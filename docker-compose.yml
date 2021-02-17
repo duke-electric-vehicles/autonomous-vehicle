@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+        dev:
+                volumes:
+                        - /dev:/dev
+                        - /home/pi/DEV/.bashrc:/root/.bashrc
+                        - /home/pi/DEV/catkin_ws:/root/catkin_ws
+                image: "dev:latest"
+                tty: true
+                container_name: "dev"
+                privileged: true
+                working_dir: /root
