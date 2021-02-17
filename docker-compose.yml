@@ -3,8 +3,8 @@ services:
         dev:
                 volumes:
                         - /dev:/dev
-                        - /home/pi/autonomous-vehicle/.bashrc:/root/.bashrc
-                        - /home/pi/autonomous-vehicle/catkin_ws:/root/catkin_ws
+                        - ./.bashrc:/root/.bashrc
+                        - ./catkin_ws:/root/catkin_ws
                 image: "dev:latest"
                 tty: true
                 container_name: "dev"
