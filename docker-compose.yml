@@ -5,7 +5,7 @@ services:
                         - /dev:/dev
                         - ./.bashrc:/root/.bashrc
                         - ./catkin_ws:/root/catkin_ws
-                image: "dev:latest"
+                image: "dukeelectricvehicles/dev:latest"
                 tty: true
                 container_name: "dev"
                 privileged: true
