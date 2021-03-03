@@ -1,11 +1,12 @@
 version: "3.3"
 services:
         dev:
+                build: .
                 volumes:
                         - /dev:/dev
                         - ./.bashrc:/root/.bashrc
                         - ./catkin_ws:/root/catkin_ws
-                image: "dukeelectricvehicles/dev:latest"
+                image: "dev_image"
                 tty: true
                 container_name: "dev"
                 privileged: true
