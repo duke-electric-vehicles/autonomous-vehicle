@@ -1,0 +1,41 @@
+[0.293s] Invoking command in '/root/dev_ws/src/py_pubsub': PYTHONPATH=/root/dev_ws/install/py_pubsub/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/py_pubsub build --build-base /root/dev_ws/build/py_pubsub/build install --prefix /root/dev_ws/install/py_pubsub --record /root/dev_ws/build/py_pubsub/install.log --single-version-externally-managed
+[0.542s] running egg_info
+[0.543s] creating ../../build/py_pubsub/py_pubsub.egg-info
+[0.543s] writing ../../build/py_pubsub/py_pubsub.egg-info/PKG-INFO
+[0.543s] writing dependency_links to ../../build/py_pubsub/py_pubsub.egg-info/dependency_links.txt
+[0.544s] writing entry points to ../../build/py_pubsub/py_pubsub.egg-info/entry_points.txt
+[0.544s] writing requirements to ../../build/py_pubsub/py_pubsub.egg-info/requires.txt
+[0.544s] writing top-level names to ../../build/py_pubsub/py_pubsub.egg-info/top_level.txt
+[0.545s] writing manifest file '../../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.593s] reading manifest file '../../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.595s] writing manifest file '../../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.595s] running build
+[0.595s] running build_py
+[0.596s] creating /root/dev_ws/build/py_pubsub/build
+[0.596s] creating /root/dev_ws/build/py_pubsub/build/lib
+[0.596s] creating /root/dev_ws/build/py_pubsub/build/lib/py_pubsub
+[0.597s] copying py_pubsub/publisher_member_function.py -> /root/dev_ws/build/py_pubsub/build/lib/py_pubsub
+[0.597s] copying py_pubsub/subscriber_member_function.py -> /root/dev_ws/build/py_pubsub/build/lib/py_pubsub
+[0.597s] copying py_pubsub/__init__.py -> /root/dev_ws/build/py_pubsub/build/lib/py_pubsub
+[0.597s] running install
+[0.597s] running install_lib
+[0.599s] creating /root/dev_ws/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[0.599s] copying /root/dev_ws/build/py_pubsub/build/lib/py_pubsub/publisher_member_function.py -> /root/dev_ws/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[0.599s] copying /root/dev_ws/build/py_pubsub/build/lib/py_pubsub/subscriber_member_function.py -> /root/dev_ws/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[0.599s] copying /root/dev_ws/build/py_pubsub/build/lib/py_pubsub/__init__.py -> /root/dev_ws/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[0.600s] byte-compiling /root/dev_ws/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/publisher_member_function.py to publisher_member_function.cpython-38.pyc
+[0.602s] byte-compiling /root/dev_ws/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/subscriber_member_function.py to subscriber_member_function.cpython-38.pyc
+[0.603s] byte-compiling /root/dev_ws/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/__init__.py to __init__.cpython-38.pyc
+[0.603s] running install_data
+[0.604s] creating /root/dev_ws/install/py_pubsub/share/ament_index
+[0.604s] creating /root/dev_ws/install/py_pubsub/share/ament_index/resource_index
+[0.604s] creating /root/dev_ws/install/py_pubsub/share/ament_index/resource_index/packages
+[0.605s] copying resource/py_pubsub -> /root/dev_ws/install/py_pubsub/share/ament_index/resource_index/packages
+[0.605s] copying package.xml -> /root/dev_ws/install/py_pubsub/share/py_pubsub
+[0.605s] running install_egg_info
+[0.607s] Copying ../../build/py_pubsub/py_pubsub.egg-info to /root/dev_ws/install/py_pubsub/lib/python3.8/site-packages/py_pubsub-0.0.0-py3.8.egg-info
+[0.608s] running install_scripts
+[0.633s] Installing listener script to /root/dev_ws/install/py_pubsub/lib/py_pubsub
+[0.634s] Installing talker script to /root/dev_ws/install/py_pubsub/lib/py_pubsub
+[0.634s] writing list of installed files to '/root/dev_ws/build/py_pubsub/install.log'
+[0.663s] Invoked command in '/root/dev_ws/src/py_pubsub' returned '0': PYTHONPATH=/root/dev_ws/install/py_pubsub/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/py_pubsub build --build-base /root/dev_ws/build/py_pubsub/build install --prefix /root/dev_ws/install/py_pubsub --record /root/dev_ws/build/py_pubsub/install.log --single-version-externally-managed

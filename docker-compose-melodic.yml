@@ -3,12 +3,12 @@ services:
         dev:
                 build:
                         context: .
-                        dockerfile: Dockerfile-Noetic
+                        dockerfile: Dockerfile-Melodic
                 volumes:
                         - /dev:/dev
                         - ./.bashrc:/root/.bashrc
                         - ./catkin_ws:/root/catkin_ws
-                image: "dev_image:noetic"
+                image: "dev_image:melodic"
                 tty: true
                 container_name: "dev"
                 privileged: true
