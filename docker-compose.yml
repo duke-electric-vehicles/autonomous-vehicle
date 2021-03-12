@@ -3,12 +3,12 @@ services:
         dev:
                 build:
                         context: .
-                        dockerfile: Dockerfile-Noetic
+                        dockerfile: Dockerfile-Foxy
                 volumes:
                         - /dev:/dev
                         - ./.bashrc:/root/.bashrc
-                        - ./catkin_ws:/root/catkin_ws
-                image: "dev_image:noetic"
+                        - ./dev_ws:/root/dev_ws
+                image: "dev_image:foxy"
                 tty: true
                 container_name: "dev"
                 privileged: true

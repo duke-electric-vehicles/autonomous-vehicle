@@ -1,4 +1,7 @@
 FROM ros:foxy
 
-RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get -y update 
+RUN apt-get -y upgrade
 RUN apt-get install -y build-essential net-tools vim wget 
+RUN apt-get install -y python3-pip
+RUN pip3 install sbp
