@@ -1,0 +1,32 @@
+[0.168s] Invoking command in '/root/dev_ws/src/py_pubsub': PYTHONPATH=/root/dev_ws/install/py_pubsub/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/py_pubsub build --build-base /root/dev_ws/build/py_pubsub/build install --prefix /root/dev_ws/install/py_pubsub --record /root/dev_ws/build/py_pubsub/install.log --single-version-externally-managed
+[0.307s] running egg_info
+[0.307s] creating ../../build/py_pubsub/py_pubsub.egg-info
+[0.307s] writing ../../build/py_pubsub/py_pubsub.egg-info/PKG-INFO
+[0.307s] writing dependency_links to ../../build/py_pubsub/py_pubsub.egg-info/dependency_links.txt
+[0.307s] writing entry points to ../../build/py_pubsub/py_pubsub.egg-info/entry_points.txt
+[0.307s] writing requirements to ../../build/py_pubsub/py_pubsub.egg-info/requires.txt
+[0.308s] writing top-level names to ../../build/py_pubsub/py_pubsub.egg-info/top_level.txt
+[0.308s] writing manifest file '../../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.332s] reading manifest file '../../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.332s] writing manifest file '../../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.333s] running build
+[0.333s] running build_py
+[0.333s] creating /root/dev_ws/build/py_pubsub/build
+[0.333s] creating /root/dev_ws/build/py_pubsub/build/lib
+[0.333s] creating /root/dev_ws/build/py_pubsub/build/lib/py_pubsub
+[0.333s] copying py_pubsub/__init__.py -> /root/dev_ws/build/py_pubsub/build/lib/py_pubsub
+[0.333s] copying py_pubsub/publisher_member_function.py -> /root/dev_ws/build/py_pubsub/build/lib/py_pubsub
+[0.333s] running install
+[0.333s] running install_lib
+[0.333s] creating /root/dev_ws/install/py_pubsub/lib/python3.6/site-packages/py_pubsub
+[0.334s] copying /root/dev_ws/build/py_pubsub/build/lib/py_pubsub/__init__.py -> /root/dev_ws/install/py_pubsub/lib/python3.6/site-packages/py_pubsub
+[0.334s] copying /root/dev_ws/build/py_pubsub/build/lib/py_pubsub/publisher_member_function.py -> /root/dev_ws/install/py_pubsub/lib/python3.6/site-packages/py_pubsub
+[0.334s] byte-compiling /root/dev_ws/install/py_pubsub/lib/python3.6/site-packages/py_pubsub/__init__.py to __init__.cpython-36.pyc
+[0.334s] byte-compiling /root/dev_ws/install/py_pubsub/lib/python3.6/site-packages/py_pubsub/publisher_member_function.py to publisher_member_function.cpython-36.pyc
+[0.334s] running install_data
+[0.335s] running install_egg_info
+[0.336s] Copying ../../build/py_pubsub/py_pubsub.egg-info to /root/dev_ws/install/py_pubsub/lib/python3.6/site-packages/py_pubsub-0.0.0-py3.6.egg-info
+[0.337s] running install_scripts
+[0.350s] Installing talker script to /root/dev_ws/install/py_pubsub/lib/py_pubsub
+[0.350s] writing list of installed files to '/root/dev_ws/build/py_pubsub/install.log'
+[0.365s] Invoked command in '/root/dev_ws/src/py_pubsub' returned '0': PYTHONPATH=/root/dev_ws/install/py_pubsub/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/py_pubsub build --build-base /root/dev_ws/build/py_pubsub/build install --prefix /root/dev_ws/install/py_pubsub --record /root/dev_ws/build/py_pubsub/install.log --single-version-externally-managed
