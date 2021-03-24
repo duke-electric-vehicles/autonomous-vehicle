@@ -3,12 +3,12 @@ services:
         dev:
                 build:
                         context: .
-                        dockerfile: Dockerfile-Eloquent
+                        dockerfile: Dockerfile-Melodic
                 volumes:
                         - /dev:/dev
                         - ./.bashrc:/root/.bashrc
-                        - ./dev_ws:/root/dev_ws
-                image: "dev_image:eloquent"
+                        - ./catkin_ws:/root/catkin_ws
+                image: "dev_image:melodic"
                 tty: true
                 container_name: "dev"
                 privileged: true
