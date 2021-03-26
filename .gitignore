@@ -1,6 +1,8 @@
 devel/
 logs/
-build/
+dev_ws/build/
+dev_ws/install/
+dev_ws/log/
 bin/
 lib/
 msg_gen/
