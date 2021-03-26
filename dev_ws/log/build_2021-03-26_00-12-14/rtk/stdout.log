@@ -1,0 +1,35 @@
+running egg_info
+creating ../../build/rtk/rtk.egg-info
+writing ../../build/rtk/rtk.egg-info/PKG-INFO
+writing dependency_links to ../../build/rtk/rtk.egg-info/dependency_links.txt
+writing entry points to ../../build/rtk/rtk.egg-info/entry_points.txt
+writing requirements to ../../build/rtk/rtk.egg-info/requires.txt
+writing top-level names to ../../build/rtk/rtk.egg-info/top_level.txt
+writing manifest file '../../build/rtk/rtk.egg-info/SOURCES.txt'
+reading manifest file '../../build/rtk/rtk.egg-info/SOURCES.txt'
+writing manifest file '../../build/rtk/rtk.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /root/dev_ws/build/rtk/build
+creating /root/dev_ws/build/rtk/build/lib
+creating /root/dev_ws/build/rtk/build/lib/rtk
+copying rtk/rtk_publisher.py -> /root/dev_ws/build/rtk/build/lib/rtk
+copying rtk/__init__.py -> /root/dev_ws/build/rtk/build/lib/rtk
+running install
+running install_lib
+creating /root/dev_ws/install/rtk/lib/python3.6/site-packages/rtk
+copying /root/dev_ws/build/rtk/build/lib/rtk/rtk_publisher.py -> /root/dev_ws/install/rtk/lib/python3.6/site-packages/rtk
+copying /root/dev_ws/build/rtk/build/lib/rtk/__init__.py -> /root/dev_ws/install/rtk/lib/python3.6/site-packages/rtk
+byte-compiling /root/dev_ws/install/rtk/lib/python3.6/site-packages/rtk/rtk_publisher.py to rtk_publisher.cpython-36.pyc
+byte-compiling /root/dev_ws/install/rtk/lib/python3.6/site-packages/rtk/__init__.py to __init__.cpython-36.pyc
+running install_data
+creating /root/dev_ws/install/rtk/share/ament_index
+creating /root/dev_ws/install/rtk/share/ament_index/resource_index
+creating /root/dev_ws/install/rtk/share/ament_index/resource_index/packages
+copying resource/rtk -> /root/dev_ws/install/rtk/share/ament_index/resource_index/packages
+copying package.xml -> /root/dev_ws/install/rtk/share/rtk
+running install_egg_info
+Copying ../../build/rtk/rtk.egg-info to /root/dev_ws/install/rtk/lib/python3.6/site-packages/rtk-0.0.0-py3.6.egg-info
+running install_scripts
+Installing pos script to /root/dev_ws/install/rtk/lib/rtk
+writing list of installed files to '/root/dev_ws/build/rtk/install.log'
