@@ -49,9 +49,9 @@ class RtkPublisher(Node):
 
     def pos_pub(self, msg, **metadata):
         pos = Vector3()
-        pos.x = msg.x * 1e-3
-        pos.y = msg.y * 1e-3
-        pos.z = msg.z * 1e-3
+        pos.x = msg.x
+        pos.y = msg.y
+        pos.z = msg.z
         self.pos_publisher.publish(pos)
         dataStr = "%.4f,%.4f,%.4f" % (msg.x * 1e-3, msg.y * 1e-3, msg.z * 1e-3)
         self.get_logger().info('Publishing Position: "%s"' % dataStr)

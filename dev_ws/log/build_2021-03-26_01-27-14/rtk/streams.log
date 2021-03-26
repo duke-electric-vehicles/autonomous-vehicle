@@ -1,0 +1,21 @@
+[0.338s] Invoking command in '/root/dev_ws/src/rtk': PYTHONPATH=/root/dev_ws/install/rtk/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/rtk build --build-base /root/dev_ws/build/rtk/build install --prefix /root/dev_ws/install/rtk --record /root/dev_ws/build/rtk/install.log --single-version-externally-managed
+[0.477s] running egg_info
+[0.477s] writing ../../build/rtk/rtk.egg-info/PKG-INFO
+[0.477s] writing dependency_links to ../../build/rtk/rtk.egg-info/dependency_links.txt
+[0.478s] writing entry points to ../../build/rtk/rtk.egg-info/entry_points.txt
+[0.478s] writing requirements to ../../build/rtk/rtk.egg-info/requires.txt
+[0.478s] writing top-level names to ../../build/rtk/rtk.egg-info/top_level.txt
+[0.502s] reading manifest file '../../build/rtk/rtk.egg-info/SOURCES.txt'
+[0.503s] writing manifest file '../../build/rtk/rtk.egg-info/SOURCES.txt'
+[0.503s] running build
+[0.503s] running build_py
+[0.503s] running install
+[0.504s] running install_lib
+[0.505s] running install_data
+[0.505s] running install_egg_info
+[0.506s] removing '/root/dev_ws/install/rtk/lib/python3.6/site-packages/rtk-0.0.0-py3.6.egg-info' (and everything under it)
+[0.506s] Copying ../../build/rtk/rtk.egg-info to /root/dev_ws/install/rtk/lib/python3.6/site-packages/rtk-0.0.0-py3.6.egg-info
+[0.507s] running install_scripts
+[0.521s] Installing pub script to /root/dev_ws/install/rtk/lib/rtk
+[0.521s] writing list of installed files to '/root/dev_ws/build/rtk/install.log'
+[0.558s] Invoked command in '/root/dev_ws/src/rtk' returned '0': PYTHONPATH=/root/dev_ws/install/rtk/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/rtk build --build-base /root/dev_ws/build/rtk/build install --prefix /root/dev_ws/install/rtk --record /root/dev_ws/build/rtk/install.log --single-version-externally-managed
