@@ -7,9 +7,9 @@ Using ROS2 Foxy to create an autonomous vehicle. Currently working on implementi
 ## 1. Initializing this Repository
 Since this repo uses the Micro Ros package (a git submodule), run these commands to clone this repo and pull the latest version of Micro Ros into this repo
 ```
-git submodule update --init
-
 git clone git@github.com:duke-electric-vehicles/autonomous-vehicle.git
+
+git submodule update --init
 ```
 
 ## 2. Building the Docker Container
@@ -106,3 +106,16 @@ Copy the full line corresponding to the Teensy. Now, run the Micro ROS Agent and
 ros2 run micro_ros_agent micro_ros_agent serial --dev <TEENSY DEVICE NAME>
 ```
 If the light on the Teensy is blinking rapidly, it has entered a failed error state. This is because there is a built in timer that waits for serial communication, and fails if it does not hear from the host computer after some time. In this case, just cancel the agent command with `Ctrl-C`, press the button on the Teensy to restart the program, and rerun the agent command. It should now indicate that the session has started.
+
+To confirm the host is hearing the published data from the Teensy, open up a new terminal, keeping the agent commmand running, and list the active ROS topics:
+```
+ros2 topic list
+```
+You should see a topic titled `/micro_ros_arduino_node_publisher`. Now, look at the incoming data with this command:
+```
+ros2 topic echo /micro_ros_arduino_node_publisher
+```
+If you see incoming data with increasing integers, communication succeeded! Now start working on communicating with more advanced messages, such as Vector3 and Twist.
+
+# Future Plan for Controlling a Motor
+The host computer will publish to a motor control topic, with normalized values ranging between 1 (forwards) and -1 (backwards). Then, the Teensy will subscribe to this topic and transform the normalized value into 
