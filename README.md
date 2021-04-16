@@ -9,6 +9,8 @@ Since this repo uses the Micro Ros package (a git submodule), run these commands
 ```
 git clone git@github.com:duke-electric-vehicles/autonomous-vehicle.git
 
+cd autonomous-vehicle
+
 git submodule update --init
 ```
 
