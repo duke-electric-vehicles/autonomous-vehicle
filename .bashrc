@@ -99,5 +99,5 @@ fi
 #fi
 cd
 alias ls="ls --color=auto"
-source /opt/ros/foxy/setup.bash > /dev/null
+source /opt/ros/galactic/setup.bash > /dev/null
 . /root/dev_ws/install/setup.bash > /dev/null
