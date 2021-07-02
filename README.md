@@ -119,5 +119,5 @@ ros2 topic echo /micro_ros_arduino_node_publisher
 ```
 If you see incoming data with increasing integers, communication succeeded! Now start working on communicating with more advanced messages, such as Vector3 and Twist.
 
-# Future Plan for Controlling a Motor
+# Controlling a Motor
 The host computer will publish to a motor control topic, with normalized values ranging between 1 (forwards) and -1 (backwards). Then, the Teensy will subscribe to this topic and transform the normalized value into a pwm output for motor control.
