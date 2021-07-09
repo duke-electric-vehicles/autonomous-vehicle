@@ -17,5 +17,5 @@ services:
                 privileged: true
         uros:
                 image: "microros/micro-ros-agent:galactic"
-                command: serial --dev TeensyName
+                command: serial --dev TEENSYNAME
                 container_name: "uros"
