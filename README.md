@@ -28,7 +28,7 @@ You can run this command from other terminals to run multiple commands at once i
 docker-compose down
 ```
 ## 3. Building the Workspace
-First, start up a docker container and enter it. All ROS commands must be run inside that docker container, as that is where ROS is installed and accessible. Now, change directory into the dev_ws folder:
+This step is now automatically done by the docker image. However, it is still useful to know how to build the workspace once you start adding packages and making changes. First, start up a docker container and enter it. All ROS commands must be run inside that docker container, as that is where ROS is installed and accessible. Now, change directory into the dev_ws folder:
 ```
 cd /opt/ros/dev_ws
 ```
