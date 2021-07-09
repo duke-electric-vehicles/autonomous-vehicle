@@ -8,10 +8,14 @@ services:
                         - DISPLAY=${DISPLAY}
                 volumes:
                         - /dev:/dev
-                        - ./.bashrc:/root/.bashrc
-                        - ./dev_ws:/root/dev_ws
+                        - ./bashrc-docker:/root/.bashrc
+                        - ./dev_ws/src:/opt/ros/dev_ws/src
                 image: "dev_image:galactic"
                 tty: true
+                stdin_open: true
                 container_name: "dev"
                 privileged: true
-                working_dir: /root
+        uros:
+                image: "microros/micro-ros-agent:galactic"
+                command: serial --dev TeensyName
+                container_name: "uros"
