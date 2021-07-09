@@ -3,13 +3,13 @@ services:
         dev:
                 build:
                         context: .
-                        dockerfile: Dockerfile-Galactic
+                        dockerfile: Dockerfile
                 environment:
                         - DISPLAY=${DISPLAY}
                 volumes:
                         - /dev:/dev
-                        - ./bashrc-docker:/root/.bashrc
-                        - ./dev_ws/src:/opt/ros/dev_ws/src
+                        - ./.bashrc-docker:/root/.bashrc
+                        - ./ros_packages/:/opt/ros/dev_ws/src
                 image: "dev_image:galactic"
                 tty: true
                 stdin_open: true
