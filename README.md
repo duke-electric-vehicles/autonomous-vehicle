@@ -30,9 +30,9 @@ docker-compose down
 ## 3. Building the Workspace
 First, start up a docker container and enter it. All ROS commands must be run inside that docker container, as that is where ROS is installed and accessible. Now, change directory into the dev_ws folder:
 ```
-cd ~/dev_ws
+cd /opt/ros/dev_ws
 ```
-ROS2 uses the `colcon` build tool. This replaces `catkin_make` from ROS1. So, in order to build the current packages in `~/dev_ws/src`, including the micro_ros_setup package, run this command from the root of the workspace, `~/dev_ws`:
+ROS2 uses the `colcon` build tool. This replaces `catkin_make` from ROS1. So, in order to build the current packages in `/opt/ros/dev_ws/src`, run this command from the root of the workspace, `/opt/ros/dev_ws`:
 ```
 colcon build
 ```
@@ -40,7 +40,7 @@ This will build our workspace and manage environment variables. In order to use 
 ```
 . install/setup.bash
 ```
-Now your workspace is built and you should see new folders in the `~/dev_ws` directory, namely `build`, `install`, `log`, and `src`.
+Now your workspace is built and you should see new folders in the `/opt/ros/dev_ws` directory, namely `build`, `install`, `log`, and `src`.
 
 ## 4. The Micro-ROS agent
 Micro-ROS allows us to communicate with microcontrollers, such as Teensies, over ROS topics. Code is uploaded onto the Teensy, and the Micro-ROS agent is run on the host machine which facilitates serial communication. You may have noticed that when you ran `docker-compose up -d` earlier, it started two containers. One of those is for the micro ros agent.
