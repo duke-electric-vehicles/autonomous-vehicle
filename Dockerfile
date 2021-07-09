@@ -7,7 +7,7 @@ FROM $FROM_IMAGE AS cacher
 # clone overlay source
 ARG OVERLAY_WS
 WORKDIR $OVERLAY_WS/src
-ADD dev_ws/src .
+ADD ros_packages .
 
 # copy manifests for caching
 WORKDIR /opt
@@ -25,7 +25,7 @@ RUN apt -y upgrade
 RUN apt install -y build-essential net-tools vim wget
 RUN apt install -y nano
 RUN apt install -y python3-pip
-#RUN apt install -y ~nros-galactic-rqt*
+RUN apt install -y ~nros-galactic-rqt*
 
 RUN pip3 install Cython
 RUN pip3 install sbp
