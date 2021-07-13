@@ -97,7 +97,7 @@ fi
 #if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 #    . /etc/bash_completion
 #fi
-cd
+cd /opt/ros/dev_ws
 alias ls="ls --color=auto"
-source /opt/ros/foxy/setup.bash > /dev/null
-. /root/dev_ws/install/setup.bash > /dev/null
+source /opt/ros/galactic/setup.bash > /dev/null
+. /opt/ros/dev_ws/install/setup.bash > /dev/null
