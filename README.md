@@ -49,9 +49,12 @@ Micro-ROS allows us to communicate with microcontrollers, such as Teensies, over
 **Your Docker Environment is now fully setup. The next section details how to run the agent and upload code to the Teensy**
 
 # Establishing Communication between Host and Teensy
-We will be using the [Micro ROS Arduino](https://github.com/micro-ROS/micro_ros_arduino) package to compile ROS code through the Arduino IDE.
 
-## 1. Patching Teensyduino to work with Micro ROS Arduino
+## 1. Installing Teensyduino
+Teensyduino is an extension to the Arduino IDE that enables you to directly download code to a Teensy. [Teensyduino Download](https://www.pjrc.com/teensy/td_download.html)
+
+## 2. Patching Teensyduino to work with Micro ROS Arduino
+We will be using the [Micro ROS Arduino](https://github.com/micro-ROS/micro_ros_arduino) package to compile ROS code through the Arduino IDE.
 First, download the [Latest Release](https://github.com/micro-ROS/micro_ros_arduino/releases) .zip file from the Micro ROS Arduino GitHub.
 
 Then, in the Arduino IDE, go to `Sketch -> Include library -> Add .ZIP Library...` and add the .zip file you just downloaded. In order for the IDE to be able to compile the library successfully, run the following commmands from your Arduino / Teensyduino installation folder.
@@ -64,7 +67,7 @@ curl https://raw.githubusercontent.com/micro-ROS/micro_ros_arduino/foxy/extras/p
 ```
 Now, you should be able to boot up the Arduino IDE, pick one of the examples on the Micro ROS Arduino Github, such as the [publisher](https://github.com/micro-ROS/micro_ros_arduino/blob/foxy/examples/micro-ros_publisher/micro-ros_publisher.ino), and complie / upload it successfully to a Teensy.
 
-## 2. Running Micro ROS Agent and Recieving Published Data from the Teensy
+## 3. Running Micro ROS Agent and Recieving Published Data from the Teensy
 If you haven't, upload the publisher example to the Teensy. Now, plug it in to the host system (your computer or the Odroid). In order to find the device name, run:
 ```
 ls /dev/serial/by-id/*
