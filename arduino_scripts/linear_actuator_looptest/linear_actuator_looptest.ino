@@ -1,4 +1,5 @@
 #include <Servo.h>
+
 /**
  * Diego Miranda
  * March 2nd, 2021
@@ -11,16 +12,19 @@
  * must be sent. In this case, we are running one motor and they
  * are identical.
  */
+
+Servo sig1, sig2;
+int still, forwards, backwards;
+
 void setup() {
   //Motor setup
-  Servo sig1, sig2;
   sig1.attach(3);
   sig2.attach(5);
 
   //Vars
-  int still = 1500;
-  int forwards = 1100;
-  int backwards = 1900;
+  still = 1500;
+  forwards = 1100;
+  backwards = 1900;
 }
 
 void loop() {
