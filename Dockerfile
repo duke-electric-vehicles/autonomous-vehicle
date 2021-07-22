@@ -60,18 +60,23 @@ RUN mkdir -p ~/.config/nvim/autoload
 RUN curl -fLO https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 RUN mv plug.vim $HOME/.config/nvim/autoload/plug.vim
 
-RUN echo "function! s:check_back_space() abort \n\
-    let col = col('.') - 1\n\
-    return !col || getline('.')[col - 1] =~ '\s'\n\
+RUN mkdir -p ~/.config/nvim
+RUN echo "function! s:check_back_space() abort\n\
+  let col = col('.') - 1\n\
+  return !col || getline('.')[col - 1]  =~ '\s'\n\
 endfunction\n\
+\n\
 inoremap <silent><expr> <Tab>\n\
-    \ pumvisible() ? '\<C-n>' :\n\
-    \ <SID>check_back_space() ? '\<Tab>' :\n\
-    \ coc#refresh()\n\
+      \ pumvisible() ? \"\<C-n>\" :\n\
+      \ <SID>check_back_space() ? \"\<Tab>\" :\n\
+      \ coc#refresh()\n\
+\n\
 nnoremap <space>w <C-w>\n\
 call plug#begin(stdpath('data') . '/plugged')\n\
 Plug 'neoclide/coc.nvim', {'branch': 'release'}\n\
-call plug#end()" > $HOME/.config/nvim/init.vim
+Plug 'dracula/vim', { 'as': 'dracula' }\n\
+call plug#end()\n\
+colorscheme dracula" > $HOME/.config/nvim/init.vim
 
 RUN mkdir $HOME/.config/coc
 RUN nvim --headless +PlugInstall +qall
