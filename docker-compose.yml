@@ -18,4 +18,6 @@ services:
         uros:
                 image: "microros/micro-ros-agent:galactic"
                 command: serial --dev TEENSYNAME
+                volumes:
+                        - /dev:/dev
                 container_name: "uros"
