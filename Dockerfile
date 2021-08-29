@@ -1,4 +1,4 @@
-ARG FROM_IMAGE=ros:galactic
+ARG FROM_IMAGE=ros:foxy
 ARG OVERLAY_WS=/opt/ros/dev_ws
 
 # multi-stage for caching
@@ -25,7 +25,7 @@ RUN apt -y upgrade
 RUN apt install -y build-essential net-tools vim wget
 RUN apt install -y nano
 RUN apt install -y python3-pip
-RUN apt install -y ~nros-galactic-rqt*
+RUN apt install -y ros-foxy-rqt*
 
 RUN pip3 install Cython
 RUN pip3 install sbp
