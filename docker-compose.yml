@@ -16,8 +16,10 @@ services:
                 container_name: "dev"
                 privileged: true
         uros:
-                image: "microros/micro-ros-agent:foxy"
-                command: serial --dev <TEENSYNAME>
                 volumes:
                         - /dev:/dev
+                image: "dukeelectricvehicles/uros-agent:foxy"
+                tty: true
+                stdin_open: true
                 container_name: "uros"
+                privileged: true
