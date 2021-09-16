@@ -48,3 +48,26 @@ Micro-ROS allows us to communicate with microcontrollers, such as Teensies, over
 
 **Your Docker Environment is now fully setup. The next section details how to run the agent and upload code to the Teensy**
 
+## 5. Running Micro ROS Agent and Recieving Published Data from the Teensy
+If you haven't, upload the publisher example to the Teensy. Now, plug it in to the host system (your computer or the Odroid). In order to find the device name, run:
+```
+ls /dev/serial/by-id/*
+```
+Copy the full line corresponding to the Teensy and replace the command argument "TeensyName" in `docker-compose.yml` under the "uros" service. Now, run the Micro ROS Agent by running 
+```
+docker-compose up -d
+```
+If the light on the Teensy is blinking rapidly, it has entered a failed error state. This is because there is a built in timer that waits for serial communication, and fails if it does not hear from the host computer after some time. In this case, just bring down the docker containers, press the button on the Teensy to restart the program, and rerun the `docker-compose up -d` command.
+
+To confirm the host is hearing the published data from the Teensy, open up a new terminal, enter the dev container with `docker exec -it dev bash`, and list the active ROS topics:
+```
+ros2 topic list
+```
+You should see a topic titled `/micro_ros_arduino_node_publisher`. Now, look at the incoming data with this command:
+```
+ros2 topic echo /micro_ros_arduino_node_publisher
+```
+If you see incoming data with increasing integers, communication succeeded! Now start working on communicating with more advanced messages, such as Vector3 and Twist.
+
+# Controlling a Motor
+The host computer will publish to a motor control topic, with normalized values ranging between 1 (forwards) and -1 (backwards). Then, the Teensy will subscribe to this topic and transform the normalized value into a pwm output for motor control.
