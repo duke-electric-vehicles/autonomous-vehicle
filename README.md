@@ -49,17 +49,31 @@ Micro-ROS allows us to communicate with microcontrollers, such as Teensies, over
 **Your Docker Environment is now fully setup. The next section details how to run the agent and upload code to the Teensy**
 
 ## 5. Running Micro ROS Agent and Recieving Published Data from the Teensy
-If you haven't, upload the publisher example to the Teensy. Now, plug it in to the host system (your computer or the Odroid). In order to find the device name, run:
+
+First, pick one of the examples on the Micro ROS Arduino Github, such as the [publisher](https://github.com/micro-ROS/micro_ros_arduino/blob/foxy/examples/micro-ros_publisher/micro-ros_publisher.ino), and complie / upload it successfully to a Teensy.
+
+Now, plug it in to the host system (your computer or the Odroid). In order to find the device name, run:
 ```
 ls /dev/serial/by-id/*
 ```
-Copy the full line corresponding to the Teensy and replace the command argument "TeensyName" in `docker-compose.yml` under the "uros" service. Now, run the Micro ROS Agent by running 
+Copy the full line corresponding to the Teensy and save it for later. Now, start up the containers with
 ```
 docker-compose up -d
 ```
-If the light on the Teensy is blinking rapidly, it has entered a failed error state. This is because there is a built in timer that waits for serial communication, and fails if it does not hear from the host computer after some time. In this case, just bring down the docker containers, press the button on the Teensy to restart the program, and rerun the `docker-compose up -d` command.
 
-To confirm the host is hearing the published data from the Teensy, open up a new terminal, enter the dev container with `docker exec -it dev bash`, and list the active ROS topics:
+Next, enter into the uros container with
+```
+docker exec -it uros bash
+```
+And run the following command to start the micro ros agent:
+```
+ros2 run micro_ros_agent micro_ros_agent serial --dev <DEVICE NAME>
+```
+Where \<DEVICE NAME\> is the output from the `ls /dev/serial/by-id/*` command from earlier.
+
+If the light on the Teensy is blinking rapidly, it has entered a failed error state. This is because there is a built in timer that waits for serial communication, and fails if it does not hear from the host computer after some time. In this case, just replug the Teensy into your USB port.
+
+To confirm the host is hearing the published data from the Teensy, open up a new terminal, enter the dev container with `docker exec -it uros bash`, and list the active ROS topics:
 ```
 ros2 topic list
 ```
