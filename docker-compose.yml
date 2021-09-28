@@ -16,9 +16,12 @@ services:
                 container_name: "dev"
                 privileged: true
         uros:
+                build:
+                        context: .
+                        dockerfile: Dockerfile-Uros
                 volumes:
                         - /dev:/dev
-                image: "dukeelectricvehicles/uros-agent:foxy"
+                image: "uros-test"
                 tty: true
                 stdin_open: true
                 container_name: "uros"
