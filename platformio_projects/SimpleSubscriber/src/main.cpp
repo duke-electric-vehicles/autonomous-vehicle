@@ -7,21 +7,20 @@
 #include <rclc/rclc.h>
 #include <rclc/executor.h>
 
-#include <std_msgs/msg/int32.h>
+#include <geometry_msgs/msg/vector3.h>
 
 rcl_subscription_t subscriber;
-std_msgs__msg__Int32 msg;
+geometry_msgs__msg__Vector3 msg;
 rclc_executor_t executor;
-rclc_support_t support;
 rcl_allocator_t allocator;
+rclc_support_t support;
 rcl_node_t node;
-rcl_timer_t timer;
+
 
 #define LED_PIN 13
 
 #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){error_loop();}}
-#define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){}}
-
+#define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){error_loop();}}
 
 void error_loop(){
   while(1){
@@ -30,15 +29,15 @@ void error_loop(){
   }
 }
 
-void subscription_callback(const void * msgin)
-{  
-  const std_msgs__msg__Int32 * msg = (const std_msgs__msg__Int32 *)msgin;
-  digitalWrite(LED_PIN, (msg->data == 0) ? LOW : HIGH);  
+//twist message cb
+void subscription_callback(const void *msgin) {
+  const geometry_msgs__msg__Vector3 * msg = (const geometry_msgs__msg__Vector3 *)msgin;
+  // if velocity in x direction is 0 turn off LED, if 1 turn on LED
+  digitalWrite(LED_PIN, (msg->x == 0) ? LOW : HIGH);
 }
 
 void setup() {
   set_microros_transports();
-  
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH);  
   
@@ -46,7 +45,7 @@ void setup() {
 
   allocator = rcl_get_default_allocator();
 
-  //create init_options
+   //create init_options
   RCCHECK(rclc_support_init(&support, 0, NULL, &allocator));
 
   // create node
@@ -56,12 +55,13 @@ void setup() {
   RCCHECK(rclc_subscription_init_default(
     &subscriber,
     &node,
-    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
-    "micro_ros_arduino_subscriber"));
+    ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, Vector3),
+    "micro_ros_arduino_vector3_subscriber"));
 
   // create executor
   RCCHECK(rclc_executor_init(&executor, &support.context, 1, &allocator));
   RCCHECK(rclc_executor_add_subscription(&executor, &subscriber, &msg, &subscription_callback, ON_NEW_DATA));
+
 }
 
 void loop() {
