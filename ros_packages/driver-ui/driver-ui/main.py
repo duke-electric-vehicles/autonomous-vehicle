@@ -17,7 +17,7 @@ GRAY = (160, 160, 160)
 BLUE = (51, 51, 255)
 GREEN = (51, 255, 153)
 RED = (255, 20, 40)
-UPDATE_DELAY = 100 # How often should the UI redraw the path with a new current position
+# UPDATE_DELAY = 1 # How often should the UI redraw the path with a new current position
 LINE_THICKNESS = 6 # How thick should the path line be
 
 def draw_points(points, current_position, rotation_from_north):
@@ -106,7 +106,7 @@ def draw_points(points, current_position, rotation_from_north):
         screen.blit(zoom_change_label, (20, HEIGHT-80))
 
         pygame.display.update()
-        pygame.time.wait(UPDATE_DELAY)
+        # pygame.time.wait(UPDATE_DELAY)
 
 def get_points_in_range(points, center, maxRange):
     # given a list of points, return all the points that are within range of a center point
