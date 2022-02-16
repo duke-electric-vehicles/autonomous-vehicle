@@ -69,6 +69,7 @@ def draw_points(points, current_position, rotation_from_north):
         screen.fill(GRAY) # redraw screen
         valid_points = get_points_in_range(points, current_position, ZOOM_CONSTANT)
         car_position = scale_point(current_position, valid_points, ZOOM_CONSTANT)
+        print(car_position)
         pygame.draw.circle(screen, RED, car_position, 30, 30)
         radar = (WIDTH/2,HEIGHT/2)
         radar_len = 50
@@ -182,7 +183,7 @@ def main():
     current_car_rotation: Degrees from NORTH that the car GPS is currently pointed towards (like a compass)
     """
 
-    path_file = "data.csv"
+    path_file = "/opt/ros/dev_ws/src/driver_ui/driver_ui/data.csv"
     points = []
     for line in open(path_file):
         points.append((float(line.split(",")[0]), float(line.split(",")[1])))

@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'driver-ui'
+package_name = 'driver_ui'
 
 setup(
     name=package_name,
@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'driver_ui = driver_ui.main:main',
         ],
     },
 )
