@@ -17,7 +17,7 @@ GRAY = (160, 160, 160)
 BLUE = (51, 51, 255)
 GREEN = (51, 255, 153)
 RED = (255, 20, 40)
-UPDATE_DELAY = 100 # How often should the UI redraw the path with a new current position
+# UPDATE_DELAY = 1 # How often should the UI redraw the path with a new current position
 LINE_THICKNESS = 6 # How thick should the path line be
 
 def draw_points(points, current_position, rotation_from_north):
@@ -69,7 +69,6 @@ def draw_points(points, current_position, rotation_from_north):
         screen.fill(GRAY) # redraw screen
         valid_points = get_points_in_range(points, current_position, ZOOM_CONSTANT)
         car_position = scale_point(current_position, valid_points, ZOOM_CONSTANT)
-        print(car_position)
         pygame.draw.circle(screen, RED, car_position, 30, 30)
         radar = (WIDTH/2,HEIGHT/2)
         radar_len = 50
@@ -107,7 +106,7 @@ def draw_points(points, current_position, rotation_from_north):
         screen.blit(zoom_change_label, (20, HEIGHT-80))
 
         pygame.display.update()
-        pygame.time.wait(UPDATE_DELAY)
+        # pygame.time.wait(UPDATE_DELAY)
 
 def get_points_in_range(points, center, maxRange):
     # given a list of points, return all the points that are within range of a center point
@@ -126,7 +125,7 @@ def scale_point(point, points, ZOOM_CONSTANT):
     scaled_points = []
     x = ((point[0] - pointsXLow) * (outputXHigh - outputXLow)) / (pointsXHigh - pointsXLow) + outputXLow
     y = ((point[1] - pointsYLow) * (outputYHigh - outputYLow)) / (pointsYHigh - pointsYLow) + outputYLow
-    return (x,y)
+    return (int(x),int(y))
 def scale_points(points, center, ZOOM_CONSTANT):
     # scale a set of given coordinates to fit within the screen
     WIDTH, HEIGHT = pygame.display.get_surface().get_size()
@@ -156,8 +155,8 @@ def rotate_points(points, angle, about):
     for point in points:
         rotated_points.append(
             [
-                rotation_matrix[0][0] * (point[0] - about[0]) + rotation_matrix[0][1] * (point[1] - about[1]) + about[0],
-                rotation_matrix[1][0] * (point[0] - about[0]) + rotation_matrix[1][1] * (point[1] - about[1]) + about[1]
+                int(rotation_matrix[0][0] * (point[0] - about[0]) + rotation_matrix[0][1] * (point[1] - about[1]) + about[0]),
+                int(rotation_matrix[1][0] * (point[0] - about[0]) + rotation_matrix[1][1] * (point[1] - about[1]) + about[1])
             ]
         )
 
