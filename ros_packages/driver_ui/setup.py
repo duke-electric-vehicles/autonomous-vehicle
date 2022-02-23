@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'driver_ui = driver_ui.main:main',
+            'driver_ui_rtk = driver_ui.mainRTK:main',
         ],
     },
 )
