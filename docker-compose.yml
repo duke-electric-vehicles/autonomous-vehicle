@@ -11,6 +11,8 @@ services:
                         - ./.bashrc-docker:/root/.bashrc
                         - ./ros_packages/:/opt/ros/dev_ws/src
                         - /tmp/.X11-unix:/tmp/.X11-unix
+                        - $HOME/.Xauthority:/root/.Xauthority"
+                        #- $HOME/.config/nvim/init.vim:/root/.config/nvim/init.vim
                 image: "dev_image:foxy"
                 tty: true
                 stdin_open: true
