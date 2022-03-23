@@ -1,3 +1,0 @@
-[console_scripts]
-pid = pid.pid:main
-
