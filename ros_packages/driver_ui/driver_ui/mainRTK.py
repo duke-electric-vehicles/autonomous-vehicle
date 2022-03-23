@@ -52,7 +52,7 @@ class DriverUI(Node):
 
         pygame.init()
 
-        self.screen = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h), pygame.RESIZABLE)
+        self.screen = pygame.display.set_mode((1200, 600))
        
 
     def pos_callback(self, msg):
