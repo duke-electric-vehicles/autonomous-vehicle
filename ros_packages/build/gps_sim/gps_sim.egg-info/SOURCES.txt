@@ -1,0 +1,16 @@
+package.xml
+setup.cfg
+setup.py
+../build/gps_sim/gps_sim.egg-info/PKG-INFO
+../build/gps_sim/gps_sim.egg-info/SOURCES.txt
+../build/gps_sim/gps_sim.egg-info/dependency_links.txt
+../build/gps_sim/gps_sim.egg-info/entry_points.txt
+../build/gps_sim/gps_sim.egg-info/requires.txt
+../build/gps_sim/gps_sim.egg-info/top_level.txt
+../build/gps_sim/gps_sim.egg-info/zip-safe
+gps_sim/__init__.py
+gps_sim/simulate.py
+resource/gps_sim
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py

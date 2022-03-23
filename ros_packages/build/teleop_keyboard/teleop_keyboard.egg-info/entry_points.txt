@@ -1,0 +1,3 @@
+[console_scripts]
+teleop_keyboard = teleop_keyboard.teleop_keyboard:main
+

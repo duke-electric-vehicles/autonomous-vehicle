@@ -1,0 +1,35 @@
+running egg_info
+creating ../build/rtk/rtk.egg-info
+writing ../build/rtk/rtk.egg-info/PKG-INFO
+writing dependency_links to ../build/rtk/rtk.egg-info/dependency_links.txt
+writing entry points to ../build/rtk/rtk.egg-info/entry_points.txt
+writing requirements to ../build/rtk/rtk.egg-info/requires.txt
+writing top-level names to ../build/rtk/rtk.egg-info/top_level.txt
+writing manifest file '../build/rtk/rtk.egg-info/SOURCES.txt'
+reading manifest file '../build/rtk/rtk.egg-info/SOURCES.txt'
+writing manifest file '../build/rtk/rtk.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /opt/ros/dev_ws/src/build/rtk/build
+creating /opt/ros/dev_ws/src/build/rtk/build/lib
+creating /opt/ros/dev_ws/src/build/rtk/build/lib/rtk
+copying rtk/__init__.py -> /opt/ros/dev_ws/src/build/rtk/build/lib/rtk
+copying rtk/publisher.py -> /opt/ros/dev_ws/src/build/rtk/build/lib/rtk
+running install
+running install_lib
+creating /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk
+copying /opt/ros/dev_ws/src/build/rtk/build/lib/rtk/__init__.py -> /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk
+copying /opt/ros/dev_ws/src/build/rtk/build/lib/rtk/publisher.py -> /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk
+byte-compiling /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk/__init__.py to __init__.cpython-38.pyc
+byte-compiling /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk/publisher.py to publisher.cpython-38.pyc
+running install_data
+creating /opt/ros/dev_ws/src/install/rtk/share/ament_index
+creating /opt/ros/dev_ws/src/install/rtk/share/ament_index/resource_index
+creating /opt/ros/dev_ws/src/install/rtk/share/ament_index/resource_index/packages
+copying resource/rtk -> /opt/ros/dev_ws/src/install/rtk/share/ament_index/resource_index/packages
+copying package.xml -> /opt/ros/dev_ws/src/install/rtk/share/rtk
+running install_egg_info
+Copying ../build/rtk/rtk.egg-info to /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk-0.0.0-py3.8.egg-info
+running install_scripts
+Installing pub script to /opt/ros/dev_ws/src/install/rtk/lib/rtk
+writing list of installed files to '/opt/ros/dev_ws/src/build/rtk/install.log'
