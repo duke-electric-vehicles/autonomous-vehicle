@@ -22,8 +22,7 @@ LINE_THICKNESS = 6 # How thick should the path line be
 
 def draw_points(points, current_position, rotation_from_north):
     pygame.init()
-    #screen = pygame.display.set_mode((1200,600))
-    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((1200,600))
     WIDTH, HEIGHT = pygame.display.get_surface().get_size()
     screen.fill(GRAY)
     """
