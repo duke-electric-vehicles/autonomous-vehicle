@@ -53,7 +53,17 @@ class DriverUI(Node):
         pygame.init()
 
         self.screen = pygame.display.set_mode((1200, 600))
+
+        timer_period = 1/60  # seconds per frame
+        self.timer = self.create_timer(timer_period, self.update_display)
        
+    def update_display(self):
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    print("ESC was pressed. quitting...")
+                    quit()
 
     def pos_callback(self, msg):
         x_pos = msg.x
@@ -63,10 +73,10 @@ class DriverUI(Node):
 
         print(f"Current position: {current_pos}")
 
-        draw_points(self.points, current_pos, self.current_car_rotation)
+        self.draw_points(self.points, current_pos, self.current_car_rotation)
 
  
-    def draw_points(points, current_position, rotation_from_north):
+    def draw_points(self, points, current_position, rotation_from_north):
         screen = self.screen
         WIDTH, HEIGHT = pygame.display.get_surface().get_size()
         screen.fill(GRAY)
@@ -89,7 +99,7 @@ class DriverUI(Node):
 
         if i == len(points)-1:
             i = 0
-            ROTATION_ANGLE = calculate_true_bearing(prev, current_position)
+            ROTATION_ANGLE = self.calculate_true_bearing(prev, current_position)
             prev = current_position
 
         i += 1
@@ -123,8 +133,8 @@ class DriverUI(Node):
                     ROTATION_ANGLE = ROTATION_ANGLE + 5
 
         screen.fill(GRAY) # redraw screen
-        valid_points = get_points_in_range(points, current_position, ZOOM_CONSTANT)
-        car_position = scale_point(current_position, valid_points, ZOOM_CONSTANT)
+        valid_points = self.get_points_in_range(points, current_position, ZOOM_CONSTANT)
+        car_position = self.scale_point(current_position, valid_points, ZOOM_CONSTANT)
 
         pygame.draw.circle(screen, RED, car_position, 30, 30)
 
@@ -140,8 +150,8 @@ class DriverUI(Node):
      
 
         if len(valid_points) > 1:
-            scaled = scale_points(valid_points, current_position, ZOOM_CONSTANT)
-            rotated = rotate_points(scaled, -ROTATION_ANGLE-90, car_position)
+            scaled = self.scale_points(valid_points, current_position, ZOOM_CONSTANT)
+            rotated = self.rotate_points(scaled, -ROTATION_ANGLE-90, car_position)
 
             for point in rotated:
                 pygame.draw.circle(screen, BLUE, point, 5, 5)
@@ -177,7 +187,7 @@ class DriverUI(Node):
 
  
 
-    def get_points_in_range(points, center, maxRange):
+    def get_points_in_range(self, points, center, maxRange):
         # given a list of points, return all the points that are within range of a center point
         valid_points = []
 
@@ -188,7 +198,7 @@ class DriverUI(Node):
 
         return valid_points
 
-    def scale_point(point, points, ZOOM_CONSTANT):
+    def scale_point(self, point, points, ZOOM_CONSTANT):
         # scale one point from a set of points
         # IMPORTANT: point must be the center point
 
@@ -202,7 +212,7 @@ class DriverUI(Node):
 
         return (int(x),int(y))
 
-    def scale_points(points, center, ZOOM_CONSTANT):
+    def scale_points(self, points, center, ZOOM_CONSTANT):
 
         # scale a set of given coordinates to fit within the screen
         WIDTH, HEIGHT = pygame.display.get_surface().get_size()
@@ -217,7 +227,7 @@ class DriverUI(Node):
 
         return scaled_points
 
-    def rotate_points(points, angle, about):
+    def rotate_points(self, points, angle, about):
 
         """
         Rotate a set of points in a plane by a certain angle about an arbitrary point.
@@ -226,16 +236,12 @@ class DriverUI(Node):
         # Convert angle to radians
         angle = math.radians(angle)
 
-     
-
         # Calculate the rotation matrix
 
         rotation_matrix = [
             [math.cos(angle), -math.sin(angle)],
             [math.sin(angle), math.cos(angle)]
         ]
-
-     
 
         # Calculate the rotated points
         rotated_points = []
@@ -252,7 +258,7 @@ class DriverUI(Node):
 
  
 
-    def calculate_true_bearing(coord1, coord2):
+    def calculate_true_bearing(self, coord1, coord2):
         lat1 = math.radians(coord1[0])
         lat2 = math.radians(coord2[0])
         long1 = math.radians(coord1[1])
