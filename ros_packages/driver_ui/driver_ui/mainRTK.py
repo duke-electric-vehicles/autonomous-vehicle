@@ -51,6 +51,7 @@ class DriverUI(Node):
         self.current_car_rotation = 0 # set current car rotation to be pointed straight NORTH
 
         pygame.init()
+        self.current_pos = (0,0)
 
         self.screen = pygame.display.set_mode((1200, 600))
 
@@ -58,7 +59,9 @@ class DriverUI(Node):
         self.timer = self.create_timer(timer_period, self.update_display)
        
     def update_display(self):
-        pygame.display.update()
+
+        self.draw_points(self.points, self.current_pos, self.current_car_rotation)
+        #pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -66,21 +69,24 @@ class DriverUI(Node):
                     quit()
 
     def pos_callback(self, msg):
+        WIDTH, HEIGHT = pygame.display.get_surface().get_size()
+        self.screen.fill(GRAY)
         x_pos = msg.x
         y_pos = msg.y
 
-        current_pos = (x_pos, y_pos)
+        self. current_pos = (x_pos, y_pos)
 
-        print(f"Current position: {current_pos}")
+        print(f"Current position: {self.current_pos}")
 
-        self.draw_points(self.points, current_pos, self.current_car_rotation)
+
+        #self.draw_points(self.points, current_pos, self.current_car_rotation)
+
 
  
     def draw_points(self, points, current_position, rotation_from_north):
         screen = self.screen
         WIDTH, HEIGHT = pygame.display.get_surface().get_size()
         screen.fill(GRAY)
-
         """
         ZOOM_CONSTANT
         How zoomed in should the UI be.
