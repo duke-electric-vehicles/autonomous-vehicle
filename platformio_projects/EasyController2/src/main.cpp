@@ -52,7 +52,7 @@ void setup() {                // The setup function is called ONCE on boot-up
   identifyHalls();                  // Uncomment this if you want the controller to auto-identify the hall states at startup!
 }
 
-void loop(uint8_t throttle) {                         // The loop function is called repeatedly, once setup() is done
+void loop() {                         // The loop function is called repeatedly, once setup() is done
   
   uint8_t throttle = readThrottle();  // readThrottle() is slow. So do the more important things 200 times more often
   for(uint8_t i = 0; i < 200; i++)
