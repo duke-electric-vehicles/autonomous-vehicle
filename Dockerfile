@@ -83,6 +83,8 @@ RUN nvim --headless +PlugInstall +qall
 RUN mkdir -p $HOME/.config/coc/extensions
 RUN cd $HOME/.config/coc/extensions && npm install coc-pyright --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
 
+RUN npm install --global pyright
+
 # source entrypoint setup
 ENV OVERLAY_WS $OVERLAY_WS
 RUN sed --in-place --expression \
