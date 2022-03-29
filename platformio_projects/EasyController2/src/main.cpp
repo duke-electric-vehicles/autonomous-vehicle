@@ -3,7 +3,7 @@
 #define THROTTLE_PIN 15       // Throttle pin
 #define THROTTLE_LOW 150      // These LOW and HIGH values are used to scale the ADC reading. More on this below
 #define THROTTLE_HIGH 710
-
+#define BUTTON_PIN A0
 #define HALL_1_PIN 6
 #define HALL_2_PIN 7
 #define HALL_3_PIN 8
@@ -21,7 +21,9 @@
 
 uint8_t hallToMotor[8] = {255, 255, 255, 255, 255, 255, 255, 255};
 
-uint8_t currentButton = 0; // 0, 1, 2, or 3 (0 slowest, 3 fastest)
+uint8_t currentButton = 3; // 0, 1, 2, or 3 (0 slowest, 3 fastest)
+
+int x = 3;
 
 // Forward declarations
 void identifyHalls();
@@ -42,6 +44,7 @@ void setup() {                // The setup function is called ONCE on boot-up
   pinMode(BL_PIN, OUTPUT);
   pinMode(CH_PIN, OUTPUT);
   pinMode(CL_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT);
 
   analogWriteFrequency(AH_PIN, 8000); // Set the PWM frequency. Since all pins are on the same timer, this sets PWM freq for all
 
@@ -186,6 +189,7 @@ uint8_t readThrottle()
   if (currentButton == 0) adc = (uint8_t)(adc / 2);
   if (currentButton == 1) adc = (uint8_t)(adc / 1.5);
   if (currentButton == 2) adc = (uint8_t)(adc / 1.2);
+  // if(currentButton == 3) adc = (uint8_t)(adc); Max Speed
 
   if (adc > 255) // Bound the output between 0 and 255
     return 255;
@@ -198,5 +202,23 @@ uint8_t readThrottle()
 
 uint8_t readButton()
 {
-  
+  int bp = analogRead(BUTTON_PIN);
+  if ((bp >= 0) && (bp < 5)){
+      x = 0;
+      return 0;
+  }
+  if ((bp >= 84) && (bp < 90)){
+      x = 1;
+      return 1;
+  }
+  if ((bp >= 27) && (bp < 40)){
+      x = 2;
+      return 2;
+  }
+  if ((bp >= 160) && (bp < 170)){
+      x = 3;
+      return 3;
+  }
+  return x;
+
 }
