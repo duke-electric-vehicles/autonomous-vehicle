@@ -21,6 +21,8 @@
 
 uint8_t hallToMotor[8] = {255, 255, 255, 255, 255, 255, 255, 255};
 
+uint8_t currentButton = 0; // 0, 1, 2, or 3 (0 slowest, 3 fastest)
+
 // Forward declarations
 void identifyHalls();
 void writePWM(uint8_t motorState, uint8_t dutyCycle);
@@ -178,6 +180,13 @@ uint8_t readThrottle()
   adc = (adc - THROTTLE_LOW) << 8;
   adc = adc / (THROTTLE_HIGH - THROTTLE_LOW);
 
+  // Scale adc based on buttons
+  currentButton = readButton();
+
+  if (currentButton == 0) adc = (uint8_t)(adc / 2);
+  if (currentButton == 1) adc = (uint8_t)(adc / 1.5);
+  if (currentButton == 2) adc = (uint8_t)(adc / 1.2);
+
   if (adc > 255) // Bound the output between 0 and 255
     return 255;
 
@@ -185,4 +194,9 @@ uint8_t readThrottle()
     return 0;
   
   return adc;
+}
+
+uint8_t readButton()
+{
+  
 }
