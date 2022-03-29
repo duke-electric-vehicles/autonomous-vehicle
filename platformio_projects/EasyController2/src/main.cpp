@@ -31,6 +31,7 @@ void writePWM(uint8_t motorState, uint8_t dutyCycle);
 void writePhases(uint8_t ah, uint8_t bh, uint8_t ch, uint8_t al, uint8_t bl, uint8_t cl);
 uint8_t getHalls();
 uint8_t readThrottle();
+uint8_t readButton();
 
 void setup() {                // The setup function is called ONCE on boot-up
   Serial.begin(115200);
