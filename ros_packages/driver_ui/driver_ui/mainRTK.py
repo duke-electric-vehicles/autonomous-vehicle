@@ -41,17 +41,15 @@ class DriverUI(Node):
         current_car_rotation: Degrees from NORTH that the car GPS is currently pointed towards (like a compass)
         """
 
-        path_file = "/opt/ros/dev_ws/src/driver_ui/driver_ui/data.csv"
+        
         self.points = []
-
-        for line in open(path_file):
-            self.points.append((float(line.split(",")[0]), float(line.split(",")[1])))
+        self.points.append((1.1, 0.0))
 
         self.current_car_position = random.choice(self.points) # set current car position to a random point for now
         self.current_car_rotation = 0 # set current car rotation to be pointed straight NORTH
 
         pygame.init()
-        self.current_pos = (0,0)
+        self.current_pos = (1,0)
 
         self.screen = pygame.display.set_mode((1200, 600))
 
@@ -59,7 +57,7 @@ class DriverUI(Node):
         self.timer = self.create_timer(timer_period, self.update_display)
        
     def update_display(self):
-
+        self.points.append((self.current_pos[0], self.current_pos[1]))
         self.draw_points(self.points, self.current_pos, self.current_car_rotation)
         #pygame.display.update()
         for event in pygame.event.get():
@@ -74,7 +72,7 @@ class DriverUI(Node):
         x_pos = msg.x
         y_pos = msg.y
 
-        self. current_pos = (x_pos, y_pos)
+        self.current_pos = (x_pos, y_pos)
 
         print(f"Current position: {self.current_pos}")
 
@@ -93,7 +91,8 @@ class DriverUI(Node):
         Value is maximum distance between the current coordinate position of the car and any point on the track
         Determines how far ahead/behind the car the path should be shown
         """
-
+        '''
+        
         ZOOM_CONSTANT = 0.001
         ROTATION_ANGLE = -90 + -rotation_from_north # by default the rotation angle is -90 if the car is pointing NORTH
 
@@ -105,7 +104,7 @@ class DriverUI(Node):
 
         if i == len(points)-1:
             i = 0
-            ROTATION_ANGLE = self.calculate_true_bearing(prev, current_position)
+            ROTATION_ANGLE = calculate_true_bearing(prev, current_position)
             prev = current_position
 
         i += 1
@@ -138,6 +137,7 @@ class DriverUI(Node):
                 if 200 <= mouse[0] <= 260 and HEIGHT-60 <= mouse[1] <= HEIGHT-20:
                     ROTATION_ANGLE = ROTATION_ANGLE + 5
 
+        '''
         screen.fill(GRAY) # redraw screen
         valid_points = self.get_points_in_range(points, current_position, ZOOM_CONSTANT)
         car_position = self.scale_point(current_position, valid_points, ZOOM_CONSTANT)
@@ -167,9 +167,10 @@ class DriverUI(Node):
         # screen extras
         font = pygame.font.SysFont(None, 24)
         current_label = font.render('Current Position: ' + str(current_position), True, BLUE)
-        speed_label = font.render('Current Speed: ' + str(100), True, BLUE)
-        zoom_label = font.render('Zoom: ' + str(ZOOM_CONSTANT), True, RED)
-        rotation_label = font.render('Rotation (degrees): ' + str(ROTATION_ANGLE), True, RED)
+        current_speed_label = font.render('Current Speed: ' + str(100), True, BLUE)
+        ideal_speed_label = font.render('Ideal Speed: ' + str(100), True, BLUE)
+        #zoom_label = font.render('Zoom: ' + str(ZOOM_CONSTANT), True, RED)
+        #rotation_label = font.render('Rotation (degrees): ' + str(ROTATION_ANGLE), True, RED)
         zoom_change_label = font.render('Adjust Zoom', True, BLUE)
 
         pygame.draw.rect(screen, RED, [20,HEIGHT-60,60,40])
@@ -181,9 +182,10 @@ class DriverUI(Node):
         pygame.draw.rect(screen, GREEN, [200,HEIGHT-60,60,40])
 
         screen.blit(current_label, (20, 20))
-        screen.blit(speed_label, (20, 60))
-        screen.blit(zoom_label, (20, 100))
-        screen.blit(rotation_label, (20, 140))
+        screen.blit(current_speed_label, (20, 60))
+        screen.blit(ideal_speed_label, (20, 100))
+        #screen.blit(zoom_label, (20, 140))
+        #screen.blit(rotation_label, (20, 180))
         screen.blit(rotation_change_label, (140, HEIGHT-80))
         screen.blit(zoom_change_label, (20, HEIGHT-80))
 
