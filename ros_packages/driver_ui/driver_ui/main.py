@@ -22,8 +22,15 @@ LINE_THICKNESS = 6 # How thick should the path line be
 
 def draw_points(points, current_position, rotation_from_north):
     pygame.init()
+
+    
+
     screen = pygame.display.set_mode((1200,600))
     WIDTH, HEIGHT = pygame.display.get_surface().get_size()
+    
+    background = pygame.image.load("image.png") ## Load the image file
+    #background = pygame.transform.scale(background,(WIDTH, HEIGHT)) ## Make it the same size as the screen
+
     screen.fill(GRAY)
     """
     ZOOM_CONSTANT
@@ -97,6 +104,7 @@ def draw_points(points, current_position, rotation_from_north):
         rotation_change_label = font.render('Adjust Rotation', True, BLUE)
         pygame.draw.rect(screen, RED, [140,HEIGHT-60,60,40])
         pygame.draw.rect(screen, GREEN, [200,HEIGHT-60,60,40])
+        screen.blit(background,(0,0)) 
         screen.blit(current_label, (20, 20))
         screen.blit(speed_label, (20, 60))
         screen.blit(zoom_label, (20, 100))
