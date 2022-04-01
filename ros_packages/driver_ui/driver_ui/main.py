@@ -104,7 +104,6 @@ def draw_points(points, current_position, rotation_from_north):
         rotation_change_label = font.render('Adjust Rotation', True, BLUE)
         pygame.draw.rect(screen, RED, [140,HEIGHT-60,60,40])
         pygame.draw.rect(screen, GREEN, [200,HEIGHT-60,60,40])
-        screen.blit(background,(0,0)) 
         screen.blit(current_label, (20, 20))
         screen.blit(speed_label, (20, 60))
         screen.blit(zoom_label, (20, 100))
