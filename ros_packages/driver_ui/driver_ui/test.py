@@ -317,12 +317,6 @@ for x in range(round(HEAT_BAR_IMAGE.get_width() / 2), HEAT_BAR_IMAGE.get_width()
         color.g -= 2
     
 
-    '''
-    if color.r > 100 and color.r < 254:
-        color.r += 2
-    if color.g > 1:
-        color.g -= 2
-    '''
 
 def main():
 
@@ -335,11 +329,9 @@ def main():
 
     clock = pg.time.Clock()
     heat_rect = HEAT_BAR_IMAGE.get_rect(topleft=(200, 100))
-    ticker_rect = HEAT_BAR_IMAGE.get_rect(topleft=(200, 10))
     # `heat` is the percentage of the surface's width and
     # is used to calculate the visible area of the image.
-    
-    heat = 50  # 5% of the image are already visible.
+
     done = False
 
     while not done:
@@ -373,11 +365,7 @@ def main():
         moveDown = False
         moveRight = False
         moveLeft = False
-
         
-
-        #heat -= 0.5  # Reduce the heat every frame.
-        heat = max(1, min(heat, 100))  # Clamp the value between 1 and 100.
         # Pass a rect or tuple as the `area` argument.
             # Use the `heat` percentage to calculate the current width. 
         screen.fill(BG_COLOR)

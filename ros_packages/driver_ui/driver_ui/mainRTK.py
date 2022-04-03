@@ -5,6 +5,8 @@ from geometry_msgs.msg import Vector3
 
 import pygame
 import math
+import time
+import datetime 
 import random
 from random import randint
 
@@ -46,7 +48,8 @@ class DriverUI(Node):
 
         
         self.points = []
-        self.points.append((1.1, 0.0))
+        self.points.append((0.0, 0.0))
+        self.index = 0
 
         self.current_car_position = random.choice(self.points) # set current car position to a random point for now
         self.current_car_rotation = 0 # set current car rotation to be pointed straight NORTH
@@ -54,11 +57,15 @@ class DriverUI(Node):
         pygame.init()
         self.current_pos = (1.000,0.000)
         self.current_vel = (0.000,0.000)
-        self.ideal_vel = (0.000,0.000)
+        self.total_distance = 0
         self.current_speed = 0.000
+        
+        self.time = time.time()
+        self.time2 = time.time()
+        self.time_delta = 0
 
         self.xpos = 600
-        self.ypos = 300
+        self.ypos = 400
 
         self.screen = pygame.display.set_mode((1200, 600))
 
@@ -67,7 +74,9 @@ class DriverUI(Node):
        
     def update_display(self):
         self.points.append((self.current_pos[0], self.current_pos[1]))
-        self.draw_points(self.points, self.current_pos, self.current_vel, self.current_speed, self.ideal_vel, self.current_car_rotation, self.xpos, self.ypos)
+        self.index += 1
+        self.time_delta = self.time2 - self.time
+        self.draw_points(self.time_delta, self.points, self.current_pos, self.current_vel, self.current_speed, self.total_distance, self.current_car_rotation, self.xpos, self.ypos)
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -80,19 +89,26 @@ class DriverUI(Node):
         self.screen.fill(GRAY)
         x_pos = msg.x
         y_pos = msg.y
+        #z_pos = msg.z
 
-        self.current_pos = (round(x_pos, 3), round(y_pos, 3))
+        self.current_pos = (x_pos, y_pos)
         self.current_vel = (round(x_pos, 3) / 1.6, round(y_pos, 3) / 2)
-        self.ideal_vel = (round(x_pos, 3) / 2.1, round(y_pos, 3) / 2.1)
+    
+
+        #euclidean distance (x,y,z)
+        self.total_distance += (((self.current_pos[0] - self.points[self.index - 1][0]) ** 2) + ((self.current_pos[1] - self.points[self.index - 1][1]) ** 2)) ** 0.5
+
         self.current_speed = round(((self.current_vel[0] ** 2) + (self.current_vel[1] ** 2)) ** 0.5, 3)
         
-        
         self.xpos += randint(-10, 10)
+        
+        self.time2 = time.time()
+
 
 
 
  
-    def draw_points(self, points, current_position, current_velocity, current_speed, ideal_velocity, rotation_from_north, xpos, ypos):
+    def draw_points(self, timedelta, points, current_position, current_velocity, current_speed, total_distance, rotation_from_north, xpos, ypos):
         screen = self.screen
         WIDTH, HEIGHT = pygame.display.get_surface().get_size()
         screen.fill(GRAY)
@@ -100,11 +116,15 @@ class DriverUI(Node):
 
         # screen extras
         font = pygame.font.SysFont(None, 24)
-        bigFont = pygame.font.SysFont('DS-DIGIB.TTF', 80)
-        current_label = font.render('Current Position: ' + str(current_position), True, BLUE)
-        current_speed = font.render(str(current_speed) + ' m/s', True, BLUE)
-        current_velocity_label = font.render('Current Speed: ' + str(current_velocity), True, BLUE)
-        ideal_speed_label = font.render('Ideal Speed: ' + str(ideal_velocity), True, BLUE)
+
+        bigFont = pygame.font.Font('/opt/ros/dev_ws/src/driver_ui/driver_ui/DS-DIGIB.TTF', 24)
+
+        current_label = bigFont.render('Current Position: ' + str(current_position), True, BLUE)
+        current_speed = bigFont.render(str(current_speed) + ' m/s', True, BLUE)
+        current_velocity_label = bigFont.render('Current Speed: ' + str(current_velocity), True, BLUE)
+        total_distance_label = bigFont.render('Total Distance: ' + str(total_distance), True, BLUE)
+        total_time_label = bigFont.render('Total Time ' + str(datetime.timedelta(seconds = timedelta)).split(".")[0], True, BLUE)
+        
 
         moveUp = False
         moveDown = False
@@ -136,10 +156,10 @@ class DriverUI(Node):
     
         
 
-        heat_rect = HEAT_BAR_IMAGE.get_rect(topleft=(100, 400))
+        heat_rect = HEAT_BAR_IMAGE.get_rect(topleft=(100, 450))
         #ticker
-        f = pygame.font.SysFont("Times New Roman", 80)
-        arrow = f.render(u'\u2193', True, (255,255,0))
+        #f = pygame.font.Font("", 100)
+        arrow = bigFont.render(u"\u2193", True, (255,255,0))
         
 
 
@@ -160,8 +180,9 @@ class DriverUI(Node):
         screen.blit(circ_surface, (0,0))
         screen.blit(current_label, (20, 20))
         screen.blit(current_velocity_label, (20, 60))
-        screen.blit(ideal_speed_label, (20, 100))
+        screen.blit(total_distance_label, (20, 100))
         screen.blit(current_speed, (20, 140))
+        screen.blit(total_time_label, (20, 180))
         
         #heatmap and ticker
         screen.blit(pygame.transform.scale(HEAT_BAR_IMAGE, (1000, 80)), heat_rect, (0, 0, 1000, 600))
