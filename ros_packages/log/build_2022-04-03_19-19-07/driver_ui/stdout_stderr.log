@@ -1,0 +1,45 @@
+running egg_info
+creating ../build/driver_ui/driver_ui.egg-info
+writing ../build/driver_ui/driver_ui.egg-info/PKG-INFO
+writing dependency_links to ../build/driver_ui/driver_ui.egg-info/dependency_links.txt
+writing entry points to ../build/driver_ui/driver_ui.egg-info/entry_points.txt
+writing requirements to ../build/driver_ui/driver_ui.egg-info/requires.txt
+writing top-level names to ../build/driver_ui/driver_ui.egg-info/top_level.txt
+writing manifest file '../build/driver_ui/driver_ui.egg-info/SOURCES.txt'
+reading manifest file '../build/driver_ui/driver_ui.egg-info/SOURCES.txt'
+writing manifest file '../build/driver_ui/driver_ui.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /opt/ros/dev_ws/src/build/driver_ui/build
+creating /opt/ros/dev_ws/src/build/driver_ui/build/lib
+creating /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui
+copying driver_ui/main.py -> /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui
+copying driver_ui/__init__.py -> /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui
+copying driver_ui/test.py -> /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui
+copying driver_ui/mainRTK.py -> /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui
+copying driver_ui/haha.py -> /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui
+running install
+running install_lib
+creating /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui
+copying /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui/main.py -> /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui
+copying /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui/__init__.py -> /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui
+copying /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui/test.py -> /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui
+copying /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui/mainRTK.py -> /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui
+copying /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui/haha.py -> /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui
+byte-compiling /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui/main.py to main.cpython-38.pyc
+byte-compiling /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui/__init__.py to __init__.cpython-38.pyc
+byte-compiling /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui/test.py to test.cpython-38.pyc
+byte-compiling /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui/mainRTK.py to mainRTK.cpython-38.pyc
+byte-compiling /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui/haha.py to haha.cpython-38.pyc
+running install_data
+creating /opt/ros/dev_ws/src/install/driver_ui/share/ament_index
+creating /opt/ros/dev_ws/src/install/driver_ui/share/ament_index/resource_index
+creating /opt/ros/dev_ws/src/install/driver_ui/share/ament_index/resource_index/packages
+copying resource/driver_ui -> /opt/ros/dev_ws/src/install/driver_ui/share/ament_index/resource_index/packages
+copying package.xml -> /opt/ros/dev_ws/src/install/driver_ui/share/driver_ui
+running install_egg_info
+Copying ../build/driver_ui/driver_ui.egg-info to /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui-0.0.0-py3.8.egg-info
+running install_scripts
+Installing driver_ui script to /opt/ros/dev_ws/src/install/driver_ui/lib/driver_ui
+Installing driver_ui_rtk script to /opt/ros/dev_ws/src/install/driver_ui/lib/driver_ui
+writing list of installed files to '/opt/ros/dev_ws/src/build/driver_ui/install.log'

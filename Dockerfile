@@ -87,6 +87,7 @@ RUN npm install --global pyright
 
 # source entrypoint setup
 ENV OVERLAY_WS $OVERLAY_WS
+ENV LANG C.UTF-8
 RUN sed --in-place --expression \
       '$isource "$OVERLAY_WS/install/setup.bash"' \
       /ros_entrypoint.sh

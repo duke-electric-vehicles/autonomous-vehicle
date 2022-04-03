@@ -28,7 +28,7 @@ class MinimalPublisher(Node):
         self.msg = Vector3()
         self.msg.x = float(self.data[self.i][0])
         self.msg.y = float(self.data[self.i][1])
-        self.msg.z = 0.0
+        self.msg.z = float(0.0)
 
         #print(self.msg.x)
         #print(self.msg.y)

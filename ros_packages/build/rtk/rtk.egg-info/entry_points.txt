@@ -1,0 +1,3 @@
+[console_scripts]
+pub = rtk.publisher:main
+
