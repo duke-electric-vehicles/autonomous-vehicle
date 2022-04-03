@@ -107,7 +107,9 @@ class DriverUI(Node):
         print(self.total_distance)
 
         #arrow from total distance
-        self.xpos2 += self.total_distance * 100
+        self.xpos2 += self.distance_delta * 100
+
+
 
         #mm/s to mph
         self.current_speed = (((self.current_vel[0] ** 2) + (self.current_vel[1] ** 2) + (self.current_vel[2] ** 2)) ** 0.5) * .00223694
@@ -192,7 +194,7 @@ class DriverUI(Node):
         #ticker for distance
 
         f = pygame.font.Font("/opt/ros/dev_ws/src/driver_ui/driver_ui/times.ttf", 60, bold = True)
-        arrow2 = f.render(u'\u25BC', True, BLUE)
+        arrow2 = f.render(u'\u2143', True, BLUE)
 
 
 
