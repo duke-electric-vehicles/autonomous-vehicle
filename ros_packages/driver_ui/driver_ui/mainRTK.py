@@ -67,7 +67,8 @@ class DriverUI(Node):
         self.xpos = 550
         self.ypos = 280
 
-        self.screen = pygame.display.set_mode((1200, 600))
+        #self.screen = pygame.display.set_mode((1200, 600))
+        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 
         timer_period = 1/60  # seconds per frame
         self.timer = self.create_timer(timer_period, self.update_display)
@@ -167,7 +168,7 @@ class DriverUI(Node):
 
         pygame.draw.polygon(screen, (0, 0, 0), ((0, 100), (0, 200), (200, 200), (200, 300), (300, 150), (200, 0), (200, 100)))
         
-        #pygame.draw.line(screen, GREEN, [0, 0], [50,30], 5)
+        
 
         #pygame.draw.rect(screen, RED, [20,HEIGHT-60,60,40])
         #pygame.draw.rect(screen, GREEN, [80,HEIGHT-60,60,40])
