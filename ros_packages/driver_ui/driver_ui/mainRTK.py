@@ -48,14 +48,14 @@ class DriverUI(Node):
 
         
         self.points = []
-        self.points.append((0.0, 0.0, 0.0))
+        self.points.append((0.0, 0.0, 219))
         self.index = 0
 
         self.current_car_position = random.choice(self.points) # set current car position to a random point for now
         self.current_car_rotation = 0 # set current car rotation to be pointed straight NORTH
 
         pygame.init()
-        self.current_pos = (0,0,0)
+        self.current_pos = (0,0,219)
         self.current_vel = (0,0,0)
         self.total_distance = 0
         self.current_speed = 0
@@ -67,8 +67,11 @@ class DriverUI(Node):
         self.xpos = 550
         self.ypos = 280
 
-        #self.screen = pygame.display.set_mode((1200, 600))
-        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        self.xpos2 = 100
+        self.ypos2 = 420
+
+        self.screen = pygame.display.set_mode((1200, 600))
+        #self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 
         timer_period = 1/60  # seconds per frame
         self.timer = self.create_timer(timer_period, self.update_display)
@@ -97,10 +100,14 @@ class DriverUI(Node):
         self.current_vel = (x_pos / 1.6, y_pos / 2, z_pos)
 
         #euclidean distance (x,y,z)
-        self.total_distance += (((self.current_pos[0] - self.points[self.index - 1][0]) ** 2) + ((self.current_pos[1] - self.points[self.index - 1][1]) ** 2) + ((self.current_pos[2] - self.points[self.index - 1][2]) ** 2)) ** 0.5
+        self.distance_delta = round(((((self.current_pos[0] - self.points[self.index - 1][0]) ** 2) + ((self.current_pos[1] - self.points[self.index - 1][1]) ** 2) + ((self.current_pos[2] - self.points[self.index - 1][2]) ** 2)) ** 0.5) * 0.000621371, 6)
+        self.total_distance += round(self.distance_delta, 6)
 
         #meters to mile conversion
-        self.total_distance *= 0.000621371
+        print(self.total_distance)
+
+        #arrow from total distance
+        self.xpos2 += self.total_distance * 100
 
         #mm/s to mph
         self.current_speed = (((self.current_vel[0] ** 2) + (self.current_vel[1] ** 2) + (self.current_vel[2] ** 2)) ** 0.5) * .00223694
@@ -166,7 +173,31 @@ class DriverUI(Node):
         f = pygame.font.Font("/opt/ros/dev_ws/src/driver_ui/driver_ui/times.ttf", 60, bold = True)
         arrow = f.render(u'\u25BC', True, BLUE)
 
-        pygame.draw.polygon(screen, (0, 0, 0), ((0, 100), (0, 200), (200, 200), (200, 300), (300, 150), (200, 0), (200, 100)))
+        #scale for distance
+        circ_surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
+        
+        pygame.draw.line(circ_surface, RED, [100, 465], [100, 500], 5)
+        pygame.draw.line(circ_surface, RED, [200, 465], [200, 500], 5)
+        pygame.draw.line(circ_surface, RED, [300, 465], [300, 500], 5)
+        pygame.draw.line(circ_surface, RED, [400, 465], [400, 500], 5)
+        pygame.draw.line(circ_surface, RED, [500, 465], [500, 500], 5)
+        pygame.draw.line(circ_surface, RED, [600, 465], [600, 500], 5)
+        pygame.draw.line(circ_surface, RED, [700, 465], [700, 500], 5)
+        pygame.draw.line(circ_surface, RED, [800, 465], [800, 500], 5)
+        pygame.draw.line(circ_surface, RED, [900, 465], [900, 500], 5)
+        pygame.draw.line(circ_surface, RED, [1000, 465], [1000, 500], 5)
+        pygame.draw.line(circ_surface, RED, [1100, 465], [1100, 500], 5)
+        pygame.draw.line(circ_surface, RED, [100, 500], [1100, 500], 5)
+
+        #ticker for distance
+
+        f = pygame.font.Font("/opt/ros/dev_ws/src/driver_ui/driver_ui/times.ttf", 60, bold = True)
+        arrow2 = f.render(u'\u25BC', True, BLUE)
+
+
+
+
+        #pygame.draw.polygon(screen, (0, 0, 0), ((0, 100), (0, 200), (200, 200), (200, 300), (300, 150), (200, 0), (200, 100)))
         
         
 
@@ -176,7 +207,8 @@ class DriverUI(Node):
         #pygame.draw.rect(screen, RED, [140,HEIGHT-60,60,40])
         #pygame.draw.rect(screen, GREEN, [200,HEIGHT-60,60,40])
 
-        circ_surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
+        
+        
         
         #pygame.draw.rect(circ_surface, BLACK, (130, 175, 320, 200), 10)
 
@@ -195,6 +227,7 @@ class DriverUI(Node):
         screen.blit(pygame.transform.scale(HEAT_BAR_IMAGE, (1000, 60)), heat_rect, (0, 0, 1000, 600))
         #screen.blit(HEAT_BAR_IMAGE, heat_rect, (0, 0, 1000, 600))
         screen.blit(arrow, (self.xpos, self.ypos))
+        screen.blit(arrow, (self.xpos2, self.ypos2))
 
         pygame.display.update()
 

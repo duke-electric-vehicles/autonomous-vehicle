@@ -15,7 +15,7 @@ class MinimalPublisher(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.i = 0
 
-        self.path_file = "/opt/ros/dev_ws/src/driver_ui/driver_ui/data.csv"
+        self.path_file = "/opt/ros/dev_ws/src/driver_ui/driver_ui/allxyz.csv"
 
         with open(self.path_file) as f:
             self.data = [tuple(line) for line in csv.reader(f)]
@@ -28,7 +28,7 @@ class MinimalPublisher(Node):
         self.msg = Vector3()
         self.msg.x = float(self.data[self.i][0])
         self.msg.y = float(self.data[self.i][1])
-        self.msg.z = float(0.0)
+        self.msg.z = float(self.data[self.i][2])
 
         #print(self.msg.x)
         #print(self.msg.y)
