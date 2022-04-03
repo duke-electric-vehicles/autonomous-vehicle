@@ -1,0 +1,21 @@
+[1.481s] Invoking command in '/opt/ros/dev_ws/src/teleop_keyboard': PYTHONPATH=/opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/teleop_keyboard build --build-base /opt/ros/dev_ws/src/build/teleop_keyboard/build install --prefix /opt/ros/dev_ws/src/install/teleop_keyboard --record /opt/ros/dev_ws/src/build/teleop_keyboard/install.log --single-version-externally-managed
+[1.665s] running egg_info
+[1.666s] writing ../build/teleop_keyboard/teleop_keyboard.egg-info/PKG-INFO
+[1.666s] writing dependency_links to ../build/teleop_keyboard/teleop_keyboard.egg-info/dependency_links.txt
+[1.667s] writing entry points to ../build/teleop_keyboard/teleop_keyboard.egg-info/entry_points.txt
+[1.667s] writing requirements to ../build/teleop_keyboard/teleop_keyboard.egg-info/requires.txt
+[1.667s] writing top-level names to ../build/teleop_keyboard/teleop_keyboard.egg-info/top_level.txt
+[1.709s] reading manifest file '../build/teleop_keyboard/teleop_keyboard.egg-info/SOURCES.txt'
+[1.710s] writing manifest file '../build/teleop_keyboard/teleop_keyboard.egg-info/SOURCES.txt'
+[1.710s] running build
+[1.711s] running build_py
+[1.711s] running install
+[1.712s] running install_lib
+[1.714s] running install_data
+[1.714s] running install_egg_info
+[1.716s] removing '/opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard-0.0.0-py3.8.egg-info' (and everything under it)
+[1.717s] Copying ../build/teleop_keyboard/teleop_keyboard.egg-info to /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard-0.0.0-py3.8.egg-info
+[1.718s] running install_scripts
+[1.739s] Installing teleop_keyboard script to /opt/ros/dev_ws/src/install/teleop_keyboard/lib/teleop_keyboard
+[1.740s] writing list of installed files to '/opt/ros/dev_ws/src/build/teleop_keyboard/install.log'
+[1.794s] Invoked command in '/opt/ros/dev_ws/src/teleop_keyboard' returned '0': PYTHONPATH=/opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/teleop_keyboard build --build-base /opt/ros/dev_ws/src/build/teleop_keyboard/build install --prefix /opt/ros/dev_ws/src/install/teleop_keyboard --record /opt/ros/dev_ws/src/build/teleop_keyboard/install.log --single-version-externally-managed

@@ -1,0 +1,3 @@
+[console_scripts]
+gps_sim = gps_sim.simulate:main
+

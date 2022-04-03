@@ -1,0 +1,22 @@
+[1.495s] Invoking command in '/opt/ros/dev_ws/src/py_pubsub': PYTHONPATH=/opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/py_pubsub build --build-base /opt/ros/dev_ws/src/build/py_pubsub/build install --prefix /opt/ros/dev_ws/src/install/py_pubsub --record /opt/ros/dev_ws/src/build/py_pubsub/install.log --single-version-externally-managed
+[1.678s] running egg_info
+[1.679s] writing ../build/py_pubsub/py_pubsub.egg-info/PKG-INFO
+[1.679s] writing dependency_links to ../build/py_pubsub/py_pubsub.egg-info/dependency_links.txt
+[1.679s] writing entry points to ../build/py_pubsub/py_pubsub.egg-info/entry_points.txt
+[1.679s] writing requirements to ../build/py_pubsub/py_pubsub.egg-info/requires.txt
+[1.680s] writing top-level names to ../build/py_pubsub/py_pubsub.egg-info/top_level.txt
+[1.716s] reading manifest file '../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[1.717s] writing manifest file '../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[1.717s] running build
+[1.717s] running build_py
+[1.717s] running install
+[1.718s] running install_lib
+[1.720s] running install_data
+[1.721s] running install_egg_info
+[1.723s] removing '/opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub-0.0.0-py3.8.egg-info' (and everything under it)
+[1.723s] Copying ../build/py_pubsub/py_pubsub.egg-info to /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub-0.0.0-py3.8.egg-info
+[1.724s] running install_scripts
+[1.745s] Installing listener script to /opt/ros/dev_ws/src/install/py_pubsub/lib/py_pubsub
+[1.745s] Installing talker script to /opt/ros/dev_ws/src/install/py_pubsub/lib/py_pubsub
+[1.746s] writing list of installed files to '/opt/ros/dev_ws/src/build/py_pubsub/install.log'
+[1.795s] Invoked command in '/opt/ros/dev_ws/src/py_pubsub' returned '0': PYTHONPATH=/opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/py_pubsub build --build-base /opt/ros/dev_ws/src/build/py_pubsub/build install --prefix /opt/ros/dev_ws/src/install/py_pubsub --record /opt/ros/dev_ws/src/build/py_pubsub/install.log --single-version-externally-managed

@@ -1,0 +1,27 @@
+[1.558s] Invoking command in '/opt/ros/dev_ws/src/pid': PYTHONPATH=/opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/pid build --build-base /opt/ros/dev_ws/src/build/pid/build install --prefix /opt/ros/dev_ws/src/install/pid --record /opt/ros/dev_ws/src/build/pid/install.log --single-version-externally-managed
+[1.749s] running egg_info
+[1.750s] writing ../build/pid/pid.egg-info/PKG-INFO
+[1.750s] writing dependency_links to ../build/pid/pid.egg-info/dependency_links.txt
+[1.751s] writing entry points to ../build/pid/pid.egg-info/entry_points.txt
+[1.751s] writing requirements to ../build/pid/pid.egg-info/requires.txt
+[1.751s] writing top-level names to ../build/pid/pid.egg-info/top_level.txt
+[1.794s] reading manifest file '../build/pid/pid.egg-info/SOURCES.txt'
+[1.795s] writing manifest file '../build/pid/pid.egg-info/SOURCES.txt'
+[1.795s] running build
+[1.795s] running build_py
+[1.795s] running install
+[1.796s] running install_lib
+[1.798s] byte-compiling /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/test.py to test.cpython-38.pyc
+[1.799s]   File "/opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/test.py", line 5
+[1.799s]     const int trigPin = 9;
+[1.799s]           ^
+[1.800s] SyntaxError: invalid syntax
+[1.800s] 
+[1.800s] running install_data
+[1.800s] running install_egg_info
+[1.802s] removing '/opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid-0.0.0-py3.8.egg-info' (and everything under it)
+[1.802s] Copying ../build/pid/pid.egg-info to /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid-0.0.0-py3.8.egg-info
+[1.804s] running install_scripts
+[1.827s] Installing pid script to /opt/ros/dev_ws/src/install/pid/lib/pid
+[1.827s] writing list of installed files to '/opt/ros/dev_ws/src/build/pid/install.log'
+[1.865s] Invoked command in '/opt/ros/dev_ws/src/pid' returned '0': PYTHONPATH=/opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/pid build --build-base /opt/ros/dev_ws/src/build/pid/build install --prefix /opt/ros/dev_ws/src/install/pid --record /opt/ros/dev_ws/src/build/pid/install.log --single-version-externally-managed

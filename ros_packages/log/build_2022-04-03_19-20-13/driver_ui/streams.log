@@ -1,0 +1,25 @@
+[1.575s] Invoking command in '/opt/ros/dev_ws/src/driver_ui': PYTHONPATH=/opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/driver_ui build --build-base /opt/ros/dev_ws/src/build/driver_ui/build install --prefix /opt/ros/dev_ws/src/install/driver_ui --record /opt/ros/dev_ws/src/build/driver_ui/install.log --single-version-externally-managed
+[1.772s] running egg_info
+[1.773s] writing ../build/driver_ui/driver_ui.egg-info/PKG-INFO
+[1.774s] writing dependency_links to ../build/driver_ui/driver_ui.egg-info/dependency_links.txt
+[1.774s] writing entry points to ../build/driver_ui/driver_ui.egg-info/entry_points.txt
+[1.775s] writing requirements to ../build/driver_ui/driver_ui.egg-info/requires.txt
+[1.775s] writing top-level names to ../build/driver_ui/driver_ui.egg-info/top_level.txt
+[1.815s] reading manifest file '../build/driver_ui/driver_ui.egg-info/SOURCES.txt'
+[1.817s] writing manifest file '../build/driver_ui/driver_ui.egg-info/SOURCES.txt'
+[1.817s] running build
+[1.817s] running build_py
+[1.818s] copying driver_ui/mainRTK.py -> /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui
+[1.818s] running install
+[1.819s] running install_lib
+[1.820s] copying /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui/mainRTK.py -> /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui
+[1.821s] byte-compiling /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui/mainRTK.py to mainRTK.cpython-38.pyc
+[1.824s] running install_data
+[1.825s] running install_egg_info
+[1.827s] removing '/opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui-0.0.0-py3.8.egg-info' (and everything under it)
+[1.827s] Copying ../build/driver_ui/driver_ui.egg-info to /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui-0.0.0-py3.8.egg-info
+[1.828s] running install_scripts
+[1.852s] Installing driver_ui script to /opt/ros/dev_ws/src/install/driver_ui/lib/driver_ui
+[1.852s] Installing driver_ui_rtk script to /opt/ros/dev_ws/src/install/driver_ui/lib/driver_ui
+[1.853s] writing list of installed files to '/opt/ros/dev_ws/src/build/driver_ui/install.log'
+[1.903s] Invoked command in '/opt/ros/dev_ws/src/driver_ui' returned '0': PYTHONPATH=/opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/driver_ui build --build-base /opt/ros/dev_ws/src/build/driver_ui/build install --prefix /opt/ros/dev_ws/src/install/driver_ui --record /opt/ros/dev_ws/src/build/driver_ui/install.log --single-version-externally-managed
