@@ -67,8 +67,8 @@ class DriverUI(Node):
         self.xpos = 550
         self.ypos = 280
 
-        self.xpos2 = 100
-        self.ypos2 = 420
+        self.xpos2 = 70
+        self.ypos2 = 435
 
         self.screen = pygame.display.set_mode((1200, 600))
         #self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
@@ -104,10 +104,14 @@ class DriverUI(Node):
         self.total_distance += round(self.distance_delta, 6)
 
         #meters to mile conversion
-        print(self.total_distance)
+        #print(self.total_distance)
 
         #arrow from total distance
-        self.xpos2 += self.distance_delta * 100
+        self.xpos2 += self.distance_delta * 1000
+
+        for x in range(100, 1100):
+            if self.xpos2 % 20 == 0:
+                pygame.draw.line(circ_surface, GREEN, [self.xpos2, HEIGHT - 75], [self.xpos2, HEIGHT - 75], 5)
 
 
 
@@ -132,11 +136,18 @@ class DriverUI(Node):
         font = pygame.font.SysFont(None, 24)
 
         bigFont = pygame.font.Font('/opt/ros/dev_ws/src/driver_ui/driver_ui/DS-DIGIB.TTF', 24)
+        speedFont = pygame.font.Font('/opt/ros/dev_ws/src/driver_ui/driver_ui/DS-DIGIB.TTF', 100)
 
+        current_position = (round(current_position[0], 2), round(current_position[1], 2), round(current_position[2], 2))
         current_label = bigFont.render('Current Position: ' + str(current_position) + ' meters', True, GREEN)
-        current_speed = bigFont.render(str(current_speed) + ' mph', True, GREEN)
+
+        current_speed = speedFont.render(f"{round(current_speed, 1):03}" + ' mph', True, GREEN)
+        
+        current_velocity = (round(current_velocity[0], 2), round(current_velocity[1], 2), round(current_velocity[2], 2))
         current_velocity_label = bigFont.render('Current Speed: ' + str(current_velocity), True, GREEN)
-        total_distance_label = bigFont.render('Total Distance: ' + str(total_distance) + ' miles', True, GREEN)
+
+        total_distance_label = bigFont.render('Total Distance: ' + str(round(total_distance, 2)) + ' miles', True, GREEN)
+
         total_time_label = bigFont.render('Total Time: ' + str(datetime.timedelta(seconds = timedelta)).split(".")[0], True, GREEN)
         
 
@@ -178,20 +189,22 @@ class DriverUI(Node):
         #scale for distance
         circ_surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
         
-        pygame.draw.line(circ_surface, RED, [100, 465], [100, 500], 5)
-        pygame.draw.line(circ_surface, RED, [200, 465], [200, 500], 5)
-        pygame.draw.line(circ_surface, RED, [300, 465], [300, 500], 5)
-        pygame.draw.line(circ_surface, RED, [400, 465], [400, 500], 5)
-        pygame.draw.line(circ_surface, RED, [500, 465], [500, 500], 5)
-        pygame.draw.line(circ_surface, RED, [600, 465], [600, 500], 5)
-        pygame.draw.line(circ_surface, RED, [700, 465], [700, 500], 5)
-        pygame.draw.line(circ_surface, RED, [800, 465], [800, 500], 5)
-        pygame.draw.line(circ_surface, RED, [900, 465], [900, 500], 5)
-        pygame.draw.line(circ_surface, RED, [1000, 465], [1000, 500], 5)
-        pygame.draw.line(circ_surface, RED, [1100, 465], [1100, 500], 5)
-        pygame.draw.line(circ_surface, RED, [100, 500], [1100, 500], 5)
+        pygame.draw.line(circ_surface, RED, [100, HEIGHT - 110], [100, HEIGHT - 75], 5)
+        pygame.draw.line(circ_surface, RED, [200, HEIGHT - 110], [200, HEIGHT - 75], 5)
+        pygame.draw.line(circ_surface, RED, [300, HEIGHT - 110], [300, HEIGHT - 75], 5)
+        pygame.draw.line(circ_surface, RED, [400, HEIGHT - 110], [400, HEIGHT - 75], 5)
+        pygame.draw.line(circ_surface, RED, [500, HEIGHT - 110], [500, HEIGHT - 75], 5)
+        pygame.draw.line(circ_surface, RED, [600, HEIGHT - 110], [600, HEIGHT - 75], 5)
+        pygame.draw.line(circ_surface, RED, [700, HEIGHT - 110], [700, HEIGHT - 75], 5)
+        pygame.draw.line(circ_surface, RED, [800, HEIGHT - 110], [800, HEIGHT - 75], 5)
+        pygame.draw.line(circ_surface, RED, [900, HEIGHT - 110], [900, HEIGHT - 75], 5)
+        pygame.draw.line(circ_surface, RED, [1000, HEIGHT - 110], [1000, HEIGHT - 75], 5)
+        pygame.draw.line(circ_surface, RED, [1100, HEIGHT - 110], [1100, HEIGHT - 75], 5)
+        pygame.draw.line(circ_surface, RED, [100, HEIGHT - 75], [1100, HEIGHT - 75], 5)
 
         #ticker for distance
+
+        
 
         f = pygame.font.Font("/opt/ros/dev_ws/src/driver_ui/driver_ui/times.ttf", 60, bold = True)
         arrow2 = f.render(u'\u2143', True, BLUE)
@@ -222,7 +235,7 @@ class DriverUI(Node):
         screen.blit(current_label, (20, 20))
         screen.blit(current_velocity_label, (20, 60))
         screen.blit(total_distance_label, (20, 100))
-        screen.blit(current_speed, (20, 140))
+        screen.blit(current_speed, (400, 200))
         screen.blit(total_time_label, (20, 180))
         
         #heatmap and ticker
