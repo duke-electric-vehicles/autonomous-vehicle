@@ -26,12 +26,13 @@ def draw_points(points, current_position, rotation_from_north):
     
 
     #screen = pygame.display.set_mode((1200,600))
-    screen = pygame.display.setmode((0,0), pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
     WIDTH, HEIGHT = pygame.display.get_surface().get_size()
+    print(WIDTH, HEIGHT)
 
     
     
-    background = pygame.image.load("image.png") ## Load the image file
+    #background = pygame.image.load("image.png") ## Load the image file
     #background = pygame.transform.scale(background,(WIDTH, HEIGHT)) ## Make it the same size as the screen
 
     screen.fill(GRAY)
