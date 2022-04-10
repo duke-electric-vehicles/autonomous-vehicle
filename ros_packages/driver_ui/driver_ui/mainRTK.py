@@ -20,7 +20,7 @@ BLUE = (51, 51, 255)
 GREEN = (51, 255, 153)
 RED = (255, 20, 40, 125)
 transparent_RED = (255, 20, 40, 125)
-transparent_Green = GREEN = (51, 255, 153, 125)
+transparent_Green = (51, 255, 153, 125)
 
 # UPDATE_DELAY = 1 # How often should the UI redraw the path with a new current position
 LINE_THICKNESS = 6 # How thick should the path line be
@@ -222,7 +222,7 @@ class DriverUI(Node):
         #pygame.draw.rect(screen, GREEN, [80,HEIGHT-60,60,40])
 
         #pygame.draw.rect(screen, RED, [140,HEIGHT-60,60,40])
-        #pygame.draw.rect(screen, GREEN, [200,HEIGHT-60,60,40])
+        
 
         
         
@@ -232,14 +232,18 @@ class DriverUI(Node):
         
         #pygame.draw.circle(circ_surface, transparent_Green, [900, 300], 100)
 
+        #rectangular outline
+        pygame.draw.rect(circ_surface, GREEN, [325, 25, 725, 375], 5)
 
         screen.blit(circ_surface, (0,0))
-        screen.blit(current_label, (20, 20))
+        screen.blit(current_label, (20, 20))    
         screen.blit(current_velocity_label, (20, 60))
         screen.blit(total_distance_label, (20, 100))
-        screen.blit(current_speed, (350, 200))
+        screen.blit(current_speed, (350, 160))
         screen.blit(total_time_label, (20, 180))
         screen.blit(current_speed_label, (550, 50))
+
+        
         
         #heatmap and ticker
         screen.blit(pygame.transform.scale(HEAT_BAR_IMAGE, (1160, 60)), heat_rect, (0, 0, 2000, 600))
