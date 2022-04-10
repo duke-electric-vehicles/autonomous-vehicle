@@ -55,7 +55,7 @@ class DriverUI(Node):
         self.current_car_rotation = 0 # set current car rotation to be pointed straight NORTH
 
         pygame.init()
-        self.current_pos = (0,0,219)
+        self.current_pos = (0,0,0)
         self.current_vel = (0,0,0)
         self.total_distance = 0
         self.current_speed = 0
@@ -65,7 +65,7 @@ class DriverUI(Node):
         self.time_delta = 0
 
         self.xpos = 650
-        self.ypos = 420
+        self.ypos = 435
 
         self.xpos2 = 70
         self.ypos2 = 590
@@ -136,11 +136,19 @@ class DriverUI(Node):
         font = pygame.font.SysFont(None, 24)
 
         bigFont = pygame.font.Font('/opt/ros/dev_ws/src/driver_ui/driver_ui/DS-DIGIB.TTF', 24)
+        smallishFont = pygame.font.Font('/opt/ros/dev_ws/src/driver_ui/driver_ui/DS-DIGIB.TTF', 35)
+        smallFont = pygame.font.Font('/opt/ros/dev_ws/src/driver_ui/driver_ui/DS-DIGIB.TTF', 40)
+        medsmallFont = pygame.font.Font('/opt/ros/dev_ws/src/driver_ui/driver_ui/DS-DIGIB.TTF', 60)
+        timeFont = pygame.font.Font('/opt/ros/dev_ws/src/driver_ui/driver_ui/DS-DIGIB.TTF', 80)
         medFont = pygame.font.Font('/opt/ros/dev_ws/src/driver_ui/driver_ui/DS-DIGIB.TTF', 100)
         speedFont = pygame.font.Font('/opt/ros/dev_ws/src/driver_ui/driver_ui/DS-DIGIB.TTF', 200)
 
         current_position = (round(current_position[0], 2), round(current_position[1], 2), round(current_position[2], 2))
         current_label = bigFont.render('Current Position: ' + str(current_position) + ' meters', True, GREEN)
+        current_x_pos = medsmallFont.render('X: ' + f"{current_position[0]:03}", True, GREEN)
+        current_y_pos = medsmallFont.render('Y: ' + f"{current_position[1]:03}", True, GREEN)
+        current_z_pos = medsmallFont.render('Z: ' + f"{current_position[2]:03}", True, GREEN)
+        pos_label = medFont.render('POS', True, GREEN)
 
         current_speed = speedFont.render(f"{round(current_speed, 1):03}" + ' mph', True, GREEN)
         current_speed_label = medFont.render('Speed', True, GREEN)
@@ -149,8 +157,14 @@ class DriverUI(Node):
         current_velocity_label = bigFont.render('Current Speed: ' + str(current_velocity), True, GREEN)
 
         total_distance_label = bigFont.render('Total Distance: ' + str(round(total_distance, 2)) + ' miles', True, GREEN)
+        
+        total_distance_label = smallishFont.render("Total Distance", True, GREEN)
+        total_distance_label2 = medsmallFont.render(f"{(round(total_distance, 2)):03}", True, GREEN)
+        total_distance_label3 = smallishFont.render(' miles', True, GREEN)
 
-        total_time_label = bigFont.render('Total Time: ' + str(datetime.timedelta(seconds = timedelta)).split(".")[0], True, GREEN)
+        #total_time_label = bigFont.render('Total Time: ' + str(datetime.timedelta(seconds = timedelta)).split(".")[0], True, GREEN)
+        total_time_label2 = smallFont.render("Total Time", True, GREEN)
+        total_time_label = timeFont.render(str(datetime.timedelta(seconds = timedelta)).split(".")[0], True, GREEN)
         
 
         moveUp = False
@@ -183,7 +197,7 @@ class DriverUI(Node):
     
         
 
-        heat_rect = HEAT_BAR_IMAGE.get_rect(topleft=(100, 490))
+        heat_rect = HEAT_BAR_IMAGE.get_rect(topleft=(100, 510))
         #ticker
         f = pygame.font.Font("/opt/ros/dev_ws/src/driver_ui/driver_ui/times.ttf", 60, bold = True)
         arrow = f.render(u'\u25BC', True, BLUE)
@@ -203,6 +217,10 @@ class DriverUI(Node):
         pygame.draw.line(circ_surface, RED, [1144, HEIGHT - 110], [1144, HEIGHT - 75], 5)
         pygame.draw.line(circ_surface, RED, [1260, HEIGHT - 110], [1260, HEIGHT - 75], 5)
         pygame.draw.line(circ_surface, RED, [100, HEIGHT - 75], [1260, HEIGHT - 75], 5)
+
+
+        #divider line
+        pygame.draw.line(circ_surface, GREEN, [25, 200], [300, 200], 5)
 
         #ticker for distance
 
@@ -234,14 +252,25 @@ class DriverUI(Node):
 
         #rectangular outline
         pygame.draw.rect(circ_surface, GREEN, [325, 25, 725, 375], 5)
+        pygame.draw.rect(circ_surface, GREEN, [1075, 25, 250, 375], 5)
+        pygame.draw.rect(circ_surface, GREEN, [25, 25, 275, 375], 5)
+        pygame.draw.rect(circ_surface, GREEN, [25, 25, 275, 375], 5)
+        pygame.draw.rect(circ_surface, GREEN, [25, 425, 1300, 325], 5)
 
         screen.blit(circ_surface, (0,0))
-        screen.blit(current_label, (20, 20))    
-        screen.blit(current_velocity_label, (20, 60))
-        screen.blit(total_distance_label, (20, 100))
+        #screen.blit(current_label, (20, 20))    
+        #screen.blit(current_velocity_label, (20, 60))
+        screen.blit(total_distance_label, (45, 45))
+        screen.blit(total_distance_label2, (55, 100))
+        screen.blit(total_distance_label3, (160, 115))
         screen.blit(current_speed, (350, 160))
-        screen.blit(total_time_label, (20, 180))
+        screen.blit(total_time_label, (42, 290))
+        screen.blit(total_time_label2, (70, 240))
         screen.blit(current_speed_label, (550, 50))
+        screen.blit(pos_label, (1125, 50))
+        screen.blit(current_x_pos, (1110, 170))
+        screen.blit(current_y_pos, (1110, 240))
+        screen.blit(current_z_pos, (1110, 310))
 
         
         
