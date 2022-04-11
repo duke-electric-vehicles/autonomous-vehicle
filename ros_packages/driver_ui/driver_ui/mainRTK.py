@@ -107,19 +107,26 @@ class DriverUI(Node):
         #print(self.total_distance)
 
         #arrow from total distance
-        self.xpos2 += self.distance_delta * 1000
+        self.xpos2 += round(self.distance_delta * 1.16, 0)
+        #self.xpos2 += 116
 
-        for x in range(100, 1100):
-            if self.xpos2 % 20 == 0:
-                pygame.draw.line(circ_surface, GREEN, [self.xpos2, HEIGHT - 75], [self.xpos2, HEIGHT - 75], 5)
 
 
 
         #mm/s to mph
-        self.current_speed = (((self.current_vel[0] ** 2) + (self.current_vel[1] ** 2) + (self.current_vel[2] ** 2)) ** 0.5) * .00223694
-        
-        self.xpos += randint(-10, 10)
-        
+        self.current_speed = (((self.current_vel[0] ** 2) + (self.current_vel[1] ** 2) + (self.current_vel[2] ** 2)) ** 0.5) * 0.00223694
+
+        #conversion from current_speed to pixels 
+        #1160 length
+        xpos_delta = (self.current_speed - 15) * (290)
+
+        if (xpos_delta > 580):
+            self.xpos = 1230
+        elif (xpos_delta < -580):
+            self.xpos = 70
+        else:
+            self.xpos += xpos_delta
+
         self.time2 = time.time()
 
 
