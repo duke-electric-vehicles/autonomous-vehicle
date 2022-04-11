@@ -165,6 +165,21 @@ class DriverUI(Node):
         #total_time_label = bigFont.render('Total Time: ' + str(datetime.timedelta(seconds = timedelta)).split(".")[0], True, GREEN)
         total_time_label2 = smallFont.render("Total Time", True, GREEN)
         total_time_label = timeFont.render(str(datetime.timedelta(seconds = timedelta)).split(".")[0], True, GREEN)
+
+        zero_mile = smallishFont.render("0.0", True, GREEN)
+        one_mile = smallishFont.render("1.0", True, GREEN)
+        two_mile = smallishFont.render("2.0", True, GREEN)
+        three_mile = smallishFont.render("3.0", True, GREEN)
+        four_mile = smallishFont.render("4.0", True, GREEN)
+        five_mile = smallishFont.render("5.0", True, GREEN)
+        six_mile = smallishFont.render("6.0", True, GREEN)
+        seven_mile = smallishFont.render("7.0", True, GREEN)
+        eight_mile = smallishFont.render("8.0", True, GREEN)
+        nine_mile = smallishFont.render("9.0", True, GREEN)
+        ten_mile = smallishFont.render("10.0", True, GREEN)
+
+        logo = pygame.image.load("/opt/ros/dev_ws/src/driver_ui/driver_ui/logo.png") 
+        logo_flip = pygame.transform.flip(logo, True, False)
         
 
         moveUp = False
@@ -263,6 +278,10 @@ class DriverUI(Node):
         screen.blit(circ_surface, (0,0))
         #screen.blit(current_label, (20, 20))    
         #screen.blit(current_velocity_label, (20, 60))
+
+        screen.blit(logo, (875, 35))
+        screen.blit(logo_flip, (350, 35))
+
         screen.blit(total_distance_label, (45, 45))
         screen.blit(total_distance_label2, (55, 100))
         screen.blit(total_distance_label3, (160, 115))
@@ -274,6 +293,18 @@ class DriverUI(Node):
         screen.blit(current_x_pos, (1110, 170))
         screen.blit(current_y_pos, (1110, 240))
         screen.blit(current_z_pos, (1110, 310))
+
+        screen.blit(zero_mile, (75, 695))
+        screen.blit(one_mile, (191, 695))
+        screen.blit(two_mile, (307, 695))
+        screen.blit(three_mile, (423, 695))
+        screen.blit(four_mile, (539, 695))
+        screen.blit(five_mile, (655, 695))
+        screen.blit(six_mile, (771, 695))
+        screen.blit(seven_mile, (887, 695))
+        screen.blit(eight_mile, (1006, 695))
+        screen.blit(nine_mile, (1119, 695))
+        screen.blit(ten_mile, (1235, 695))
 
         
         
