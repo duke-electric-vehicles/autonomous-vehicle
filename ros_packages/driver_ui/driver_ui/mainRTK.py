@@ -70,8 +70,8 @@ class DriverUI(Node):
         self.xpos2 = 70
         self.ypos2 = 800
 
-        self.screen = pygame.display.set_mode((1920, 1080))
-        #self.screen = pygame.display.set_mode((0,0), pygame.RESIZABLE)
+        self.screen = pygame.display.set_mode((1360, 768))
+        #self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 
         timer_period = 1/60  # seconds per frame
         self.timer = self.create_timer(timer_period, self.update_display)
