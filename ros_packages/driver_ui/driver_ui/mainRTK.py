@@ -248,9 +248,6 @@ class DriverUI(Node):
         f = pygame.font.Font("/opt/ros/dev_ws/src/driver_ui/driver_ui/times.ttf", 60, bold = True)
         arrow2 = f.render(u'\u2143', True, BLUE)
 
-        plus_two_label = medsmallFont.render("+2", True, RED)
-        minus_two_label = medsmallFont.render("-2", True, RED)
-
 
 
 
@@ -320,9 +317,6 @@ class DriverUI(Node):
         #screen.blit(HEAT_BAR_IMAGE, heat_rect, (0, 0, 1000, 600))
         screen.blit(arrow, (self.xpos, self.ypos))
         screen.blit(arrow, (self.xpos2, self.ypos2))
-
-        screen.blit(plus_two_label, (1250, 580))
-        screen.blit(minus_two_label, (40, 580))
 
         pygame.display.update()
 
