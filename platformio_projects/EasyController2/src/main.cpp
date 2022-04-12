@@ -3,7 +3,6 @@
 #define THROTTLE_PIN 15       // Throttle pin
 #define THROTTLE_LOW 150      // These LOW and HIGH values are used to scale the ADC reading. More on this below
 #define THROTTLE_HIGH 710
-
 #define HALL_1_PIN 6
 #define HALL_2_PIN 7
 #define HALL_3_PIN 8
