@@ -3,8 +3,6 @@ import pygame as pg
 """
 CONSTANTS
 """
-
-<<<<<<< HEAD
 BLACK = (0, 0, 0)
 GRAY = (160, 160, 160)
 BLUE = (51, 51, 255)
@@ -282,7 +280,7 @@ def main(args=None):
 if __name__ == '__main__':
 
     main()
-=======
+
 pg.init()
 screen = pg.display.set_mode((640, 480))
 BG_COLOR = pg.Color(30, 30, 50)
@@ -381,4 +379,3 @@ def main():
 if __name__ == '__main__':
     main()
     pg.quit()
->>>>>>> a5b6c15 (added gradient bar to GUI)
