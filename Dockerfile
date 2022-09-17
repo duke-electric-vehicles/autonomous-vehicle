@@ -52,10 +52,6 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
 RUN apt-get update
 RUN apt-get install -y curl
 
-RUN npm install --global pyright
-
-RUN npm install --global pyright
-
 # source entrypoint setup
 ENV OVERLAY_WS $OVERLAY_WS
 ENV LANG C.UTF-8
