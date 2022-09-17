@@ -1,31 +1,29 @@
-version: "3.3"
+version: '3.3'
 services:
-        dev:
-                build:
-                        context: .
-                        dockerfile: Dockerfile
-                environment:
-                        - DISPLAY=${DISPLAY}
-                volumes:
-                        - /dev:/dev
-                        - ./.bashrc-docker:/root/.bashrc
-                        - ./ros_packages/:/opt/ros/dev_ws/src
-                        - /tmp/.X11-unix:/tmp/.X11-unix
-                        - $HOME/.Xauthority:/root/.Xauthority:rw"
-                image: "dev_image:foxy"
-                tty: true
-                stdin_open: true
-                container_name: "dev"
-                privileged: true
-                network_mode: host
-        uros:
-                build:
-                        context: .
-                        dockerfile: Dockerfile-Uros
-                volumes:
-                        - /dev:/dev
-                image: "uros-test"
-                tty: true
-                stdin_open: true
-                container_name: "uros"
-                privileged: true
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /dev:/dev
+      - ./.bashrc-docker:/root/.bashrc
+      - ./ros_packages/:/opt/ros/dev_ws/src
+    image: 'dev_image:foxy'
+    tty: true
+    stdin_open: true
+    container_name: 'dev'
+    privileged: true
+    network_mode: host
+  uros:
+    build:
+      context: .
+      dockerfile: Dockerfile-Uros
+    volumes:
+      - /dev:/dev
+    image: 'uros'
+    tty: true
+    stdin_open: true
+    container_name: 'uros'
+    privileged: true
