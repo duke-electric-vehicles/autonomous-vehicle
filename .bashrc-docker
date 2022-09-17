@@ -99,6 +99,5 @@ fi
 #fi
 cd /opt/ros/dev_ws
 alias ls="ls --color=auto"
-alias vim="nvim"
 source /opt/ros/foxy/setup.bash > /dev/null
 . /opt/ros/dev_ws/install/setup.bash > /dev/null
