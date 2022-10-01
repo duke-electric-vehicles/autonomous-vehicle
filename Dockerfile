@@ -20,12 +20,12 @@ RUN mkdir -p /tmp/opt && \
 # multi-stage for building
 FROM $FROM_IMAGE AS builder
 
-RUN apt -y update
-RUN apt -y upgrade
-RUN apt install -y build-essential net-tools vim wget
-RUN apt install -y nano
-RUN apt install -y python3-pip
-RUN apt install -y ros-foxy-rqt*
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get install -y build-essential net-tools vim wget
+RUN apt-get install -y nano
+RUN apt-get install -y python3-pip
+RUN apt-get install -y ros-foxy-rqt*
 
 RUN pip3 install Cython
 RUN pip3 install sbp
@@ -54,6 +54,7 @@ RUN apt-get install -y curl
 
 # source entrypoint setup
 ENV OVERLAY_WS $OVERLAY_WS
+ENV LANG C.UTF-8
 RUN sed --in-place --expression \
       '$isource "$OVERLAY_WS/install/setup.bash"' \
       /ros_entrypoint.sh
