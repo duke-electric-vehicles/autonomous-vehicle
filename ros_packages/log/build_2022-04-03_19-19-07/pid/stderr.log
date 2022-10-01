@@ -1,5 +1,0 @@
-  File "/opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/test.py", line 5
-    const int trigPin = 9;
-          ^
-SyntaxError: invalid syntax
-
