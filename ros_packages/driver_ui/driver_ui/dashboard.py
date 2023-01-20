@@ -11,24 +11,21 @@ import sys
 #GLOBAL CONSTS
 
 #pos tuple (x, y, z)
-global position 
 position = (0, 0, 0)
 
 #speed (km/h)
-global speed
 speed = 0
 
 #power (watt)
-global power
 power = 0
 
 #time (seconds)
-global timeLog
 timeLog = 0
 
 class DriverUI(Node):
 
     def __init__(self) -> None:
+
         super().__init__('driver_ui')
 
         self.subscription = self.create_subscription(
@@ -48,40 +45,68 @@ class DriverUI(Node):
         self.height = pygame.display.Info().current_h
         self.screen = pygame.display.set_mode((self.width, self.height))
 
-        self.screen.fill((51, 51, 255))
-
         timer_period = 1/60  # seconds per frame
-        self.timer = self.create_timer(timer_period, self.update_display)
-        
 
-    #need to make static background resizeable
-    #dependent on self.width, self.height
-    def speed_callback(self, msg) -> None:
-        return
-    
-    def distance_callback(self, msg) -> None:
-        return
-    
-    def position_callback(self, msg):
-        self.screen.fill((0, 0, 255))
-    
-    def power_bacllback(self, msg) -> None:
-        return 
+        self.init_ui(self.height, self.width)
+
+        self.timer = self.create_timer(timer_period, self.update_display)
 
     #Main frame loop
     def update_display(self) -> None:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
-
+                #self.init_ui(self.screen, self.height, self.width)
                 #exit condition by pressing 'esc' button
                 if event.key == pygame.K_ESCAPE:
                     print("ESC was pressed. quitting...")
-                    quit()
+                    quit()  
 
+    #unchanged surfaces on the screen
+    def init_ui(self, height, width):
+        #test ui for now
+        self.screen.fill((160, 160, 160))
+        logo = pygame.image.load("/opt/ros/dev_ws/src/driver_ui/driver_ui/logo.png") 
+        self.screen.blit(logo, (875, 35))  
+        pygame.display.update()
+        
+
+    #need to make static background resizeable
+    #dependent on self.width, self.height
+    def position_callback(self, msg):
+        
+        x_pos = msg.x
+        y_pos = msg.y
+        z_pos = msg.z
+        
+        global position
+
+        #tuple cur_pos
+        position = (x_pos, y_pos, z_pos)
+
+
+        return
+
+    def speed_callback(self, msg) -> None:
+        
+
+        return
+    
+    def distance_callback(self, msg) -> None:
+        return
+    
+    def power_callback(self, msg) -> None:
+        return 
+
+    def amps_callback(self, msg) -> None:
+        return
+    
+    def voltage_callback(self, msg) -> None:
+        return
+
+    def joules_callback(self, msg) -> None:
+        return
 
 def main(args = None):
-        
-        print('Hello World')
 
         rclpy.init(args=args)
 
