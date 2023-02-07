@@ -112,19 +112,8 @@ class DriverUI(Node):
 
     #need to make static background resizeable
     #dependent on self.width, self.height
-    #needs ECEF-LLA conversion factors for pos_callback
+    #already in lat/long form from publisher.py
     def position_callback(self, msg):
-        
-        #Currently in ECEF
-        ECEF_x_pos = msg.x
-        ECEF_y_pos = msg.y
-        ECEF_z_pos = msg.z
-        
-        global ECEF_position
-
-        #tuple cur_pos
-        ECEF_position = (ECEF_x_pos, ECEF_y_pos, ECEF_z_pos)
-        LLA_position = ecef_to_lla(ECEF_position)
 
 
 
