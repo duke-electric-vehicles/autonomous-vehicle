@@ -2,6 +2,7 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Vector3
+from geographic_msgs.msg import GeoPoint
 import pygame
 import time
 import datetime 
@@ -16,6 +17,7 @@ position = (0, 0, 0)
 #speed (km/h)
 speed = 0
 
+
 #power (watt)
 power = 0
 
@@ -27,12 +29,18 @@ class DriverUI(Node):
     def __init__(self) -> None:
 
         super().__init__('driver_ui')
-
+        #pos subscriber service
         self.subscription = self.create_subscription(
-            Vector3,
+            GeoPoint,
             'rtk_pos',
             self.position_callback,
             10)
+        #vel subscriber service
+        self.subscription = self.create_subscription(
+            Vector3,
+            'rtk_vel',
+            self.velocity_callback,
+            10)    
 
         self.subscription
 
@@ -41,14 +49,14 @@ class DriverUI(Node):
 
         #initialize pygame screen / get dimensions
         #self.width, self.height = pygame.display.get_surface().get_size()
-        #self.width = pygame.display.Info().current_w
-        #self.height = pygame.display.Info().current_h
+        self.width = pygame.display.Info().current_w
+        self.height = pygame.display.Info().current_h
 
         self.width = 400
         self.height = 400
-
         self.screen = pygame.display.set_mode((self.width, self.height))
-  
+
+        #initialize clock
         self.clock = pygame.time.Clock()
         self.time_elapsed_milli = 0
         self.clock_status = False
@@ -58,6 +66,7 @@ class DriverUI(Node):
         self.init_ui(self.height, self.width)
         timer_period = 1/60  # seconds per frame
         self.screen.fill((0, 0, 0))
+
         self.timer = self.create_timer(timer_period, self.update_display)
 
 
@@ -77,26 +86,23 @@ class DriverUI(Node):
             message = 'Seconds since enter: ' + str(self.time_elapsed_seconds)
             self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 20))
 
-        return
 
     def update_display(self) -> None:
         
-        #timer init
+        #timer fps init
         self.clock.tick(60)
         self.timer_callback()
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
-
                 #pause timer
                 if event.key == pygame.K_p:
                     self.timer_event = 'paused'
                     self.clock_status = False
-
+                #unpause timer
                 if event.key == pygame.K_o:
                     self.timer_event = 'unpaused'
                     self.clock_status = True
-
                 #exit condition by pressing 'esc' button
                 if event.key == pygame.K_ESCAPE:
                     print("ESC was pressed. quitting...")
@@ -115,12 +121,9 @@ class DriverUI(Node):
     #already in lat/long form from publisher.py
     def position_callback(self, msg):
 
-
-
-
         return
 
-    def speed_callback(self, msg) -> None:
+    def velocity_callback(self, msg) -> None:
         
 
         return
