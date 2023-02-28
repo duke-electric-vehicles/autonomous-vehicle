@@ -8,6 +8,9 @@ import datetime
 from random import randint
 import sys
 
+import pygame
+from pygame.locals import *
+
 #GLOBAL CONSTS
 
 #pos tuple (x, y, z)
@@ -101,13 +104,21 @@ class DriverUI(Node):
                 #exit condition by pressing 'esc' button
                 if event.key == pygame.K_ESCAPE:
                     print("ESC was pressed. quitting...")
-                    quit() 
+                    quit()
+                
+            # if x is pressed quit
+            if event.type == QUIT or \
+                    (event.type == pygame.KEYDOWN and event.key == K_q):
+                # exit if q is pressed 
+                pygame.quit()
+                sys.exit()
+
 
         pygame.display.update()
 
     def jackson_test(self) -> None:
         FONT = pygame.font.SysFont("Sans", 20)
-        message = 'Jackson Test asdfasdasdfasdffasdfasdf'
+        message = 'Jackson Test'
         self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 40))
 
     #unchanged surfaces on the screen
