@@ -84,6 +84,7 @@ class DriverUI(Node):
         #timer init
         self.clock.tick(60)
         self.timer_callback()
+        self.jackson_test()
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -103,6 +104,11 @@ class DriverUI(Node):
                     quit() 
 
         pygame.display.update()
+
+    def jackson_test(self) -> None:
+        FONT = pygame.font.SysFont("Sans", 20)
+        message = 'Jackson Test'
+        self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 40))
 
     #unchanged surfaces on the screen
     def init_ui(self, height, width):
