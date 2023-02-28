@@ -107,7 +107,7 @@ class DriverUI(Node):
 
     def jackson_test(self) -> None:
         FONT = pygame.font.SysFont("Sans", 20)
-        message = 'Jackson Test'
+        message = 'Jackson Test asdfasdf'
         self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 40))
 
     #unchanged surfaces on the screen
