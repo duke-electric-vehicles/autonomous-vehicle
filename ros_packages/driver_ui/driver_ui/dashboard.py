@@ -36,11 +36,13 @@ class DriverUI(Node):
             self.position_callback,
             10)
         #vel subscriber service
+        '''
         self.subscription = self.create_subscription(
             Vector3,
             'rtk_vel',
             self.velocity_callback,
-            10)    
+            10)   
+        ''' 
 
         self.subscription
 
@@ -93,6 +95,17 @@ class DriverUI(Node):
         self.clock.tick(60)
         self.timer_callback()
 
+
+        FONT = pygame.font.SysFont("Sans", 20)
+
+        message = self.lat
+        message1 = self.long
+        message2 = self.alt 
+
+        self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 40))
+        self.screen.blit(FONT.render(message1, True, (120, 120, 120)), (20, 60))
+        self.screen.blit(FONT.render(message2, True, (120, 120, 120)), (20, 80))
+
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 #pause timer
@@ -121,7 +134,11 @@ class DriverUI(Node):
     #already in lat/long form from publisher.py
     def position_callback(self, msg):
 
-        return
+        self.screen.fill((0, 0, 0))
+
+        self.lat = msg.latitude
+        self.long = msg.longitude
+        self.alt = msg.altitude
 
     def velocity_callback(self, msg) -> None:
         
