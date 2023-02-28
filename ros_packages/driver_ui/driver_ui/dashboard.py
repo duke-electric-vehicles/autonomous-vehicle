@@ -9,21 +9,6 @@ import datetime
 from random import randint
 import sys
 
-#GLOBAL CONSTS
-
-#pos tuple (x, y, z)
-position = (0, 0, 0)
-
-#speed (km/h)
-speed = 0
-
-
-#power (watt)
-power = 0
-
-#time (seconds)
-timeLog = 0
-
 class DriverUI(Node):
 
     def __init__(self) -> None:
@@ -32,7 +17,7 @@ class DriverUI(Node):
         #pos subscriber service
         self.subscription = self.create_subscription(
             GeoPoint,
-            'rtk_pos',
+            'gps_data_sim',
             self.position_callback,
             10)
         #vel subscriber service
@@ -46,8 +31,14 @@ class DriverUI(Node):
 
         self.subscription
 
+        #Global Data Variables
+
         #initialize pygame
         pygame.init()
+
+        self.alt = '0.0'
+        self.lat = '0.0'
+        self.long = '0.0'
 
         #initialize pygame screen / get dimensions
         #self.width, self.height = pygame.display.get_surface().get_size()
@@ -82,7 +73,7 @@ class DriverUI(Node):
             self.time_elapsed_milli += self.clock.get_time()
             self.time_elapsed_seconds = (self.time_elapsed_milli / 1000)
             self.time_elapsed_seconds = round(self.time_elapsed_seconds, 1)
-        
+
             FONT = pygame.font.SysFont("Sans", 20)
 
             message = 'Seconds since enter: ' + str(self.time_elapsed_seconds)
@@ -95,16 +86,16 @@ class DriverUI(Node):
         self.clock.tick(60)
         self.timer_callback()
 
-
         FONT = pygame.font.SysFont("Sans", 20)
 
-        message = self.lat
-        message1 = self.long
-        message2 = self.alt 
+        message3 = str(self.lat)
+        message1 = str(self.long)
+        message2 = str(self.alt) 
 
-        self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 40))
+        self.screen.blit(FONT.render(message3, True, (120, 120, 120)), (20, 40))
         self.screen.blit(FONT.render(message1, True, (120, 120, 120)), (20, 60))
         self.screen.blit(FONT.render(message2, True, (120, 120, 120)), (20, 80))
+
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -133,8 +124,6 @@ class DriverUI(Node):
     #dependent on self.width, self.height
     #already in lat/long form from publisher.py
     def position_callback(self, msg):
-
-        self.screen.fill((0, 0, 0))
 
         self.lat = msg.latitude
         self.long = msg.longitude
