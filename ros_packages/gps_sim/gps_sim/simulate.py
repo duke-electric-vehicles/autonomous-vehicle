@@ -1,34 +1,32 @@
 import rclpy
 from rclpy.node import Node
 
-from std_msgs.msg import String
-from geometry_msgs.msg import Vector3
+from geographic_msgs.msg import GeoPoint
 
 
 class GpsSimulator(Node):
-
     def __init__(self):
-        super().__init__('GpsSimulator')
-        self.publisher_ = self.create_publisher(Vector3, 'gps_data_sim', 10)
+        super().__init__("GpsSimulator")
+        self.publisher_ = self.create_publisher(GeoPoint, "gps_data_sim", 10)
         timer_period = 0.05  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
-        self.f = open('/opt/ros/dev_ws/src/gps_sim/gps_sim/coordinates.txt', 'r')
+        self.f = open("/opt/ros/dev_ws/src/gps_sim/gps_sim/coordinates.txt", "r")
 
     def timer_callback(self):
         line = self.f.readline()
         if not line:
-            #Repeat
+            # Repeat
             self.f.close()
-            self.f = open('/opt/ros/dev_ws/src/gps_sim/gps_sim/coordinates.txt', 'r')
+            self.f = open("/opt/ros/dev_ws/src/gps_sim/gps_sim/coordinates.txt", "r")
             line = self.f.readline()
-        strs = line.split(',')
-        msg = Vector3()
-        msg.z = 0.0 
-        msg.x = float(strs[0])
-        msg.y = float(strs[1])
+        strs = line.split(",")
+        msg = GeoPoint()
+        msg.altitude = 0.0
+        msg.latitude = float(strs[0])
+        msg.longitude = float(strs[1])
 
         self.publisher_.publish(msg)
-        self.get_logger().info(f"Publishing: {msg.x}, {msg.y}, {msg.z}")
+        self.get_logger().info(f"Publishing: {msg.altitude}, {msg.latitude}, {msg.longitude}")
 
 
 def main(args=None):
@@ -45,5 +43,5 @@ def main(args=None):
     rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

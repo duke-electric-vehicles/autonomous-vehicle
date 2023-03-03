@@ -22,6 +22,8 @@ setup(
         'console_scripts': [
             'driver_ui = driver_ui.main:main',
             'driver_ui_rtk = driver_ui.mainRTK:main',
+            'fonts_utils = driver_ui.fonts_utils',
+            'dashboard = driver_ui.dashboard:main'
         ],
     },
 )
