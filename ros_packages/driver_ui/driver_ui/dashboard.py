@@ -28,11 +28,11 @@ class DriverUI(Node):
 
         self.subscription
 
-        # Global Data Variables
-
         # initialize pygame
         pygame.init()
 
+
+        # Global Data Vars
         self.alt = "0.0"
         self.lat = "0.0"
         self.long = "0.0"
@@ -48,12 +48,10 @@ class DriverUI(Node):
 
         # initialize clock
         self.clock = pygame.time.Clock()
+        self.time_elapsed_seconds = 0
         self.time_elapsed_milli = 0
         self.clock_status = False
 
-        timer_period = 1 / 60  # seconds per frame
-
-        self.init_ui(self.height, self.width)
         timer_period = 1 / 60  # seconds per frame
         self.screen.fill((0, 0, 0))
 
@@ -61,33 +59,29 @@ class DriverUI(Node):
 
     # Main frame loop
     def timer_callback(self) -> None:
+
         if self.clock_status:
             # reset screen/(surface in the future)
 
             self.time_elapsed_milli += self.clock.get_time()
             self.time_elapsed_seconds = self.time_elapsed_milli / 1000
             self.time_elapsed_seconds = round(self.time_elapsed_seconds, 1)
-
-            FONT = pygame.font.SysFont("Sans", 20)
-
-            message = "Seconds since enter: " + str(self.time_elapsed_seconds)
-            self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 20))
-
-            message3 = str(self.lat)
-            message1 = str(self.long)
-            message2 = str(self.alt)
-
-            self.screen.blit(FONT.render(message3, True, (120, 120, 120)), (20, 40))
-            self.screen.blit(FONT.render(message1, True, (120, 120, 120)), (20, 60))
-            self.screen.blit(FONT.render(message2, True, (120, 120, 120)), (20, 80))
+        
+        return 
 
     def update_display(self) -> None:
         self.screen.fill((0, 0, 0))
-
         # timer fps init
         self.clock.tick(60)
         self.timer_callback()
-        self.jackson_test()
+
+        FONT = pygame.font.SysFont("Sans", 20)
+        
+        message = "Seconds since enter: " + str(self.time_elapsed_seconds)
+        self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 20))
+        self.screen.blit(FONT.render(self.long, True, (120, 120, 120)), (20, 40))
+        self.screen.blit(FONT.render(self.lat, True, (120, 120, 120)), (20, 60))
+        self.screen.blit(FONT.render(self.alt, True, (120, 120, 120)), (20, 80))
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -105,50 +99,46 @@ class DriverUI(Node):
                     quit()
 
             # if x is pressed quit
-            if event.type == QUIT or (
-                event.type == pygame.KEYDOWN and event.key == K_q
-            ):
+            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_q):
                 # exit if q is pressed
                 pygame.quit()
                 sys.exit()
 
         pygame.display.update()
 
-    def jackson_test(self) -> None:
-        FONT = pygame.font.SysFont("Sans", 20)
-        message = "Jackson Test"
-        self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 40))
+        return 
 
     # unchanged surfaces on the screen
-    def init_ui(self, height, width):
+    def init_ui(self) -> None:
         # test ui for now
-
         return
 
     # need to make static background resizeable
     # dependent on self.width, self.height
     # already in lat/long form from publisher.py
-    def position_callback(self, msg):
-        self.lat = msg.latitude
-        self.long = msg.longitude
-        self.alt = msg.altitude
+    def position_callback(self, msg) -> None:
+        self.alt = str(msg.altitude)
+        self.lat = str(msg.latitude)
+        self.long = str(msg.longitude)
 
-    def velocity_callback(self, msg) -> None:
         return
 
-    def distance_callback(self, msg) -> None:
+    def velocity_callback(self) -> None:
         return
 
-    def power_callback(self, msg) -> None:
+    def distance_callback(self) -> None:
         return
 
-    def amps_callback(self, msg) -> None:
+    def power_callback(self) -> None:
         return
 
-    def voltage_callback(self, msg) -> None:
+    def amps_callback(self) -> None:
         return
 
-    def joules_callback(self, msg) -> None:
+    def voltage_callback(self) -> None:
+        return
+
+    def joules_callback(self) -> None:
         return
 
 
