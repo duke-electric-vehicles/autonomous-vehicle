@@ -19,7 +19,7 @@ services:
   uros:
     build:
       context: .
-      dockerfile: Dockerfile-Uros
+      dockerfile: Dockerfile.Uros
     volumes:
       - /dev:/dev
     image: 'uros'
@@ -27,3 +27,8 @@ services:
     stdin_open: true
     container_name: 'uros'
     privileged: true
+  lsp:
+    build:
+      context: .
+      dockerfile: Dockerfile.LSP
+    image: "dev_image_lsp:foxy"
