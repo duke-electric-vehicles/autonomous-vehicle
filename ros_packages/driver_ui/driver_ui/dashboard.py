@@ -68,7 +68,6 @@ class DriverUI(Node):
 
         if self.clock_status:
             #reset screen/(surface in the future)
-            self.screen.fill((0, 0, 0))
             
             self.time_elapsed_milli += self.clock.get_time()
             self.time_elapsed_seconds = (self.time_elapsed_milli / 1000)
@@ -79,23 +78,22 @@ class DriverUI(Node):
             message = 'Seconds since enter: ' + str(self.time_elapsed_seconds)
             self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 20))
 
+            message3 = str(self.lat)
+            message1 = str(self.long)
+            message2 = str(self.alt) 
+
+            self.screen.blit(FONT.render(message3, True, (120, 120, 120)), (20, 40))
+            self.screen.blit(FONT.render(message1, True, (120, 120, 120)), (20, 60))
+            self.screen.blit(FONT.render(message2, True, (120, 120, 120)), (20, 80))
+
 
     def update_display(self) -> None:
+        
+        self.screen.fill((0, 0, 0))
         
         #timer fps init
         self.clock.tick(60)
         self.timer_callback()
-
-        FONT = pygame.font.SysFont("Sans", 20)
-
-        message3 = str(self.lat)
-        message1 = str(self.long)
-        message2 = str(self.alt) 
-
-        self.screen.blit(FONT.render(message3, True, (120, 120, 120)), (20, 40))
-        self.screen.blit(FONT.render(message1, True, (120, 120, 120)), (20, 60))
-        self.screen.blit(FONT.render(message2, True, (120, 120, 120)), (20, 80))
-
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
