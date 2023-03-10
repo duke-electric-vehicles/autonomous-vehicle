@@ -19,7 +19,7 @@
 
 #define HALL_OVERSAMPLE 4     // Hall oversampling count. More on this in the getHalls() function
 
-uint8_t hallToMotor[8] = {255, 255, 255, 255, 255, 255, 255, 255};
+uint8_t hallToMotor[8] = {255, 1, 3, 2, 5, 0, 4, 255};
 
 // Forward declarations
 void identifyHalls();
@@ -47,14 +47,23 @@ void setup() {                // The setup function is called ONCE on boot-up
   pinMode(HALL_2_PIN, INPUT);
   pinMode(HALL_3_PIN, INPUT);
 
-  pinMode(THROTTLE_PIN, INPUT);
+  //identifyHalls();                  // Uncomment this if you want the controller to auto-identify the hall states at startup!
+  Serial.println(hallToMotor[0]);
+  Serial.println(hallToMotor[1]);
+  Serial.println(hallToMotor[2]);
+  Serial.println(hallToMotor[3]);
+  Serial.println(hallToMotor[4]);
+  Serial.println(hallToMotor[5]);
+  Serial.println(hallToMotor[6]);
+  Serial.println(hallToMotor[7]);
   
-  identifyHalls();                  // Uncomment this if you want the controller to auto-identify the hall states at startup!
+  pinMode(THROTTLE_PIN, INPUT);
 }
 
 void loop() {                         // The loop function is called repeatedly, once setup() is done
   
   uint8_t throttle = readThrottle();  // readThrottle() is slow. So do the more important things 200 times more often
+  //Serial.println(throttle);
   for(uint8_t i = 0; i < 200; i++)
   {  
     uint8_t hall = getHalls();              // Read from the hall sensors
