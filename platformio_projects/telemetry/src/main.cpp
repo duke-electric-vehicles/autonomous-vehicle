@@ -1,31 +1,27 @@
 #include <SPI.h>
 #include <SD.h>
-
-/**
- * @author Diego
- * 
- **/
+#include <vector>
 
 // Replace these with your sensor reading functions
-float getVoltage() { return 0; }
-float getCurrent() { return 0; }
-float getPower() { return 0; }
-float getVelocity() { return 0; }
-float getEnergy() { return 0; }
-float getDistance() { return 0; }
-unsigned long getElapsedTime() { return 0; }
-float getLatitude() { return 0; }
-float getLongitude() { return 0; }
-float getAltitude() { return 0; }
+double getVoltage() { return 0; }
+double getCurrent() { return 0; }
+double getPower() { return 0; }
+double getVelocity() { return 0; }
+double getEnergy() { return 0; }
+double getDistance() { return 0; }
+double getElapsedTime() { return 0; }
+double getLatitude() { return 0; }
+double getLongitude() { return 0; }
+double getAltitude() { return 0; }
 
-const int chipSelect = BUILTIN_SDCARD; // Use the built-in SD card slot on Teensy 4.1
-const unsigned long logInterval = 1000; // Log data every 1000 milliseconds (1 second)
+const int chipSelect = BUILTIN_SDCARD;
+const unsigned long logInterval = 1000;
 unsigned long previousMillis = 0;
 
 void setup() {
   Serial.begin(9600);
   while (!Serial) {
-    ; // Wait for the serial monitor to open
+    ;
   }
 
   Serial.print("Initializing SD card...");
@@ -36,7 +32,6 @@ void setup() {
   }
   Serial.println("Card initialized.");
 
-  // Create a new CSV file
   File dataFile = SD.open("data.csv", FILE_WRITE);
   if (dataFile) {
     dataFile.println("Voltage(V),Current(A),Power(W),Velocity(m/s),Energy(J),Distance(m),Elapsed Time(ms),Latitude(DD.dddd),Longitude(DD.dddd),Altitude(m)");
@@ -47,41 +42,34 @@ void setup() {
   }
 }
 
-void logData() {
-  // Get sensor data
-  float voltage = getVoltage();
-  float current = getCurrent();
-  float power = getPower();
-  float velocity = getVelocity();
-  float energy = getEnergy();
-  float distance = getDistance();
-  unsigned long elapsedTime = getElapsedTime();
-  float latitude = getLatitude();
-  float longitude = getLongitude();
-  float altitude = getAltitude();
+struct SensorData {
+  using Func = double (*)();
+  Func func;
+  int decimalPlaces;
+};
 
-  // Log data to the CSV file
+std::vector<SensorData> sensorDataFunctions = {
+  {getVoltage, 2},
+  {getCurrent, 2},
+  {getPower, 2},
+  {getVelocity, 2},
+  {getEnergy, 2},
+  {getDistance, 2},
+  {getElapsedTime, 0},
+  {getLatitude, 4},
+  {getLongitude, 4},
+  {getAltitude, 2}
+};
+
+void logData() {
   File dataFile = SD.open("data.csv", FILE_WRITE);
   if (dataFile) {
-    dataFile.print(voltage, 2);
-    dataFile.print(",");
-    dataFile.print(current, 2);
-    dataFile.print(",");
-    dataFile.print(power, 2);
-    dataFile.print(",");
-    dataFile.print(velocity, 2);
-    dataFile.print(",");
-    dataFile.print(energy, 2);
-    dataFile.print(",");
-    dataFile.print(distance, 2);
-    dataFile.print(",");
-    dataFile.print(elapsedTime);
-    dataFile.print(",");
-    dataFile.print(latitude, 4);
-    dataFile.print(",");
-    dataFile.print(longitude, 4);
-    dataFile.print(",");
-    dataFile.println(altitude, 2);
+    for (auto& sensorData : sensorDataFunctions) {
+      double data = sensorData.func();
+      dataFile.print(data, sensorData.decimalPlaces);
+      dataFile.print(&sensorData != &sensorDataFunctions.back() ? "," : "\n");
+    }
+
     dataFile.close();
     Serial.println("Logged data");
   } else {
