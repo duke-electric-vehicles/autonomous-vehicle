@@ -42,15 +42,15 @@ class DriverUI(Node):
         self.width = pygame.display.Info().current_w
         self.height = pygame.display.Info().current_h
 
-        self.width = 400
-        self.height = 400
+        self.width = 800
+        self.height = 480
         self.screen = pygame.display.set_mode((self.width, self.height))
 
         # initialize clock
         self.clock = pygame.time.Clock()
         self.time_elapsed_seconds = 0
         self.time_elapsed_milli = 0
-        self.clock_status = False
+        self.clock_status = False 
 
         timer_period = 1 / 60  # seconds per frame
         self.screen.fill((0, 0, 0))
@@ -70,6 +70,7 @@ class DriverUI(Node):
         return 
 
     def update_display(self) -> None:
+        self.screen.blit(pygame.transform.rotate(self.screen, 180), (0, 0))
         self.screen.fill((0, 0, 0))
         # timer fps init
         self.clock.tick(60)
@@ -78,10 +79,28 @@ class DriverUI(Node):
         FONT = pygame.font.SysFont("Sans", 20)
         
         message = "Seconds since enter: " + str(self.time_elapsed_seconds)
-        self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 20))
-        self.screen.blit(FONT.render(self.long, True, (120, 120, 120)), (20, 40))
-        self.screen.blit(FONT.render(self.lat, True, (120, 120, 120)), (20, 60))
-        self.screen.blit(FONT.render(self.alt, True, (120, 120, 120)), (20, 80))
+
+        msg = FONT.render(message, True, (120, 120, 120))
+        #msg = pygame.transform.rotate(msg, 90)
+        
+        long_msg = FONT.render(self.long, True, (120, 120, 120))
+        #long_msg = pygame.transform.rotate(long_msg, 90)
+
+        lat_msg = FONT.render(self.lat, True, (120, 120, 120))
+        #lat_msg = pygame.transform.rotate(lat_msg, 90)
+
+        alt_msg = FONT.render(self.alt, True, (120, 120, 120))
+        #alt_msg = pygame.transform.rotate(alt_msg, 90)
+
+        self.screen.blit(msg, (20, 20))
+        self.screen.blit(long_msg, (20, 40))
+        self.screen.blit(lat_msg, (20, 60))
+        self.screen.blit(alt_msg, (20, 80))
+
+        #self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 20))
+        #self.screen.blit(FONT.render(self.long, True, (120, 120, 120)), (20, 40))
+        #self.screen.blit(FONT.render(self.lat, True, (120, 120, 120)), (20, 60))
+        #self.screen.blit(FONT.render(self.alt, True, (120, 120, 120)), (20, 80))
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
