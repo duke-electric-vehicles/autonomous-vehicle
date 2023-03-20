@@ -106,6 +106,10 @@ def main():
                     stop_time = None
                     running = False
                     distance = 0
+                elif event.key == pygame.K_ESCAPE:
+                    print("ESC was pressed. quitting...")
+                    quit() 
+
 
         # Clear the screen
         screen.fill(BLACK)
