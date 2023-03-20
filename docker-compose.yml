@@ -15,6 +15,7 @@ services:
     stdin_open: true
     container_name: 'dev'
     privileged: true
+    network_mode: host
   uros:
     build:
       context: .
