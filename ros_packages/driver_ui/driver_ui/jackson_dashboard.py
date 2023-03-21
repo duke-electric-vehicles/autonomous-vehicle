@@ -265,6 +265,9 @@ class DriverUI(Node):
         self.prev_timestamp = None
         self.start_ros_thread()
         self.cumulative_distance = 0.0
+        self.speed_values = []
+        self.speed_buffer_size = 5  # Number of speed values to average
+
 
     # def generate_random_data(self):
     #     self.lat += random.uniform(-0.0005, 0.0005)
@@ -285,7 +288,15 @@ class DriverUI(Node):
 
             if time_diff > 0:
                 speed_kmh = (distance / time_diff) * 3600  # Speed in km/h
-                self.speed = speed_kmh * 0.621371  # Convert to mph
+                speed_mph = speed_kmh * 0.621371  # Convert to mph
+
+                # Store the new speed value and remove the oldest if the buffer is full
+                self.speed_values.append(speed_mph)
+                if len(self.speed_values) > self.speed_buffer_size:
+                    self.speed_values.pop(0)
+
+                # Calculate the average speed
+                self.speed = sum(self.speed_values) / len(self.speed_values)
 
         self.prev_lat = msg.latitude
         self.prev_lon = msg.longitude
@@ -293,6 +304,7 @@ class DriverUI(Node):
 
         self.lat = msg.latitude
         self.lon = msg.longitude
+
 
     def calculate_distance(self, lat1, lon1, lat2, lon2):
         radius_earth = 6371  # km
