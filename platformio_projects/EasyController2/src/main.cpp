@@ -177,7 +177,9 @@ uint8_t readThrottle()
   adc = (adc - THROTTLE_LOW) << 8;
   adc = adc / (THROTTLE_HIGH - THROTTLE_LOW);
 
-  adc = (adc - 81)/(315.0/255);
+  adc /= 395.0/255;
+
+  // Serial.println(adc);
 
   if (adc > 255) // Bound the output between 0 and 255
     return 255;
