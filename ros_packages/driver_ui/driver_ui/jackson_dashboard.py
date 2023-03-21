@@ -263,10 +263,11 @@ class DriverUI(Node):
         self.prev_lat = None
         self.prev_lon = None
         self.prev_timestamp = None
-        self.start_ros_thread()
         self.cumulative_distance = 0.0
         self.speed_values = []
-        self.speed_buffer_size = 15  # Number of speed values to average
+        self.speed_buffer_size = 50
+        self.start_ros_thread()
+         # Number of speed values to average
 
 
     # def generate_random_data(self):
@@ -280,14 +281,14 @@ class DriverUI(Node):
             current_lon = msg.longitude
             current_timestamp = datetime.now()
 
-            distance = self.calculate_distance(
+            self.distance = self.calculate_distance(
                 self.prev_lat, self.prev_lon, current_lat, current_lon
             )
             time_diff = (current_timestamp - self.prev_timestamp).total_seconds()
-            self.cumulative_distance += distance
+            self.cumulative_distance += self.distance
 
             if time_diff > 0:
-                speed_kmh = (distance / time_diff) * 3600  # Speed in km/h
+                speed_kmh = (self.distance / time_diff) * 3600  # Speed in km/h
                 speed_mph = speed_kmh * 0.621371  # Convert to mph
 
                 # Store the new speed value and remove the oldest if the buffer is full
@@ -367,7 +368,7 @@ class DriverUI(Node):
                         self.start_time = None
                         self.stop_time = None
                         self.running = False
-                        self.distance = 0
+                        self.cumulative_distance = 0.0
                     elif event.key == pygame.K_ESCAPE:
                         print("ESC was pressed. quitting...")
                         quit()
@@ -377,9 +378,7 @@ class DriverUI(Node):
             # self.generate_random_data()
             self.screen.fill(self.BLACK)
 
-            # rotated_screen = pygame.transform.rotate(self.screen, -90)
-            # self.screen.blit(rotated_screen, (0, 0))
-
+            
 
             self.draw_text("Driver Dashboard", self.font_large, self.WHITE, 50, 25)
 
@@ -414,6 +413,9 @@ class DriverUI(Node):
 
             self.draw_cumulative_distance()
             self.draw_progress_bar(self.cumulative_distance, 10)
+
+            # rotated_screen = pygame.transform.rotate(self.screen, -90)
+            # self.screen.blit(rotated_screen, (0, 0))
 
             pygame.display.flip()
 
