@@ -1,161 +1,339 @@
 import pygame
 import time
 import math
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import Vector3
+from geographic_msgs.msg import GeoPoint
 
-pygame.init()
+class DriverUI(Node):
 
-# Define some colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GRAY = (192, 192, 192)
-BLUE = (0, 0, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
+    def __init__(self):
+        super().__init__("driver_ui")
 
-# Set the dimensions of the screen
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+        self.subscription = self.create_subscription(
+            GeoPoint, "gps_data_sim", self.position_callback, 10
+        )
 
-# Create the screen object
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.subscription
 
-# Set the title of the window
-pygame.display.set_caption("Driver Dashboard")
+        # Define some colors
+        self.BLACK = (0, 0, 0)
+        self.WHITE = (255, 255, 255)
+        self.GRAY = (192, 192, 192)
+        self.BLUE = (0, 0, 255)
+        self.GREEN = (0, 255, 0)
+        self.RED = (255, 0, 0)
 
-# Define some fonts
-font_small = pygame.font.SysFont('Calibri', 25, True, False)
-font_large = pygame.font.SysFont('Calibri', 50, True, False)
+        # Set the dimensions of the screen
+        self.SCREEN_WIDTH = 800
+        self.SCREEN_HEIGHT = 600
 
-# Define some variables
-lat = 37.7749
-lon = -122.4194
-speed = 0
-distance = 0
-start_time = None
-stop_time = None
-running = False
+        # Create the screen object
+        self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
 
-# def update_speed(speed):
-#     speed = speed + 0.1
-#     return speed
+        # Set the title of the window
+        pygame.display.set_caption("Driver Dashboard")
 
-# Define some functions
-def calculate_distance(lat1, lon1, lat2, lon2):
-    # Calculate the distance between two points on Earth using the Haversine formula
-    radius_earth = 6371 # km
+        # Define some fonts
+        self.font_small = pygame.font.SysFont('Calibri', 25, True, False)
+        self.font_large = pygame.font.SysFont('Calibri', 50, True, False)
 
-    dlat = math.radians(lat2 - lat1)
-    dlon = math.radians(lon2 - lon1)
-    a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon/2) * math.sin(dlon/2)
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
-    d = radius_earth * c
+        # Define some variables
+        self.lat = 0.0
+        self.lon = 0.0
+        self.speed = 0
+        self.distance = 0
+        self.start_time = None
+        self.stop_time = None
+        self.running = False
 
-    return d
+        # self.run()
 
-def draw_text(text, font, color, x, y):
-    # Draw some text on the screen
-    text_surface = font.render(text, True, color)
-    text_rect = text_surface.get_rect()
-    text_rect.topleft = (x, y)
-    screen.blit(text_surface, text_rect)
+    def position_callback(self, msg) -> None:
+        self.lat = msg.latitude
+        self.lon = msg.longitude
 
-def draw_gauge(speed, max_speed):
-    # Draw a speedometer-style gauge on the screen
-    gauge_rect = pygame.Rect(400, 150, 200, 200)
-    pygame.draw.arc(screen, WHITE, gauge_rect, math.pi * 1.1, math.pi * 1.9, 10)
-    gauge_value = speed / max_speed * math.pi * 0.8 + math.pi * 0.1
-    pygame.draw.arc(screen, BLUE, gauge_rect, math.pi * 1.1, gauge_value, 10)
+    def calculate_distance(self, lat1, lon1, lat2, lon2):
+        # Calculate the distance between two points on Earth using the Haversine formula
+        radius_earth = 6371  # km
 
-    # Draw the speed as a number in the middle of the gauge
-    speed_text = font_small.render(f"{speed:02f}" + " MPH", True, WHITE)
-    speed_rect = speed_text.get_rect()
-    speed_rect.center = (500, 250)
-    screen.blit(speed_text, speed_rect)
+        dlat = math.radians(lat2 - lat1)
+        dlon = math.radians(lon2 - lon1)
+        a = math.sin(dlat / 2) * math.sin(dlat / 2) + math.cos(math.radians(lat1)) \
+            * math.cos(math.radians(lat2)) * math.sin(dlon / 2) * math.sin(dlon / 2)
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+        d = radius_earth * c
 
+        return d
 
-def draw_progress_bar(value, max_value):
-    # Draw a progress bar on the screen
-    bar_rect = pygame.Rect(50, 300, 300, 50)
-    pygame.draw.rect(screen, GRAY, bar_rect, 5)
-    progress_rect = pygame.Rect(55, 305, (SCREEN_WIDTH - 110) * value / max_value, 40)
-    pygame.draw.rect(screen, GREEN, progress_rect)
+    def draw_text(self, text, font, color, x, y):
+        # Draw some text on the screen
+        text_surface = font.render(text, True, color)
+        text_rect = text_surface.get_rect()
+        text_rect.topleft = (x, y)
+        self.screen.blit(text_surface, text_rect)
 
-def main():
-    global lat, lon, speed, distance, start_time, stop_time, running
+    def draw_gauge(self, speed, max_speed):
+        # Draw a speedometer-style gauge on the screen
+        gauge_rect = pygame.Rect(400, 150, 200, 200)
+        pygame.draw.arc(self.screen, self.WHITE, gauge_rect, math.pi * 1.1, math.pi * 1.9, 10)
+        gauge_value = speed / max_speed * math.pi * 0.8 + math.pi * 0.1
+        pygame.draw.arc(self.screen, self.BLUE, gauge_rect, math.pi * 1.1, gauge_value, 10)
 
-    # Start the game loop
-    done = False
-    while not done:
+        # Draw the speed as a number in the middle of the gauge
+        # speed_text = self.font
+        speed_text = self.font_small.render(f"{speed:02f}" + " MPH", True, self.WHITE)
+        speed_rect = speed_text.get_rect()
+        speed_rect.center = (500, 250)
+        self.screen.blit(speed_text, speed_rect)
 
-        # Handle events
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                done = True
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_s and not running:
-                    if start_time is None:
-                        start_time = time.time()
-                    else:
-                        start_time = time.time() - (stop_time - start_time)
-                    running = True
-                elif event.key == pygame.K_s and running:
-                    stop_time = time.time()
-                    running = False
-                elif event.key == pygame.K_r:
-                    start_time = None
-                    stop_time = None
-                    running = False
-                    distance = 0
-                elif event.key == pygame.K_ESCAPE:
-                    print("ESC was pressed. quitting...")
-                    quit() 
+    def draw_progress_bar(self, value, max_value):
+        # Draw a progress bar on the screen
+        bar_rect = pygame.Rect(50, 300, 300, 50)
+        pygame.draw.rect(self.screen, self.GRAY, bar_rect, 5)
+        progress_rect = pygame.Rect(55, 305, (self.SCREEN_WIDTH - 110) * value / max_value, 40)
+        pygame.draw.rect(self.screen, self.GREEN, progress_rect)
 
+    def run(self):
 
-        # Clear the screen
-        screen.fill(BLACK)
+        # Start the game loop
+        while rclpy.ok():
+            # Process ROS messages
+            rclpy.spin_once(self, timeout_sec=0.1)
+            # rclpy.spin_once(self, timeout = 0.1)
+            # self.position_callback()
+            # position_callback()
+            # Handle events
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_s and not self.running:
+                        if self.start_time is None:
+                            self.start_time = time.time()
+                        else:
+                            self.start_time = time.time() - (self.stop_time - self.start_time)
+                        running = True
+                    elif event.key == pygame.K_s and not self.running:
+                        if self.start_time is None:
+                            self.start_time = time.time()
+                        elif self.stop_time is not None:
+                            self.start_time = time.time() - (self.stop_time - self.start_time)
+                        self.running = True
+                    elif event.key == pygame.K_s and self.running:
+                        self.stop_time = time.time()
+                        self.running = False
+                    elif event.key == pygame.K_ESCAPE:
+                        print("ESC was pressed. quitting...")
+                        quit()
 
-        # Draw the dashboard
-        draw_text("Driver Dashboard", font_large, WHITE, 50, 25)
+            # Clear the screen
+            self.screen.fill(self.BLACK)
 
-        # Draw the latitude and longitude
-        draw_text(f"Latitude: {lat}", font_small, WHITE, 50, 100)
-        draw_text(f"Longitude: {lon}", font_small, WHITE, 50, 150)
+            # Draw the dashboard
+            self.draw_text("Driver Dashboard", self.font_large, self.WHITE, 50, 25)
 
-        # Draw the speedometer
-        speed = speed + 0.001
-        draw_gauge(speed, 20)
+            # Draw the latitude and longitude
+            self.draw_text(f"Latitude: {self.lat}", self.font_small, self.WHITE, 50, 100)
+            self.draw_text(f"Longitude: {self.lon}", self.font_small, self.WHITE, 50, 150)
 
-        # Draw the stopwatch
-        if running:
-            elapsed_time = time.time() - start_time
-            minutes = int(elapsed_time // 60)
-            seconds = int(elapsed_time % 60)
-            milliseconds = int((elapsed_time % 1) * 1000)
-            stopwatch_text = "Time: " + f"{minutes:02d}:{seconds:02d}:{milliseconds:03d}"
-            draw_text(stopwatch_text, font_small, WHITE, 400, 100)
+            # Draw the speedometer
+            self.speed = self.speed + 0.001
+            self.draw_gauge(self.speed, 20)
 
-            # Update the distance
-            if start_time is not None and running:
-                current_distance = calculate_distance(lat, lon, lat + 0.001, lon + 0.001)
-                distance += current_distance
-
-        else:
-            if start_time is not None and stop_time is not None:
-                elapsed_time = stop_time - start_time
+            # Draw the stopwatch
+            if self.running:
+                elapsed_time = time.time() - self.start_time
                 minutes = int(elapsed_time // 60)
                 seconds = int(elapsed_time % 60)
                 milliseconds = int((elapsed_time % 1) * 1000)
                 stopwatch_text = "Time: " + f"{minutes:02d}:{seconds:02d}:{milliseconds:03d}"
-                draw_text(stopwatch_text, font_small, WHITE, 400, 100)
+                self.draw_text(stopwatch_text, self.font_small, self.WHITE, 400, 100)
 
-        # Draw the distance
-        draw_progress_bar(distance, 10000)
+                # Update the distance
+                if self.start_time is not None and self.running:
+                    current_distance = self.calculate_distance(self.lat, self.lon, self.lat + 0.001, self.lon + 0.001)
+                    self.distance += current_distance
 
-        # Update the screen
-        pygame.display.flip()
+            else:
+                if self.start_time is not None and self.stop_time is not None:
+                    elapsed_time = self.stop_time - self.start_time
+                elif self.start_time is not None:  # Add this condition
+                    elapsed_time = time.time() - self.start_time
+                else:
+                    elapsed_time = 0
 
-    # Quit the game
-    pygame.quit()
+                minutes = int(elapsed_time // 60)
+                seconds = int(elapsed_time % 60)
+                milliseconds = int((elapsed_time % 1) * 1000)
+                stopwatch_text = "Time: " + f"{minutes:02d}:{seconds:02d}:{milliseconds:03d}"
+                self.draw_text(stopwatch_text, self.font_small, self.WHITE, 400, 100)
+
+
+            # Draw the distance
+           
+            # Draw the distance
+            self.draw_progress_bar(self.distance, 10)
+
+            # Update the screen
+            pygame.display.update()
+
+        # Quit the game
+        pygame.quit()
+
+def main(args=None):
+    rclpy.init(args=args)
+    pygame.init()
+
+    driver_ui = DriverUI()
+    driver_ui.run()
+
+    rclpy.shutdown()
 
 if __name__ == "__main__":
     main()
+
+
+import pygame
+import time
+import math
+import random
+# from geometry_msgs.msg import Vector3
+# from geographic_msgs.msg import GeoPoint
+
+
+# dummy screen
+# class DriverUI:
+#     def __init__(self):
+#         pygame.init()
+
+#         self.BLACK = (0, 0, 0)
+#         self.WHITE = (255, 255, 255)
+#         self.GRAY = (192, 192, 192)
+#         self.BLUE = (0, 0, 255)
+#         self.GREEN = (0, 255, 0)
+#         self.RED = (255, 0, 0)
+
+#         self.SCREEN_WIDTH = 480
+#         self.SCREEN_HEIGHT = 800
+
+#         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
+
+#         pygame.display.set_caption("Driver Dashboard")
+
+#         self.font_small = pygame.font.SysFont("Calibri", 25, True, False)
+#         self.font_large = pygame.font.SysFont("Calibri", 50, True, False)
+#         self.font_xlarge = pygame.font.SysFont("Calibri", 75, True, False)
+
+#         self.lat = 0
+#         self.lon = 0
+#         self.speed = 0
+#         self.distance = 0
+#         self.start_time = None
+#         self.stop_time = None
+#         self.running = False
+
+#     def generate_random_data(self):
+#         self.lat += random.uniform(-0.0005, 0.0005)
+#         self.lon += random.uniform(-0.0005, 0.0005)
+#         self.speed += random.uniform(-0.5, 0.5)
+
+#     def calculate_distance(self, lat1, lon1, lat2, lon2):
+#         radius_earth = 6371  # km
+#         dlat = math.radians(lat2 - lat1)
+#         dlon = math.radians(lon2 - lon1)
+#         a = (
+#             math.sin(dlat / 2) * math.sin(dlat / 2)
+#             + math.cos(math.radians(lat1))
+#             * math.cos(math.radians(lat2))
+#             * math.sin(dlon / 2)
+#             * math.sin(dlon / 2)
+#         )
+#         c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+#         d = radius_earth * c
+#         return d
+
+#     def draw_text(self, text, font, color, x, y):
+#         text_surface = font.render(text, True, color)
+#         text_rect = text_surface.get_rect()
+#         text_rect.topleft = (x, y)
+#         self.screen.blit(text_surface, text_rect)
+
+#     def draw_progress_bar(self, value, max_value):
+#         bar_rect = pygame.Rect(50, 550, 380, 50)
+#         pygame.draw.rect(self.screen, self.GRAY, bar_rect, 5)
+#         progress_rect = pygame.Rect(
+#             55, 555, (self.SCREEN_WIDTH - 110) * value / max_value, 40
+#         )
+#         pygame.draw.rect(self.screen, self.GREEN, progress_rect)
+
+#     def run(self):
+#         done = False
+#         while not done:
+#             for event in pygame.event.get():
+#                 if event.type == pygame.QUIT:
+#                     done = True
+#                 elif event.type == pygame.KEYDOWN:
+#                     if event.key == pygame.K_s and not self.running:
+#                         if self.start_time is None:
+#                             self.start_time = time.time()
+#                         else:
+#                             self.start_time = (
+#                                 time.time() - (self.stop_time - self.start_time)
+#                             )
+#                         self.running = True
+#                     elif event.key == pygame.K_s and self.running:
+#                         self.stop_time = time.time()
+#                         self.running = False
+#                     elif event.key == pygame.K_r:
+#                         self.start_time = None
+#                         self.stop_time = None
+#                         self.running = False
+#                         self.distance = 0
+#                     elif event.key == pygame.K_ESCAPE:
+#                         print("ESC was pressed. quitting...")
+#                         quit()
+
+#             self.screen.fill(self.BLACK)
+
+#             self.generate_random_data()
+
+#             self.draw_text("Driver Dashboard", self.font_large, self.WHITE, 50, 25)
+
+#             stopwatch_y = 100
+#             if self.running:
+#                 elapsed_time = time.time() - self.start_time
+#             else:
+#                 elapsed_time = (
+#                     self.stop_time - self.start_time
+#                     if self.start_time is not None and self.stop_time is not None
+#                     else 0
+#                 )
+#             minutes = int(elapsed_time // 60)
+#             seconds = int(elapsed_time % 60)
+#             milliseconds = int((elapsed_time % 1) * 1000)
+#             stopwatch_text = f"{minutes:02d}:{seconds:02d}:{milliseconds:03d}"
+#             self.draw_text(stopwatch_text, self.font_large, self.WHITE, 120, stopwatch_y)
+
+#             speed_y = 300
+#             self.draw_text(
+#                 f"{self.speed:.2f} MPH", self.font_xlarge, self.WHITE, 50, speed_y
+#             )
+
+#             if self.running:
+#                 current_distance = self.calculate_distance(
+#                     self.lat, self.lon, self.lat + 0.001, self.lon + 0.001
+#                 )
+#                 self.distance += current_distance
+
+#             self.draw_progress_bar(self.distance, 10000)
+
+#             pygame.display.flip()
+
+#         pygame.quit()
+
+
+# if __name__ == "__main__":
+#     ui = DriverUI()
+#     ui.run()
