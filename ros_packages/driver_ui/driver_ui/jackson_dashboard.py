@@ -375,6 +375,11 @@ class DriverUI(Node):
             self.screen.fill(self.BLACK)
 
             # self.generate_random_data()
+            self.screen.fill(self.BLACK)
+
+            # rotated_screen = pygame.transform.rotate(self.screen, -90)
+            # self.screen.blit(rotated_screen, (0, 0))
+
 
             self.draw_text("Driver Dashboard", self.font_large, self.WHITE, 50, 25)
 
