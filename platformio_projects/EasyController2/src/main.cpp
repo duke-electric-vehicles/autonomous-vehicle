@@ -3,7 +3,6 @@
 #define THROTTLE_PIN 15       // Throttle pin
 #define THROTTLE_LOW 150      // These LOW and HIGH values are used to scale the ADC reading. More on this below
 #define THROTTLE_HIGH 710
-
 #define HALL_1_PIN 6
 #define HALL_2_PIN 7
 #define HALL_3_PIN 8
@@ -19,7 +18,7 @@
 
 #define HALL_OVERSAMPLE 4     // Hall oversampling count. More on this in the getHalls() function
 
-uint8_t hallToMotor[8] = {255, 255, 255, 255, 255, 255, 255, 255};
+uint8_t hallToMotor[8] = {255, 1, 3, 2, 5, 0, 4, 255};
 
 // Forward declarations
 void identifyHalls();
@@ -49,7 +48,7 @@ void setup() {                // The setup function is called ONCE on boot-up
 
   pinMode(THROTTLE_PIN, INPUT);
   
-  identifyHalls();                  // Uncomment this if you want the controller to auto-identify the hall states at startup!
+  // identifyHalls();                  // Uncomment this if you want the controller to auto-identify the hall states at startup!
 }
 
 void loop() {                         // The loop function is called repeatedly, once setup() is done
@@ -177,6 +176,10 @@ uint8_t readThrottle()
   int32_t adc = analogRead(THROTTLE_PIN); // Note, analogRead can be slow!
   adc = (adc - THROTTLE_LOW) << 8;
   adc = adc / (THROTTLE_HIGH - THROTTLE_LOW);
+
+  adc /= 395.0/255;
+
+  // Serial.println(adc);
 
   if (adc > 255) // Bound the output between 0 and 255
     return 255;
