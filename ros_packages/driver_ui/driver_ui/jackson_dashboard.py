@@ -229,7 +229,7 @@ class DriverUI(Node):
         super().__init__("driver_ui")
 
         self.subscription = self.create_subscription(
-            GeoPoint, "gps_data_sim", self.position_callback, 1
+            GeoPoint, "gps_data_sim", self.position_callback, 10
         )
 
         self.subscription
