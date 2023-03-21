@@ -266,7 +266,7 @@ class DriverUI(Node):
         self.start_ros_thread()
         self.cumulative_distance = 0.0
         self.speed_values = []
-        self.speed_buffer_size = 5  # Number of speed values to average
+        self.speed_buffer_size = 15  # Number of speed values to average
 
 
     # def generate_random_data(self):
