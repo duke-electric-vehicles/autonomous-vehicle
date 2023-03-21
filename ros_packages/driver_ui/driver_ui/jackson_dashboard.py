@@ -266,7 +266,7 @@ class DriverUI(Node):
         self.prev_timestamp = None
         self.cumulative_distance = 0.0
         self.speed_values = []
-        self.speed_buffer_size = 50
+        self.speed_buffer_size = 100
         self.start_ros_thread()
          # Number of speed values to average
 
@@ -333,7 +333,7 @@ class DriverUI(Node):
         bar_rect = pygame.Rect(50, 550, 380, 50)
         pygame.draw.rect(self.screen, self.GRAY, bar_rect, 5)
         progress_rect = pygame.Rect(
-            55, 555, (self.SCREEN_WIDTH - 110) * value / max_value, 40
+            55, 555, (self.SCREEN_WIDTH - 110) * (value / max_value), 40
         )
         pygame.draw.rect(self.screen, self.GREEN, progress_rect)
 
@@ -462,7 +462,7 @@ class DriverUI(Node):
             #     self.distance += current_distance
 
             self.draw_cumulative_distance()
-            self.draw_progress_bar(self.cumulative_distance, 10)
+            self.draw_progress_bar(self.cumulative_distance * 0.621371, 10)
 
             # rotated_screen = pygame.transform.rotate(self.screen, -90)
             # self.screen.blit(rotated_screen, (0, 0))
