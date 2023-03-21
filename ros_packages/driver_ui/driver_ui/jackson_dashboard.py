@@ -251,7 +251,8 @@ class DriverUI(Node):
 
         self.font_small = pygame.font.SysFont("Calibri", 25, True, False)
         self.font_large = pygame.font.SysFont("Calibri", 50, True, False)
-        self.font_xlarge = pygame.font.SysFont("Calibri", 90, True, False)
+        self.font_xlarge = pygame.font.SysFont("Calibri", 75, True, False)
+        self.font_gauge_numbers = pygame.font.SysFont("Calibri", 20, True, False) 
 
         self.lat = 0
         self.lon = 0
@@ -337,14 +338,46 @@ class DriverUI(Node):
         pygame.draw.rect(self.screen, self.GREEN, progress_rect)
 
     def draw_cumulative_distance(self):
-        distance_y = 500
+        distance_y = 625
         self.draw_text(
             f"Cumulative Distance: {self.cumulative_distance * 0.621371:.3f} miles",
             self.font_small,
             self.WHITE,
-            50,
+            100,
             distance_y,
         )
+
+    def draw_gauge(self, x, y, radius, value, max_value, color, font):
+        pygame.draw.circle(self.screen, color, (x, y), radius, 2)
+        text = self.font_xlarge.render(f"{value:.2f}", True, color)
+        text_rect = text.get_rect(center=(x, y))
+        self.screen.blit(text, text_rect)
+
+        # Draw numbers around the gauge
+        num_interval = max_value // 10  # Set the interval for displaying numbers
+        num_radius = radius - 15  # Adjust the position of the numbers
+        for num in range(0, max_value + 1, num_interval):
+            angle = 270 * (num / max_value) - 135
+            rad_angle = math.radians(angle)
+            num_x = x + num_radius * math.cos(rad_angle)
+            num_y = y + num_radius * math.sin(rad_angle)
+            num_text = self.font_gauge_numbers.render(str(num), True, color)
+            num_rect = num_text.get_rect(center=(num_x, num_y))
+            self.screen.blit(num_text, num_rect)
+
+
+    def draw_needle(self, x, y, radius, value, max_value, color):
+        angle = 270 * (value / max_value) - 135
+        rad_angle = math.radians(angle)
+        end_x = x + radius * math.cos(rad_angle)
+        end_y = y + radius * math.sin(rad_angle)
+        pygame.draw.line(self.screen, color, (x, y), (end_x, end_y), 2)
+    
+    def draw_center_circle(self, x, y, radius, color):
+        pygame.draw.circle(self.screen, color, (x, y), radius)
+
+
+
 
     def run(self):
         done = False
@@ -380,7 +413,7 @@ class DriverUI(Node):
 
             
 
-            self.draw_text("Driver Dashboard", self.font_large, self.WHITE, 50, 25)
+            self.draw_text("Driver Dashboard", self.font_large, self.WHITE, 100, 25)
 
             stopwatch_y = 100
             if self.running:
@@ -400,10 +433,27 @@ class DriverUI(Node):
             self.draw_text("Lon: " + f"{self.lon:.5f}", self.font_large, self.WHITE, 120, stopwatch_y + 100)
 
 
-            speed_y = 300
-            self.draw_text(
-                f"{self.speed:.2f} MPH", self.font_xlarge, self.WHITE, 50, speed_y
-            )
+            # speed_y = 300
+            # self.draw_text(
+            #     f"{self.speed:.2f} MPH", self.font_xlarge, self.WHITE, 50, speed_y
+            # )
+
+                        # ...
+
+            # Speed Gauge
+            gauge_x = self.SCREEN_WIDTH // 2
+            gauge_y = 400
+            gauge_radius = 110
+            max_speed_value = 100  # Set the maximum speed value for the gauge
+            
+            self.draw_needle(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.RED)
+
+            center_radius = 75
+            self.draw_center_circle(gauge_x, gauge_y, center_radius, self.BLACK)
+            self.draw_gauge(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.WHITE, self.font_large)
+
+            # ...
+
 
             # if self.running:
             #     current_distance = self.calculate_distance(
