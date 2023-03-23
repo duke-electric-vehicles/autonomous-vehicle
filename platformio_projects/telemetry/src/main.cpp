@@ -1,29 +1,59 @@
 #include <SPI.h>
 #include <SD.h>
+#include <INA190.cpp>
+#include <NEO6M.cpp>
 #include <vector>
 
+// Sensors and device mapping
+const int CURRENT_SENSE_PIN = 21;
+const int HALL_INPUT_PIN = 26;
+const int VBAT_INPUT_PIN = 17;
+const int LED_DIN_PIN = 33;
+
+// Comms
+const int SCL_PIN = 24;
+const int SDA_PIN = 25;
+const int RX_PIN = 7;
+const int TX_PIN = 8;
+
+// Consts
+const float VBAT_GAIN = 10;
+const float CURR_SENSE_SHUNT_R = 0.001;
+const int updateRate = 5;   // in Hz
+
+// Sensors and devices
+INA190 currSense(CURRENT_SENSE_PIN, CURR_SENSE_SHUNT_R);  // pin 21, R = 1mOhm
+NEO6M gps; 
+
 // Replace these with your sensor reading functions
-double getVoltage() { return 0; }
-double getCurrent() { return 0; }
-double getPower() { return 0; }
-double getVelocity() { return 0; }
-double getEnergy() { return 0; }
-double getDistance() { return 0; }
-double getElapsedTime() { return 0; }
-double getLatitude() { return 0; }
-double getLongitude() { return 0; }
-double getAltitude() { return 0; }
+double getVoltage() { 
+  int voltageIn = analogRead(VBAT_INPUT_PIN);
+  float batteryVoltage = voltageIn * VBAT_GAIN *  (3.3 / 1023);
+  return batteryVoltage; 
+}
+
+double getCurrent() { 
+  return currSense.getCurrent(); 
+}
+
+double getPower() {
+  return currSense.getCurrent() * getVoltage(); 
+}
+
+double getVelocity() { return 0; }  // determined by hall sensor
+double getEnergy() { return 0; }    // todo: calculate total energy by integrating power
+double getDistance() { return 0; }  // todo: same as above
+double getElapsedTime() { return 0; } // 
+double getLatitude() { return gps.getLatitude(); }
+double getLongitude() { return gps.getLongitude(); }
+double getAltitude() { return gps.getAltitude(); }
 
 const int chipSelect = BUILTIN_SDCARD;
 const unsigned long logInterval = 1000;
 unsigned long previousMillis = 0;
 
-void setup() {
-  Serial.begin(9600);
-  while (!Serial) {
-    ;
-  }
 
+void initSD(){
   Serial.print("Initializing SD card...");
 
   if (!SD.begin(chipSelect)) {
@@ -77,11 +107,18 @@ void logData() {
   }
 }
 
-void loop() {
-  unsigned long currentMillis = millis();
-
-  if (currentMillis - previousMillis >= logInterval) {
-    previousMillis = currentMillis;
-    logData();
+void setup() {
+  Serial.begin(9600);
+  while (!Serial) {
+    ;
   }
+
+  initSD();
+  gps.initialize();
+}
+
+// primary function here is to update and log data
+void loop() { 
+  gps.update();
+  delay(200);
 }
