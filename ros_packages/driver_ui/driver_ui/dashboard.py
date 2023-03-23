@@ -42,6 +42,9 @@ class DriverUI(Node):
         self.width = pygame.display.Info().current_w
         self.height = pygame.display.Info().current_h
 
+        #self.width = 800
+        #self.height = 480
+
         self.width = 800
         self.height = 480
         self.screen = pygame.display.set_mode((self.width, self.height))
@@ -70,7 +73,6 @@ class DriverUI(Node):
         return 
 
     def update_display(self) -> None:
-        self.screen.blit(pygame.transform.rotate(self.screen, 180), (0, 0))
         self.screen.fill((0, 0, 0))
         # timer fps init
         self.clock.tick(60)
@@ -93,14 +95,9 @@ class DriverUI(Node):
         #alt_msg = pygame.transform.rotate(alt_msg, 90)
 
         self.screen.blit(msg, (20, 20))
-        self.screen.blit(long_msg, (20, 40))
-        self.screen.blit(lat_msg, (20, 60))
-        self.screen.blit(alt_msg, (20, 80))
-
-        #self.screen.blit(FONT.render(message, True, (120, 120, 120)), (20, 20))
-        #self.screen.blit(FONT.render(self.long, True, (120, 120, 120)), (20, 40))
-        #self.screen.blit(FONT.render(self.lat, True, (120, 120, 120)), (20, 60))
-        #self.screen.blit(FONT.render(self.alt, True, (120, 120, 120)), (20, 80))
+        self.screen.blit(long_msg, (40, 40))
+        self.screen.blit(lat_msg, (60, 60))
+        self.screen.blit(alt_msg, (80, 80))
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -127,9 +124,11 @@ class DriverUI(Node):
 
         return 
 
-    # unchanged surfaces on the screen
-    def init_ui(self) -> None:
+    # surface outline of the screen
+    def static_ui(self) -> None:
         # test ui for now
+        self.ui_outline = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
+        
         return
 
     # need to make static background resizeable

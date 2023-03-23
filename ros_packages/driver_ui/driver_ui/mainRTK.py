@@ -326,6 +326,8 @@ class DriverUI(Node):
         screen.blit(plus_two_label, (1250, 450))
         screen.blit(minus_two_label, (40, 450))
 
+        #screen.blit(pygame.transform.flip(circ_surface, True, False), (0, 0))
+
         pygame.display.update()
 
 def main(args=None):
