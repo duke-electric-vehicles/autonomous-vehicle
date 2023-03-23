@@ -215,6 +215,8 @@ from geographic_msgs.msg import GeoPoint
 import rclpy
 from rclpy.node import Node
 import threading
+import cv2
+import numpy as np
 
 class DriverUI(Node):
 
@@ -254,6 +256,11 @@ class DriverUI(Node):
         self.font_xlarge = pygame.font.SysFont("Calibri", 75, True, False)
         self.font_gauge_numbers = pygame.font.SysFont("Calibri", 20, True, False) 
 
+        # self.font_small = pygame.font.SysFont("Futura", 25, True, False)
+        # self.font_large = pygame.font.SysFont("Futura", 50, True, False)
+        # self.font_xlarge = pygame.font.SysFont("Futura", 75, True, False)
+        # self.font_gauge_numbers = pygame.font.SysFont("Futura", 20, True, False)
+
         self.lat = 0
         self.lon = 0
         self.speed = 0
@@ -267,6 +274,7 @@ class DriverUI(Node):
         self.cumulative_distance = 0.0
         self.speed_values = []
         self.speed_buffer_size = 100
+        self.show_camera = False
         self.start_ros_thread()
          # Number of speed values to average
 
@@ -322,6 +330,18 @@ class DriverUI(Node):
         c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
         d = radius_earth * c
         return d
+    
+    def initialize_camera(self):
+        self.cap = cv2.VideoCapture(4)
+
+    def display_camera(self):
+        ret, frame = self.cap.read()  # Read a frame from the camera
+        if ret:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert the frame to RGB
+            frame = cv2.flip(frame, 1)  # Flip the frame horizontally
+            frame = np.rot90(frame)  # Rotate the frame 90 degrees counter-clockwise
+            frame = pygame.surfarray.make_surface(frame)  # Convert the frame to a Pygame surface
+            self.screen.blit(frame, (0, 0))  # Draw the frame on the screen
 
     def draw_text(self, text, font, color, x, y):
         text_surface = font.render(text, True, color)
@@ -380,6 +400,8 @@ class DriverUI(Node):
 
 
     def run(self):
+        self.initialize_camera()
+
         done = False
         while not done:
             for event in pygame.event.get():
@@ -401,74 +423,85 @@ class DriverUI(Node):
                         self.start_time = None
                         self.stop_time = None
                         self.running = False
+                    elif event.key == pygame.K_c:
+                        self.show_camera = not self.show_camera
                         self.cumulative_distance = 0.0
                     elif event.key == pygame.K_ESCAPE:
                         print("ESC was pressed. quitting...")
                         quit()
 
-            self.screen.fill(self.BLACK)
+            if self.show_camera:
+                cover_color = (0, 0, 0)
+                cover_rect = pygame.Rect(0, 0, self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
+                pygame.draw.rect(self.screen, cover_color, cover_rect)
+                self.display_camera()
+                self.draw_text("Camera Display", self.font_large, self.WHITE, 100, 600)
 
-            # self.generate_random_data()
-            self.screen.fill(self.BLACK)
-
-            
-
-            self.draw_text("Driver Dashboard", self.font_large, self.WHITE, 100, 25)
-
-            stopwatch_y = 100
-            if self.running:
-                elapsed_time = time.time() - self.start_time
             else:
-                elapsed_time = (
-                    self.stop_time - self.start_time
-                    if self.start_time is not None and self.stop_time is not None
-                    else 0
-                )
-            minutes = int(elapsed_time // 60)
-            seconds = int(elapsed_time % 60)
-            milliseconds = int((elapsed_time % 1) * 1000)
-            stopwatch_text = "Time: " + f"{minutes:02d}:{seconds:02d}:{milliseconds:03d}"
-            self.draw_text(stopwatch_text, self.font_large, self.WHITE, 120, stopwatch_y)
-            self.draw_text("Lat: " + f"{self.lat:.5f}", self.font_large, self.WHITE, 120, stopwatch_y + 50)
-            self.draw_text("Lon: " + f"{self.lon:.5f}", self.font_large, self.WHITE, 120, stopwatch_y + 100)
+                self.screen.fill(self.BLACK)
+
+                # self.generate_random_data()
+                self.screen.fill(self.BLACK)
+
+                
+
+                self.draw_text("Driver Dashboard", self.font_large, self.WHITE, 100, 25)
+
+                stopwatch_y = 100
+                if self.running:
+                    elapsed_time = time.time() - self.start_time
+                else:
+                    elapsed_time = (
+                        self.stop_time - self.start_time
+                        if self.start_time is not None and self.stop_time is not None
+                        else 0
+                    )
+                minutes = int(elapsed_time // 60)
+                seconds = int(elapsed_time % 60)
+                milliseconds = int((elapsed_time % 1) * 1000)
+                stopwatch_text = "Time: " + f"{minutes:02d}:{seconds:02d}:{milliseconds:03d}"
+                self.draw_text(stopwatch_text, self.font_large, self.WHITE, 120, stopwatch_y)
+                self.draw_text("Lat: " + f"{self.lat:.5f}", self.font_large, self.WHITE, 120, stopwatch_y + 50)
+                self.draw_text("Lon: " + f"{self.lon:.5f}", self.font_large, self.WHITE, 120, stopwatch_y + 100)
 
 
-            # speed_y = 300
-            # self.draw_text(
-            #     f"{self.speed:.2f} MPH", self.font_xlarge, self.WHITE, 50, speed_y
-            # )
+                # speed_y = 300
+                # self.draw_text(
+                #     f"{self.speed:.2f} MPH", self.font_xlarge, self.WHITE, 50, speed_y
+                # )
 
-                        # ...
+                            # ...
 
-            # Speed Gauge
-            gauge_x = self.SCREEN_WIDTH // 2
-            gauge_y = 400
-            gauge_radius = 110
-            max_speed_value = 100  # Set the maximum speed value for the gauge
-            
-            self.draw_needle(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.RED)
+                # Speed Gauge
+                gauge_x = self.SCREEN_WIDTH // 2
+                gauge_y = 400
+                gauge_radius = 110
+                max_speed_value = 100  # Set the maximum speed value for the gauge
+                
+                self.draw_needle(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.RED)
 
-            center_radius = 75
-            self.draw_center_circle(gauge_x, gauge_y, center_radius, self.BLACK)
-            self.draw_gauge(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.WHITE, self.font_large)
+                center_radius = 75
+                self.draw_center_circle(gauge_x, gauge_y, center_radius, self.BLACK)
+                self.draw_gauge(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.WHITE, self.font_large)
 
-            # ...
+                # ...
 
 
-            # if self.running:
-            #     current_distance = self.calculate_distance(
-            #         self.lat, self.lon, self.lat + 0.001, self.lon + 0.001
-            #     )
-            #     self.distance += current_distance
+                # if self.running:
+                #     current_distance = self.calculate_distance(
+                #         self.lat, self.lon, self.lat + 0.001, self.lon + 0.001
+                #     )
+                #     self.distance += current_distance
 
-            self.draw_cumulative_distance()
-            self.draw_progress_bar(self.cumulative_distance * 0.621371, 10)
+                self.draw_cumulative_distance()
+                self.draw_progress_bar(self.cumulative_distance * 0.621371, 10)
 
-            # rotated_screen = pygame.transform.rotate(self.screen, -90)
-            # self.screen.blit(rotated_screen, (0, 0))
+                # rotated_screen = pygame.transform.rotate(self.screen, -90)
+                # self.screen.blit(rotated_screen, (0, 0))
 
             pygame.display.flip()
 
+        self.cap.release()
         pygame.quit()
 
 def main(args=None):
