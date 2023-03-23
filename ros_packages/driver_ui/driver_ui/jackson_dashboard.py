@@ -230,9 +230,19 @@ class DriverUI(Node):
     def __init__(self):
         super().__init__("driver_ui")
 
+        #data sim
         self.subscription = self.create_subscription(
-            GeoPoint, "gps_data_sim", self.position_callback, 10
+            GeoPoint, "gps_data_sim", self.position_callback_speed, 10
         )
+
+        # rtk
+        # self.subscription = self.create_subscription(
+        #     GeoPoint, "rtk_pos", self.position_callback, 10
+        # )
+
+        # self.subscription = self.create_subscription(
+        #     Vector3, "rtk_vel", self.soeed_callback, 10
+        # )
 
         self.subscription
         pygame.init()
@@ -284,7 +294,7 @@ class DriverUI(Node):
     #     self.lon += random.uniform(-0.0005, 0.0005)
     #     self.speed += random.uniform(-0.5, 0.5)
 
-    def position_callback(self, msg):
+    def position_callback_speed(self, msg):
         if self.prev_lat is not None and self.prev_lon is not None:
             current_lat = msg.latitude
             current_lon = msg.longitude
@@ -314,6 +324,39 @@ class DriverUI(Node):
 
         self.lat = msg.latitude
         self.lon = msg.longitude
+
+    def position_callback(self, msg):
+        if self.prev_lat is not None and self.prev_lon is not None:
+                current_lat = msg.latitude
+                current_lon = msg.longitude
+                current_timestamp = datetime.now()
+
+                self.distance = self.calculate_distance(
+                    self.prev_lat, self.prev_lon, current_lat, current_lon
+                )
+
+                self.cumulative_distance += self.distance
+        self.prev_lat = msg.latitude
+        self.prev_lon = msg.longitude
+        self.prev_timestamp = datetime.now()
+
+        self.lat = msg.latitude
+        self.lon = msg.longitude
+
+    def speed_callback(self, msg):
+        xVel = msg.x
+        yVel = msg.y
+        zVel = msg.z
+        
+        magnitude = ((xVel ** 2) + (yVel ** 2)) ** 0.5
+
+        self.speed_values.append(magnitude)
+
+        if len(self.speed_values) > self.speed_buffer_size:
+            self.speed_values.pop(0)
+
+        self.speed = sum(self.speed_values) / len(self.speed_values)
+
 
 
     def calculate_distance(self, lat1, lon1, lat2, lon2):
