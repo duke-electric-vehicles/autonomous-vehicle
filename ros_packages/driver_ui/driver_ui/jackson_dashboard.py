@@ -241,7 +241,7 @@ class DriverUI(Node):
         # )
 
         # self.subscription = self.create_subscription(
-        #     Vector3, "rtk_vel", self.soeed_callback, 10
+        #     Vector3, "rtk_vel", self.speed_callback, 10
         # )
 
         self.subscription
@@ -283,8 +283,9 @@ class DriverUI(Node):
         self.prev_timestamp = None
         self.cumulative_distance = 0.0
         self.speed_values = []
-        self.speed_buffer_size = 100
+        self.speed_buffer_size = 25
         self.show_camera = False
+        self.camera_thread = None
         self.start_ros_thread()
          # Number of speed values to average
 
@@ -375,7 +376,7 @@ class DriverUI(Node):
         return d
     
     def initialize_camera(self):
-        self.cap = cv2.VideoCapture(4)
+        self.cap = cv2.VideoCapture(0)
 
     def display_camera(self):
         ret, frame = self.cap.read()  # Read a frame from the camera
@@ -417,7 +418,7 @@ class DriverUI(Node):
         self.screen.blit(text, text_rect)
 
         # Draw numbers around the gauge
-        num_interval = max_value // 10  # Set the interval for displaying numbers
+        num_interval = max_value // 20  # Set the interval for displaying numbers
         num_radius = radius - 15  # Adjust the position of the numbers
         for num in range(0, max_value + 1, num_interval):
             angle = 270 * (num / max_value) - 135
@@ -438,6 +439,13 @@ class DriverUI(Node):
     
     def draw_center_circle(self, x, y, radius, color):
         pygame.draw.circle(self.screen, color, (x, y), radius)
+
+    def stop_camera_feed(self):
+        if self.cap:
+            self.cap.release()
+        if self.camera_thread:
+            self.camera_thread.join()
+            self.camera_thread = None
 
 
 
@@ -468,7 +476,11 @@ class DriverUI(Node):
                         self.running = False
                     elif event.key == pygame.K_c:
                         self.show_camera = not self.show_camera
-                        self.cumulative_distance = 0.0
+                        if self.show_camera:
+                            self.camera_thread = threading.Thread(target=self.show_camera)
+                            self.camera_thread.start()
+                        else:
+                            self.stop_camera_feed()
                     elif event.key == pygame.K_ESCAPE:
                         print("ESC was pressed. quitting...")
                         quit()
@@ -477,11 +489,12 @@ class DriverUI(Node):
                 cover_color = (0, 0, 0)
                 cover_rect = pygame.Rect(0, 0, self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
                 pygame.draw.rect(self.screen, cover_color, cover_rect)
+                self.draw_text("NO CAMERA DETECTED", self.font_large, self.RED, 50, 200)
                 self.display_camera()
                 self.draw_text("Camera Display", self.font_large, self.WHITE, 100, 600)
 
             else:
-                self.screen.fill(self.BLACK)
+                # self.screen.fill(self.BLACK)
 
                 # self.generate_random_data()
                 self.screen.fill(self.BLACK)
@@ -519,7 +532,7 @@ class DriverUI(Node):
                 gauge_x = self.SCREEN_WIDTH // 2
                 gauge_y = 400
                 gauge_radius = 110
-                max_speed_value = 100  # Set the maximum speed value for the gauge
+                max_speed_value = 20  # Set the maximum speed value for the gauge
                 
                 self.draw_needle(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.RED)
 
