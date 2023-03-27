@@ -356,7 +356,7 @@ class DriverUI(Node):
         if len(self.speed_values) > self.speed_buffer_size:
             self.speed_values.pop(0)
 
-        self.speed = sum(self.speed_values) / len(self.speed_values)
+        self.speed = (sum(self.speed_values) / len(self.speed_values)) * 2.23694
 
 
 
