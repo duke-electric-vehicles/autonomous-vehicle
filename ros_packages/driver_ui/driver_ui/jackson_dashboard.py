@@ -231,18 +231,18 @@ class DriverUI(Node):
         super().__init__("driver_ui")
 
         #data sim
-        self.subscription = self.create_subscription(
-            GeoPoint, "gps_data_sim", self.position_callback_speed, 10
-        )
+        # self.subscription = self.create_subscription(
+        #     GeoPoint, "gps_data_sim", self.position_callback_speed, 10
+        # )
 
         # rtk
-        # self.subscription = self.create_subscription(
-        #     GeoPoint, "rtk_pos", self.position_callback, 10
-        # )
+        self.subscription = self.create_subscription(
+            GeoPoint, "rtk_pos", self.position_callback, 10
+        )
 
-        # self.subscription = self.create_subscription(
-        #     Vector3, "rtk_vel", self.speed_callback, 10
-        # )
+        self.subscription = self.create_subscription(
+            Vector3, "rtk_vel", self.speed_callback, 10
+        )
 
         self.subscription
         pygame.init()
@@ -283,7 +283,7 @@ class DriverUI(Node):
         self.prev_timestamp = None
         self.cumulative_distance = 0.0
         self.speed_values = []
-        self.speed_buffer_size = 25
+        self.speed_buffer_size = 5
         self.show_camera = False
         self.camera_thread = None
         self.start_ros_thread()
