@@ -21,6 +21,14 @@ class DriverUI(Node):
         self.ros_thread = threading.Thread(target=ros_spin)
         self.ros_thread.start()
 
+    def create_button(self, text, x, y, w, h, color, text_color):
+        button = pygame.Rect(x, y, w, h)
+        pygame.draw.rect(self.screen, color, button)
+        button_text = self.font_small.render(text, True, text_color)
+        text_rect = button_text.get_rect(center=(x + w // 2, y + h // 2))
+        self.screen.blit(button_text, text_rect)
+        return button
+
     def __init__(self):
         super().__init__("driver_ui")
 
@@ -247,6 +255,10 @@ class DriverUI(Node):
     def run(self):
         self.initialize_camera()
 
+        start_button = self.create_button("Start", 60, 700, 100, 50, self.BLUE, self.WHITE)
+        stop_button = self.create_button("Stop", 190, 700, 100, 50, self.RED, self.WHITE)
+        reset_button = self.create_button("Reset", 320, 700, 100, 50, self.GREEN, self.WHITE)
+
         done = False
         while not done:
             for event in pygame.event.get():
@@ -278,6 +290,23 @@ class DriverUI(Node):
                     elif event.key == pygame.K_ESCAPE:
                         print("ESC was pressed. quitting...")
                         quit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = pygame.mouse.get_pos()
+                    if start_button.collidepoint(mouse_pos) and not self.running:
+                        if self.start_time is None:
+                            self.start_time = time.time()
+                        else:
+                            self.start_time = (
+                                time.time() - (self.stop_time - self.start_time)
+                            )
+                        self.running = True
+                    elif stop_button.collidepoint(mouse_pos) and self.running:
+                        self.stop_time = time.time()
+                        self.running = False
+                    elif reset_button.collidepoint(mouse_pos):
+                        self.start_time = None
+                        self.stop_time = None
+                        self.running = False
 
             if self.show_camera:
                 cover_color = (0, 0, 0)
@@ -349,6 +378,10 @@ class DriverUI(Node):
                 # rotated_screen = pygame.transform.rotate(self.screen, -90)
                 # self.screen.blit(rotated_screen, (0, 0))
 
+            tart_button = self.create_button("Start", 60, 700, 100, 50, self.BLUE, self.WHITE)
+            stop_button = self.create_button("Stop", 190, 700, 100, 50, self.RED, self.WHITE)
+            reset_button = self.create_button("Reset", 320, 700, 100, 50, self.GREEN, self.WHITE)
+            
             pygame.display.flip()
 
         self.cap.release()
