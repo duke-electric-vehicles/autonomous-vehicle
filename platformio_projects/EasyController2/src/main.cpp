@@ -18,7 +18,8 @@
 
 #define HALL_OVERSAMPLE 4     // Hall oversampling count. More on this in the getHalls() function
 
-uint8_t hallToMotor[8] = {255, 1, 3, 2, 5, 0, 4, 255};
+uint8_t hallToMotor[8] = {255, 1, 3, 2, 5, 0, 4, 255}; //Koford 175
+//uint8_t hallToMotor[8] = {255, 5, 3, 4, 1, 0, 2, 255}; //Koford 350
 
 // Forward declarations
 void identifyHalls();
