@@ -378,10 +378,10 @@ class DriverUI(Node):
                 # rotated_screen = pygame.transform.rotate(self.screen, -90)
                 # self.screen.blit(rotated_screen, (0, 0))
 
-            tart_button = self.create_button("Start", 60, 700, 100, 50, self.BLUE, self.WHITE)
+            start_button = self.create_button("Start", 60, 700, 100, 50, self.BLUE, self.WHITE)
             stop_button = self.create_button("Stop", 190, 700, 100, 50, self.RED, self.WHITE)
             reset_button = self.create_button("Reset", 320, 700, 100, 50, self.GREEN, self.WHITE)
-            
+
             pygame.display.flip()
 
         self.cap.release()
