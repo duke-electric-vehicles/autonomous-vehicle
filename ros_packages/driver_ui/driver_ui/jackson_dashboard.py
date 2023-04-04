@@ -11,6 +11,7 @@ from rclpy.node import Node
 import threading
 import cv2
 import numpy as np
+import sys
 
 class DriverUI(Node):
 
@@ -60,6 +61,7 @@ class DriverUI(Node):
         self.SCREEN_HEIGHT = 800
 
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
+        # self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 
         pygame.display.set_caption("Driver Dashboard")
 
@@ -287,9 +289,9 @@ class DriverUI(Node):
                             self.camera_thread.start()
                         else:
                             self.stop_camera_feed()
-                    elif event.key == pygame.K_ESCAPE:
-                        print("ESC was pressed. quitting...")
-                        quit()
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_pos = pygame.mouse.get_pos()
                     if start_button.collidepoint(mouse_pos) and not self.running:
