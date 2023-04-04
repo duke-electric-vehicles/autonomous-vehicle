@@ -1,6 +1,7 @@
 import pygame
 import time
 import math
+import sys
 
 pygame.init()
 
@@ -17,7 +18,7 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
 # Create the screen object
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
 
 # Set the title of the window
 pygame.display.set_caption("Driver Dashboard")
@@ -108,7 +109,9 @@ def main():
                     distance = 0
                 elif event.key == pygame.K_ESCAPE:
                     print("ESC was pressed. quitting...")
-                    quit() 
+                    pygame.display.quit()
+                    pygame.quit()
+                    sys.exit()
 
 
         # Clear the screen
@@ -155,7 +158,9 @@ def main():
         pygame.display.flip()
 
     # Quit the game
+    pygame.display.quit()
     pygame.quit()
+    sys.exit()
 
 if __name__ == "__main__":
     main()
