@@ -67,7 +67,7 @@ class DriverUI(Node):
 
         self.font_small = pygame.font.SysFont("Calibri", 25, True, False)
         self.font_large = pygame.font.SysFont("Calibri", 50, True, False)
-        self.font_xlarge = pygame.font.SysFont("Calibri", 75, True, False)
+        self.font_xlarge = pygame.font.SysFont("Calibri", 85, True, False)
         self.font_gauge_numbers = pygame.font.SysFont("Calibri", 20, True, False) 
 
         # self.font_small = pygame.font.SysFont("Futura", 25, True, False)
@@ -90,6 +90,8 @@ class DriverUI(Node):
         self.speed_buffer_size = 5
         self.show_camera = False
         self.camera_thread = None
+        self.voltage = 0.0
+        self.current = 0.0
         self.start_ros_thread()
          # Number of speed values to average
 
@@ -257,9 +259,9 @@ class DriverUI(Node):
     def run(self):
         self.initialize_camera()
 
-        start_button = self.create_button("Start", 60, 700, 100, 50, self.BLUE, self.WHITE)
-        stop_button = self.create_button("Stop", 190, 700, 100, 50, self.RED, self.WHITE)
-        reset_button = self.create_button("Reset", 320, 700, 100, 50, self.GREEN, self.WHITE)
+        # start_button = self.create_button("Start", 0, 700, 160, 100, self.BLUE, self.WHITE)
+        # stop_button = self.create_button("Stop", 160, 700, 160, 100, self.RED, self.WHITE)
+        # reset_button = self.create_button("Reset", 320, 700, 160, 100, self.GREEN, self.WHITE)
 
         done = False
         while not done:
@@ -342,8 +344,13 @@ class DriverUI(Node):
                 milliseconds = int((elapsed_time % 1) * 1000)
                 stopwatch_text = "Time: " + f"{minutes:02d}:{seconds:02d}:{milliseconds:03d}"
                 self.draw_text(stopwatch_text, self.font_large, self.WHITE, 120, stopwatch_y)
-                self.draw_text("Lat: " + f"{self.lat:.5f}", self.font_large, self.WHITE, 120, stopwatch_y + 50)
-                self.draw_text("Lon: " + f"{self.lon:.5f}", self.font_large, self.WHITE, 120, stopwatch_y + 100)
+                self.draw_text("Lat: " + f"{self.lat:.5f}", self.font_large, self.WHITE, 40, stopwatch_y + 70)
+                self.draw_text("Lon: " + f"{self.lon:.5f}", self.font_large, self.WHITE, 260, stopwatch_y + 70)
+
+                self.draw_text("V: " + f"{self.voltage:.2f}", self.font_large, self.WHITE, 10, 385)
+                self.draw_text("I: " + f"{self.current:.2f}", self.font_large, self.WHITE, 370, 385)
+
+
 
 
                 # speed_y = 300
@@ -380,9 +387,9 @@ class DriverUI(Node):
                 # rotated_screen = pygame.transform.rotate(self.screen, -90)
                 # self.screen.blit(rotated_screen, (0, 0))
 
-            start_button = self.create_button("Start", 60, 700, 100, 50, self.BLUE, self.WHITE)
-            stop_button = self.create_button("Stop", 190, 700, 100, 50, self.RED, self.WHITE)
-            reset_button = self.create_button("Reset", 320, 700, 100, 50, self.GREEN, self.WHITE)
+            start_button = self.create_button("Start", 0, 700, 160, 100, self.GREEN, self.WHITE)
+            stop_button = self.create_button("Stop", 160, 700, 160, 100, self.RED, self.WHITE)
+            reset_button = self.create_button("Reset", 320, 700, 160, 100, self.BLUE, self.WHITE)
 
             pygame.display.flip()
 
