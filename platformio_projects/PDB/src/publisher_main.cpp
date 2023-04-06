@@ -5,6 +5,11 @@
 #include <INA190.cpp>
 #include <NEO6M.cpp>
 #include <vector>
+#include <stdio.h>
+#include <rcl/rcl.h>
+#include <rcl/error_handling.h>
+#include <rclc/rclc.h>
+#include <rclc/executor.h>
 
 // Include float64 (idk what msg type it should be)
 //#include <my_custom_msgs/msg/sensor_data.h>
@@ -128,12 +133,16 @@ void data_setup() {
 // primary function here is to update and log data
 void data_loop() { 
   gps.update();
-  delay(200);
+  // delay(200);
 }
 
 // Global variables for micro-ROS
-rcl_publisher_t publisher;
-my_custom_msgs__msg__SensorData msg;
+rcl_publisher_t voltage_pub;
+rcl_publisher_t current_pub;
+rcl_publisher_t power_pub;
+std_msgs__msg__Float64 voltage_msg;
+std_msgs__msg__Float64 current_msg;
+std_msgs__msg__Float64 power_msg;
 rclc_executor_t executor;
 rclc_support_t support;
 rcl_allocator_t allocator;
@@ -159,9 +168,9 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
   RCLC_UNUSED(last_call_time);
   if (timer != NULL) {
     // Fill in the message data
-    msg.voltage = getVoltage();
-    msg.current = getCurrent();
-    msg.power = getPower();
+    voltage_msg.data = getVoltage();
+    current_msg.data = getCurrent();
+    power_msg.data = getPower();
     //msg.velocity = getVelocity();
     //msg.energy = getEnergy();
     //msg.distance = getDistance();
@@ -171,7 +180,9 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
     //msg.altitude = getAltitude();
 
     // Publish the message
-    RCSOFTCHECK(rcl_publish(&publisher, &msg, NULL));
+    RCSOFTCHECK(rcl_publish(&voltage_pub, &voltage_msg, NULL));
+    RCSOFTCHECK(rcl_publish(&current_pub, &current_msg, NULL));
+    RCSOFTCHECK(rcl_publish(&power_pub, &power_msg, NULL));
   }
 }
 
@@ -187,15 +198,25 @@ void setup() {
 
   // Initialize micro-ROS
   RCCHECK(rclc_support_init(&support, 0, NULL, &allocator));
-  RCCHECK(rclc_node_init_default(&node, "micro_ros_arduino_node", "", &support));
+  RCCHECK(rclc_node_init_default(&node, "pdb_node", "", &support));
   RCCHECK(rclc_publisher_init_default(
-    &publisher,
+    &voltage_pub,
     &node,
     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float64),
-    "sensor_data_publisher"));
+    "pdb_voltage"));
+  RCCHECK(rclc_publisher_init_default(
+    &current_pub,
+    &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float64),
+    "pdb_current"));
+  RCCHECK(rclc_publisher_init_default(
+    &power_pub,
+    &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float64),
+    "pdb_power"));
 
   // Initialize timer
-  const unsigned int timer_timeout = 1000;
+  const unsigned int timer_timeout = 500;
   RCCHECK(rclc_timer_init_default(
     &timer,
     &support,
@@ -208,7 +229,7 @@ void setup() {
 }
 
 void loop() {
-  data_loop(); // Update data and log it
-  delay(100);
+  // data_loop(); // Update data and log it
+  // delay(100);
   RCSOFTCHECK(rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100)));
 }
