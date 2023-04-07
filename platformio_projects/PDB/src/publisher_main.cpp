@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <micro_ros_arduino.h>
+#include <micro_ros_platformio.h>
 #include <SPI.h>
 #include <SD.h>
 #include <INA190.cpp>
@@ -66,24 +66,24 @@ const unsigned long logInterval = 1000;
 unsigned long previousMillis = 0;
 
 
-void initSD(){
-  Serial.print("Initializing SD card...");
-
-  if (!SD.begin(chipSelect)) {
-    Serial.println("Card failed, or not present");
-    while (1);
-  }
-  Serial.println("Card initialized.");
-
-  File dataFile = SD.open("data.csv", FILE_WRITE);
-  if (dataFile) {
-    dataFile.println("Voltage(V),Current(A),Power(W),Velocity(m/s),Energy(J),Distance(m),Elapsed Time(ms),Latitude(DD.dddd),Longitude(DD.dddd),Altitude(m)");
-    dataFile.close();
-    Serial.println("Created data.csv");
-  } else {
-    Serial.println("Error creating data.csv");
-  }
-}
+// void initSD(){
+//   Serial.print("Initializing SD card...");
+//
+//   if (!SD.begin(chipSelect)) {
+//     Serial.println("Card failed, or not present");
+//     while (1);
+//   }
+//   Serial.println("Card initialized.");
+//
+//   File dataFile = SD.open("data.csv", FILE_WRITE);
+//   if (dataFile) {
+//     dataFile.println("Voltage(V),Current(A),Power(W),Velocity(m/s),Energy(J),Distance(m),Elapsed Time(ms),Latitude(DD.dddd),Longitude(DD.dddd),Altitude(m)");
+//     dataFile.close();
+//     Serial.println("Created data.csv");
+//   } else {
+//     Serial.println("Error creating data.csv");
+//   }
+// }
 
 struct SensorData {
   using Func = double (*)();
@@ -104,37 +104,37 @@ std::vector<SensorData> sensorDataFunctions = {
   {getAltitude, 2}
 };
 
-void logData() {
-  File dataFile = SD.open("data.csv", FILE_WRITE);
-  if (dataFile) {
-    for (auto& sensorData : sensorDataFunctions) {
-      double data = sensorData.func();
-      dataFile.print(data, sensorData.decimalPlaces);
-      dataFile.print(&sensorData != &sensorDataFunctions.back() ? "," : "\n");
-    }
+// void logData() {
+//   File dataFile = SD.open("data.csv", FILE_WRITE);
+//   if (dataFile) {
+//     for (auto& sensorData : sensorDataFunctions) {
+//       double data = sensorData.func();
+//       dataFile.print(data, sensorData.decimalPlaces);
+//       dataFile.print(&sensorData != &sensorDataFunctions.back() ? "," : "\n");
+//     }
+//
+//     dataFile.close();
+//     Serial.println("Logged data");
+//   } else {
+//     Serial.println("Error opening data.csv");
+//   }
+// }
 
-    dataFile.close();
-    Serial.println("Logged data");
-  } else {
-    Serial.println("Error opening data.csv");
-  }
-}
-
-void data_setup() {
-  Serial.begin(9600);
-  while (!Serial) {
-    ;
-  }
-
-  initSD();
-  gps.initialize();
-}
+// void data_setup() {
+//   Serial.begin(9600);
+//   while (!Serial) {
+//     ;
+//   }
+//
+//   // initSD();
+//   // gps.initialize();
+// }
 
 // primary function here is to update and log data
-void data_loop() { 
-  gps.update();
-  // delay(200);
-}
+// void data_loop() { 
+//   gps.update();
+//   // delay(200);
+// }
 
 // Global variables for micro-ROS
 rcl_publisher_t voltage_pub;
@@ -165,6 +165,7 @@ void error_loop(){
 
 void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 {  
+  // Serial.println("publishing");
   RCLC_UNUSED(last_call_time);
   if (timer != NULL) {
     // Fill in the message data
@@ -187,8 +188,9 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 }
 
 void setup() {
-  data_setup(); // Initialize data logging
-  set_microros_transports(); // Initialize micro-ROS transports
+  // data_setup(); // Initialize data logging
+  Serial.begin(115200);
+  set_microros_serial_transports(Serial); // Initialize micro-ROS transports
   
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH);  
@@ -214,7 +216,7 @@ void setup() {
     &node,
     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float64),
     "pdb_power"));
-
+  //
   // Initialize timer
   const unsigned int timer_timeout = 500;
   RCCHECK(rclc_timer_init_default(
@@ -226,6 +228,7 @@ void setup() {
   // Initialize executor
   RCCHECK(rclc_executor_init(&executor, &support.context, 1, &allocator));
   RCCHECK(rclc_executor_add_timer(&executor, &timer));
+  // Serial.println("finished setup");
 }
 
 void loop() {
