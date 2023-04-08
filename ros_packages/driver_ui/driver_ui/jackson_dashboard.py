@@ -101,7 +101,7 @@ class DriverUI(Node):
     #     self.speed += random.uniform(-0.5, 0.5)
 
     def position_callback_speed(self, msg):
-        if self.prev_lat is not None and self.prev_lon is not None:
+        if (self.prev_lat is not 90.0 and self.prev_lon is not 0.0):
             current_lat = msg.latitude
             current_lon = msg.longitude
             current_timestamp = datetime.now()
@@ -109,6 +109,7 @@ class DriverUI(Node):
             self.distance = self.calculate_distance(
                 self.prev_lat, self.prev_lon, current_lat, current_lon
             )
+
             time_diff = (current_timestamp - self.prev_timestamp).total_seconds()
             self.cumulative_distance += self.distance
 
