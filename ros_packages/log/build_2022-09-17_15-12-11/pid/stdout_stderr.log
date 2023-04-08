@@ -1,0 +1,36 @@
+running egg_info
+writing ../build/pid/pid.egg-info/PKG-INFO
+writing dependency_links to ../build/pid/pid.egg-info/dependency_links.txt
+writing entry points to ../build/pid/pid.egg-info/entry_points.txt
+writing requirements to ../build/pid/pid.egg-info/requires.txt
+writing top-level names to ../build/pid/pid.egg-info/top_level.txt
+reading manifest file '../build/pid/pid.egg-info/SOURCES.txt'
+writing manifest file '../build/pid/pid.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /opt/ros/dev_ws/src/build/pid/build
+creating /opt/ros/dev_ws/src/build/pid/build/lib
+creating /opt/ros/dev_ws/src/build/pid/build/lib/pid
+copying pid/__init__.py -> /opt/ros/dev_ws/src/build/pid/build/lib/pid
+copying pid/pid.py -> /opt/ros/dev_ws/src/build/pid/build/lib/pid
+copying pid/test.py -> /opt/ros/dev_ws/src/build/pid/build/lib/pid
+running install
+running install_lib
+creating /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid
+copying /opt/ros/dev_ws/src/build/pid/build/lib/pid/__init__.py -> /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid
+copying /opt/ros/dev_ws/src/build/pid/build/lib/pid/pid.py -> /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid
+copying /opt/ros/dev_ws/src/build/pid/build/lib/pid/test.py -> /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid
+byte-compiling /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/__init__.py to __init__.cpython-38.pyc
+byte-compiling /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/pid.py to pid.cpython-38.pyc
+byte-compiling /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/test.py to test.cpython-38.pyc
+running install_data
+  File "/opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/test.py", line 5
+    const int trigPin = 9;
+          ^
+SyntaxError: invalid syntax
+
+running install_egg_info
+Copying ../build/pid/pid.egg-info to /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid-0.0.0-py3.8.egg-info
+running install_scripts
+Installing pid script to /opt/ros/dev_ws/src/install/pid/lib/pid
+writing list of installed files to '/opt/ros/dev_ws/src/build/pid/install.log'

@@ -1,0 +1,30 @@
+[0.986s] Invoking command in '/opt/ros/dev_ws/src/rtk': PYTHONPATH=/opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/rtk build --build-base /opt/ros/dev_ws/src/build/rtk/build install --prefix /opt/ros/dev_ws/src/install/rtk --record /opt/ros/dev_ws/src/build/rtk/install.log --single-version-externally-managed
+[1.073s] running egg_info
+[1.078s] writing ../build/rtk/rtk.egg-info/PKG-INFO
+[1.081s] writing dependency_links to ../build/rtk/rtk.egg-info/dependency_links.txt
+[1.087s] writing entry points to ../build/rtk/rtk.egg-info/entry_points.txt
+[1.092s] writing requirements to ../build/rtk/rtk.egg-info/requires.txt
+[1.097s] writing top-level names to ../build/rtk/rtk.egg-info/top_level.txt
+[1.131s] reading manifest file '../build/rtk/rtk.egg-info/SOURCES.txt'
+[1.142s] writing manifest file '../build/rtk/rtk.egg-info/SOURCES.txt'
+[1.150s] running build
+[1.153s] running build_py
+[1.158s] creating /opt/ros/dev_ws/src/build/rtk/build
+[1.166s] creating /opt/ros/dev_ws/src/build/rtk/build/lib
+[1.168s] creating /opt/ros/dev_ws/src/build/rtk/build/lib/rtk
+[1.172s] copying rtk/__init__.py -> /opt/ros/dev_ws/src/build/rtk/build/lib/rtk
+[1.176s] copying rtk/publisher.py -> /opt/ros/dev_ws/src/build/rtk/build/lib/rtk
+[1.180s] running install
+[1.183s] running install_lib
+[1.194s] creating /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk
+[1.197s] copying /opt/ros/dev_ws/src/build/rtk/build/lib/rtk/__init__.py -> /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk
+[1.219s] copying /opt/ros/dev_ws/src/build/rtk/build/lib/rtk/publisher.py -> /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk
+[1.236s] byte-compiling /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk/__init__.py to __init__.cpython-38.pyc
+[1.244s] byte-compiling /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk/publisher.py to publisher.cpython-38.pyc
+[1.262s] running install_data
+[1.266s] running install_egg_info
+[1.275s] Copying ../build/rtk/rtk.egg-info to /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk-0.0.0-py3.8.egg-info
+[1.374s] running install_scripts
+[1.397s] Installing pub script to /opt/ros/dev_ws/src/install/rtk/lib/rtk
+[1.408s] writing list of installed files to '/opt/ros/dev_ws/src/build/rtk/install.log'
+[1.432s] Invoked command in '/opt/ros/dev_ws/src/rtk' returned '0': PYTHONPATH=/opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/rtk build --build-base /opt/ros/dev_ws/src/build/rtk/build install --prefix /opt/ros/dev_ws/src/install/rtk --record /opt/ros/dev_ws/src/build/rtk/install.log --single-version-externally-managed

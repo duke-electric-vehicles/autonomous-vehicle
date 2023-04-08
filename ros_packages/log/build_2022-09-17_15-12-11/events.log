@@ -1,0 +1,255 @@
+[0.000000] (-) TimerEvent: {}
+[0.003108] (driver_ui) JobQueued: {'identifier': 'driver_ui', 'dependencies': OrderedDict()}
+[0.004222] (gps_sim) JobQueued: {'identifier': 'gps_sim', 'dependencies': OrderedDict()}
+[0.006139] (pid) JobQueued: {'identifier': 'pid', 'dependencies': OrderedDict()}
+[0.006973] (py_pubsub) JobQueued: {'identifier': 'py_pubsub', 'dependencies': OrderedDict()}
+[0.008267] (rtk) JobQueued: {'identifier': 'rtk', 'dependencies': OrderedDict()}
+[0.009059] (teleop_keyboard) JobQueued: {'identifier': 'teleop_keyboard', 'dependencies': OrderedDict()}
+[0.010062] (driver_ui) JobStarted: {'identifier': 'driver_ui'}
+[0.055058] (gps_sim) JobStarted: {'identifier': 'gps_sim'}
+[0.097667] (-) TimerEvent: {}
+[0.099353] (pid) JobStarted: {'identifier': 'pid'}
+[0.139540] (py_pubsub) JobStarted: {'identifier': 'py_pubsub'}
+[0.197663] (-) TimerEvent: {}
+[0.299189] (-) TimerEvent: {}
+[0.401374] (-) TimerEvent: {}
+[0.503302] (-) TimerEvent: {}
+[0.604831] (-) TimerEvent: {}
+[0.706061] (-) TimerEvent: {}
+[0.807898] (-) TimerEvent: {}
+[0.908951] (-) TimerEvent: {}
+[1.012224] (-) TimerEvent: {}
+[1.115339] (-) TimerEvent: {}
+[1.156313] (gps_sim) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../build/gps_sim', 'build', '--build-base', '/opt/ros/dev_ws/src/build/gps_sim/build', 'install', '--prefix', '/opt/ros/dev_ws/src/install/gps_sim', '--record', '/opt/ros/dev_ws/src/build/gps_sim/install.log', '--single-version-externally-managed'], 'cwd': '/opt/ros/dev_ws/src/gps_sim', 'env': {'HOSTNAME': 'docker-desktop', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib', 'HOME': '/root', 'OLDPWD': '/opt/ros/dev_ws', 'OVERLAY_WS': '/opt/ros/dev_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/opt/ros/dev_ws/install', 'ROS_DISTRO': 'foxy', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': '', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/opt/ros/dev_ws/install/driver_ui:/opt/ros/dev_ws/install/teleop_keyboard:/opt/ros/dev_ws/install/rtk:/opt/ros/dev_ws/install/py_pubsub:/opt/ros/dev_ws/install/pid:/opt/ros/dev_ws/install/gps_sim:/opt/ros/foxy', 'PWD': '/opt/ros/dev_ws/src/build/gps_sim', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/opt/ros/dev_ws/src/install/gps_sim/lib/python3.8/site-packages:/opt/ros/dev_ws/install/driver_ui/lib/python3.8/site-packages:/opt/ros/dev_ws/install/teleop_keyboard/lib/python3.8/site-packages:/opt/ros/dev_ws/install/rtk/lib/python3.8/site-packages:/opt/ros/dev_ws/install/py_pubsub/lib/python3.8/site-packages:/opt/ros/dev_ws/install/pid/lib/python3.8/site-packages:/opt/ros/dev_ws/install/gps_sim/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages', 'COLCON': '1'}, 'shell': False}
+[1.208642] (pid) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../build/pid', 'build', '--build-base', '/opt/ros/dev_ws/src/build/pid/build', 'install', '--prefix', '/opt/ros/dev_ws/src/install/pid', '--record', '/opt/ros/dev_ws/src/build/pid/install.log', '--single-version-externally-managed'], 'cwd': '/opt/ros/dev_ws/src/pid', 'env': {'HOSTNAME': 'docker-desktop', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib', 'HOME': '/root', 'OLDPWD': '/opt/ros/dev_ws', 'OVERLAY_WS': '/opt/ros/dev_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/opt/ros/dev_ws/install', 'ROS_DISTRO': 'foxy', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': '', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/opt/ros/dev_ws/install/driver_ui:/opt/ros/dev_ws/install/teleop_keyboard:/opt/ros/dev_ws/install/rtk:/opt/ros/dev_ws/install/py_pubsub:/opt/ros/dev_ws/install/pid:/opt/ros/dev_ws/install/gps_sim:/opt/ros/foxy', 'PWD': '/opt/ros/dev_ws/src/build/pid', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages:/opt/ros/dev_ws/install/driver_ui/lib/python3.8/site-packages:/opt/ros/dev_ws/install/teleop_keyboard/lib/python3.8/site-packages:/opt/ros/dev_ws/install/rtk/lib/python3.8/site-packages:/opt/ros/dev_ws/install/py_pubsub/lib/python3.8/site-packages:/opt/ros/dev_ws/install/pid/lib/python3.8/site-packages:/opt/ros/dev_ws/install/gps_sim/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages', 'COLCON': '1'}, 'shell': False}
+[1.237195] (-) TimerEvent: {}
+[1.238472] (driver_ui) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../build/driver_ui', 'build', '--build-base', '/opt/ros/dev_ws/src/build/driver_ui/build', 'install', '--prefix', '/opt/ros/dev_ws/src/install/driver_ui', '--record', '/opt/ros/dev_ws/src/build/driver_ui/install.log', '--single-version-externally-managed'], 'cwd': '/opt/ros/dev_ws/src/driver_ui', 'env': {'HOSTNAME': 'docker-desktop', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib', 'HOME': '/root', 'OLDPWD': '/opt/ros/dev_ws', 'OVERLAY_WS': '/opt/ros/dev_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/opt/ros/dev_ws/install', 'ROS_DISTRO': 'foxy', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': '', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/opt/ros/dev_ws/install/driver_ui:/opt/ros/dev_ws/install/teleop_keyboard:/opt/ros/dev_ws/install/rtk:/opt/ros/dev_ws/install/py_pubsub:/opt/ros/dev_ws/install/pid:/opt/ros/dev_ws/install/gps_sim:/opt/ros/foxy', 'PWD': '/opt/ros/dev_ws/src/build/driver_ui', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages:/opt/ros/dev_ws/install/driver_ui/lib/python3.8/site-packages:/opt/ros/dev_ws/install/teleop_keyboard/lib/python3.8/site-packages:/opt/ros/dev_ws/install/rtk/lib/python3.8/site-packages:/opt/ros/dev_ws/install/py_pubsub/lib/python3.8/site-packages:/opt/ros/dev_ws/install/pid/lib/python3.8/site-packages:/opt/ros/dev_ws/install/gps_sim/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages', 'COLCON': '1'}, 'shell': False}
+[1.271444] (py_pubsub) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../build/py_pubsub', 'build', '--build-base', '/opt/ros/dev_ws/src/build/py_pubsub/build', 'install', '--prefix', '/opt/ros/dev_ws/src/install/py_pubsub', '--record', '/opt/ros/dev_ws/src/build/py_pubsub/install.log', '--single-version-externally-managed'], 'cwd': '/opt/ros/dev_ws/src/py_pubsub', 'env': {'HOSTNAME': 'docker-desktop', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib', 'HOME': '/root', 'OLDPWD': '/opt/ros/dev_ws', 'OVERLAY_WS': '/opt/ros/dev_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/opt/ros/dev_ws/install', 'ROS_DISTRO': 'foxy', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': '', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/opt/ros/dev_ws/install/driver_ui:/opt/ros/dev_ws/install/teleop_keyboard:/opt/ros/dev_ws/install/rtk:/opt/ros/dev_ws/install/py_pubsub:/opt/ros/dev_ws/install/pid:/opt/ros/dev_ws/install/gps_sim:/opt/ros/foxy', 'PWD': '/opt/ros/dev_ws/src/build/py_pubsub', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages:/opt/ros/dev_ws/install/driver_ui/lib/python3.8/site-packages:/opt/ros/dev_ws/install/teleop_keyboard/lib/python3.8/site-packages:/opt/ros/dev_ws/install/rtk/lib/python3.8/site-packages:/opt/ros/dev_ws/install/py_pubsub/lib/python3.8/site-packages:/opt/ros/dev_ws/install/pid/lib/python3.8/site-packages:/opt/ros/dev_ws/install/gps_sim/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages', 'COLCON': '1'}, 'shell': False}
+[1.329052] (gps_sim) StdoutLine: {'line': b'running egg_info\n'}
+[1.338557] (-) TimerEvent: {}
+[1.341208] (gps_sim) StdoutLine: {'line': b'writing ../build/gps_sim/gps_sim.egg-info/PKG-INFO\n'}
+[1.347515] (pid) StdoutLine: {'line': b'running egg_info\n'}
+[1.352932] (gps_sim) StdoutLine: {'line': b'writing dependency_links to ../build/gps_sim/gps_sim.egg-info/dependency_links.txt\n'}
+[1.356496] (pid) StdoutLine: {'line': b'writing ../build/pid/pid.egg-info/PKG-INFO\n'}
+[1.359778] (pid) StdoutLine: {'line': b'writing dependency_links to ../build/pid/pid.egg-info/dependency_links.txt\n'}
+[1.364122] (gps_sim) StdoutLine: {'line': b'writing entry points to ../build/gps_sim/gps_sim.egg-info/entry_points.txt\n'}
+[1.368123] (gps_sim) StdoutLine: {'line': b'writing requirements to ../build/gps_sim/gps_sim.egg-info/requires.txt\n'}
+[1.374397] (pid) StdoutLine: {'line': b'writing entry points to ../build/pid/pid.egg-info/entry_points.txt\n'}
+[1.378064] (gps_sim) StdoutLine: {'line': b'writing top-level names to ../build/gps_sim/gps_sim.egg-info/top_level.txt\n'}
+[1.381575] (driver_ui) StdoutLine: {'line': b'running egg_info\n'}
+[1.389624] (pid) StdoutLine: {'line': b'writing requirements to ../build/pid/pid.egg-info/requires.txt\n'}
+[1.393105] (driver_ui) StdoutLine: {'line': b'writing ../build/driver_ui/driver_ui.egg-info/PKG-INFO\n'}
+[1.397021] (pid) StdoutLine: {'line': b'writing top-level names to ../build/pid/pid.egg-info/top_level.txt\n'}
+[1.400675] (driver_ui) StdoutLine: {'line': b'writing dependency_links to ../build/driver_ui/driver_ui.egg-info/dependency_links.txt\n'}
+[1.405028] (driver_ui) StdoutLine: {'line': b'writing entry points to ../build/driver_ui/driver_ui.egg-info/entry_points.txt\n'}
+[1.408067] (driver_ui) StdoutLine: {'line': b'writing requirements to ../build/driver_ui/driver_ui.egg-info/requires.txt\n'}
+[1.411188] (driver_ui) StdoutLine: {'line': b'writing top-level names to ../build/driver_ui/driver_ui.egg-info/top_level.txt\n'}
+[1.423818] (gps_sim) StdoutLine: {'line': b"reading manifest file '../build/gps_sim/gps_sim.egg-info/SOURCES.txt'\n"}
+[1.427282] (gps_sim) StdoutLine: {'line': b"writing manifest file '../build/gps_sim/gps_sim.egg-info/SOURCES.txt'\n"}
+[1.434509] (pid) StdoutLine: {'line': b"reading manifest file '../build/pid/pid.egg-info/SOURCES.txt'\n"}
+[1.438052] (gps_sim) StdoutLine: {'line': b'running build\n'}
+[1.443278] (-) TimerEvent: {}
+[1.444839] (gps_sim) StdoutLine: {'line': b'running build_py\n'}
+[1.448942] (gps_sim) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/gps_sim/build\n'}
+[1.451944] (gps_sim) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/gps_sim/build/lib\n'}
+[1.455479] (pid) StdoutLine: {'line': b"writing manifest file '../build/pid/pid.egg-info/SOURCES.txt'\n"}
+[1.464192] (gps_sim) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/gps_sim/build/lib/gps_sim\n'}
+[1.468830] (driver_ui) StdoutLine: {'line': b"reading manifest file '../build/driver_ui/driver_ui.egg-info/SOURCES.txt'\n"}
+[1.475255] (pid) StdoutLine: {'line': b'running build\n'}
+[1.480375] (pid) StdoutLine: {'line': b'running build_py\n'}
+[1.488587] (gps_sim) StdoutLine: {'line': b'copying gps_sim/__init__.py -> /opt/ros/dev_ws/src/build/gps_sim/build/lib/gps_sim\n'}
+[1.494023] (pid) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/pid/build\n'}
+[1.497766] (pid) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/pid/build/lib\n'}
+[1.502203] (pid) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/pid/build/lib/pid\n'}
+[1.506423] (driver_ui) StdoutLine: {'line': b"writing manifest file '../build/driver_ui/driver_ui.egg-info/SOURCES.txt'\n"}
+[1.510952] (gps_sim) StdoutLine: {'line': b'copying gps_sim/simulate.py -> /opt/ros/dev_ws/src/build/gps_sim/build/lib/gps_sim\n'}
+[1.516402] (driver_ui) StdoutLine: {'line': b'running build\n'}
+[1.521244] (driver_ui) StdoutLine: {'line': b'running build_py\n'}
+[1.525227] (pid) StdoutLine: {'line': b'copying pid/__init__.py -> /opt/ros/dev_ws/src/build/pid/build/lib/pid\n'}
+[1.530348] (driver_ui) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/driver_ui/build\n'}
+[1.533514] (py_pubsub) StdoutLine: {'line': b'running egg_info\n'}
+[1.537754] (driver_ui) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/driver_ui/build/lib\n'}
+[1.541168] (py_pubsub) StdoutLine: {'line': b'writing ../build/py_pubsub/py_pubsub.egg-info/PKG-INFO\n'}
+[1.548875] (-) TimerEvent: {}
+[1.550382] (gps_sim) StdoutLine: {'line': b'running install\n'}
+[1.555989] (driver_ui) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui\n'}
+[1.559860] (gps_sim) StdoutLine: {'line': b'running install_lib\n'}
+[1.563959] (pid) StdoutLine: {'line': b'copying pid/pid.py -> /opt/ros/dev_ws/src/build/pid/build/lib/pid\n'}
+[1.570315] (py_pubsub) StdoutLine: {'line': b'writing dependency_links to ../build/py_pubsub/py_pubsub.egg-info/dependency_links.txt\n'}
+[1.578982] (gps_sim) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/install/gps_sim/lib/python3.8/site-packages/gps_sim\n'}
+[1.583315] (driver_ui) StdoutLine: {'line': b'copying driver_ui/__init__.py -> /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui\n'}
+[1.587378] (gps_sim) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/gps_sim/build/lib/gps_sim/__init__.py -> /opt/ros/dev_ws/src/install/gps_sim/lib/python3.8/site-packages/gps_sim\n'}
+[1.592265] (py_pubsub) StdoutLine: {'line': b'writing entry points to ../build/py_pubsub/py_pubsub.egg-info/entry_points.txt\n'}
+[1.603615] (pid) StdoutLine: {'line': b'copying pid/test.py -> /opt/ros/dev_ws/src/build/pid/build/lib/pid\n'}
+[1.608827] (py_pubsub) StdoutLine: {'line': b'writing requirements to ../build/py_pubsub/py_pubsub.egg-info/requires.txt\n'}
+[1.613465] (driver_ui) StdoutLine: {'line': b'copying driver_ui/main.py -> /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui\n'}
+[1.618096] (py_pubsub) StdoutLine: {'line': b'writing top-level names to ../build/py_pubsub/py_pubsub.egg-info/top_level.txt\n'}
+[1.623139] (gps_sim) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/gps_sim/build/lib/gps_sim/simulate.py -> /opt/ros/dev_ws/src/install/gps_sim/lib/python3.8/site-packages/gps_sim\n'}
+[1.630524] (pid) StdoutLine: {'line': b'running install\n'}
+[1.634334] (pid) StdoutLine: {'line': b'running install_lib\n'}
+[1.640265] (driver_ui) StdoutLine: {'line': b'copying driver_ui/mainRTK.py -> /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui\n'}
+[1.644472] (pid) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid\n'}
+[1.650161] (-) TimerEvent: {}
+[1.651278] (pid) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/pid/build/lib/pid/__init__.py -> /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid\n'}
+[1.656609] (driver_ui) StdoutLine: {'line': b'copying driver_ui/test.py -> /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui\n'}
+[1.662180] (gps_sim) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/gps_sim/lib/python3.8/site-packages/gps_sim/__init__.py to __init__.cpython-38.pyc\n'}
+[1.667532] (driver_ui) StdoutLine: {'line': b'running install\n'}
+[1.675066] (driver_ui) StdoutLine: {'line': b'running install_lib\n'}
+[1.679398] (pid) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/pid/build/lib/pid/pid.py -> /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid\n'}
+[1.684243] (driver_ui) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui\n'}
+[1.689480] (gps_sim) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/gps_sim/lib/python3.8/site-packages/gps_sim/simulate.py to simulate.cpython-38.pyc\n'}
+[1.694022] (py_pubsub) StdoutLine: {'line': b"reading manifest file '../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'\n"}
+[1.700655] (driver_ui) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui/__init__.py -> /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui\n'}
+[1.706478] (pid) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/pid/build/lib/pid/test.py -> /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid\n'}
+[1.712029] (py_pubsub) StdoutLine: {'line': b"writing manifest file '../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'\n"}
+[1.716068] (gps_sim) StdoutLine: {'line': b'running install_data\n'}
+[1.722566] (py_pubsub) StdoutLine: {'line': b'running build\n'}
+[1.726296] (py_pubsub) StdoutLine: {'line': b'running build_py\n'}
+[1.729668] (py_pubsub) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/py_pubsub/build\n'}
+[1.734278] (driver_ui) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui/main.py -> /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui\n'}
+[1.739881] (gps_sim) StdoutLine: {'line': b'running install_egg_info\n'}
+[1.743904] (pid) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/__init__.py to __init__.cpython-38.pyc\n'}
+[1.749100] (py_pubsub) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/py_pubsub/build/lib\n'}
+[1.753999] (-) TimerEvent: {}
+[1.755752] (gps_sim) StdoutLine: {'line': b'Copying ../build/gps_sim/gps_sim.egg-info to /opt/ros/dev_ws/src/install/gps_sim/lib/python3.8/site-packages/gps_sim-0.0.0-py3.8.egg-info\n'}
+[1.759956] (py_pubsub) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub\n'}
+[1.765227] (py_pubsub) StdoutLine: {'line': b'copying py_pubsub/__init__.py -> /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub\n'}
+[1.769358] (driver_ui) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui/mainRTK.py -> /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui\n'}
+[1.775829] (pid) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/pid.py to pid.cpython-38.pyc\n'}
+[1.779165] (py_pubsub) StdoutLine: {'line': b'copying py_pubsub/publisher_member_function.py -> /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub\n'}
+[1.783085] (driver_ui) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/driver_ui/build/lib/driver_ui/test.py -> /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui\n'}
+[1.787502] (pid) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/test.py to test.cpython-38.pyc\n'}
+[1.795859] (pid) StdoutLine: {'line': b'running install_data\n'}
+[1.798992] (pid) StderrLine: {'line': b'  File "/opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/test.py", line 5\n'}
+[1.803469] (pid) StderrLine: {'line': b'    const int trigPin = 9;\n'}
+[1.810882] (pid) StderrLine: {'line': b'          ^\n'}
+[1.816037] (pid) StderrLine: {'line': b'SyntaxError: invalid syntax\n'}
+[1.820262] (pid) StderrLine: {'line': b'\n'}
+[1.825464] (py_pubsub) StdoutLine: {'line': b'copying py_pubsub/subscriber_member_function.py -> /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub\n'}
+[1.829505] (pid) StdoutLine: {'line': b'running install_egg_info\n'}
+[1.832831] (driver_ui) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui/__init__.py to __init__.cpython-38.pyc\n'}
+[1.837116] (pid) StdoutLine: {'line': b'Copying ../build/pid/pid.egg-info to /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid-0.0.0-py3.8.egg-info\n'}
+[1.843101] (py_pubsub) StdoutLine: {'line': b'running install\n'}
+[1.848759] (py_pubsub) StdoutLine: {'line': b'running install_lib\n'}
+[1.853558] (py_pubsub) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub\n'}
+[1.857069] (-) TimerEvent: {}
+[1.858456] (driver_ui) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui/main.py to main.cpython-38.pyc\n'}
+[1.863452] (py_pubsub) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub/__init__.py -> /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub\n'}
+[1.870125] (driver_ui) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui/mainRTK.py to mainRTK.cpython-38.pyc\n'}
+[1.873636] (py_pubsub) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub/publisher_member_function.py -> /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub\n'}
+[1.878061] (driver_ui) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui/test.py to test.cpython-38.pyc\n'}
+[1.881862] (py_pubsub) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub/subscriber_member_function.py -> /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub\n'}
+[1.886019] (driver_ui) StdoutLine: {'line': b'running install_data\n'}
+[1.891679] (py_pubsub) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/__init__.py to __init__.cpython-38.pyc\n'}
+[1.895111] (driver_ui) StdoutLine: {'line': b'running install_egg_info\n'}
+[1.899497] (driver_ui) StdoutLine: {'line': b'Copying ../build/driver_ui/driver_ui.egg-info to /opt/ros/dev_ws/src/install/driver_ui/lib/python3.8/site-packages/driver_ui-0.0.0-py3.8.egg-info\n'}
+[1.905585] (gps_sim) StdoutLine: {'line': b'running install_scripts\n'}
+[1.911663] (py_pubsub) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/publisher_member_function.py to publisher_member_function.cpython-38.pyc\n'}
+[1.919914] (gps_sim) StdoutLine: {'line': b'Installing gps_sim script to /opt/ros/dev_ws/src/install/gps_sim/lib/gps_sim\n'}
+[1.925039] (py_pubsub) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/subscriber_member_function.py to subscriber_member_function.cpython-38.pyc\n'}
+[1.934999] (gps_sim) StdoutLine: {'line': b"writing list of installed files to '/opt/ros/dev_ws/src/build/gps_sim/install.log'\n"}
+[1.941891] (py_pubsub) StdoutLine: {'line': b'running install_data\n'}
+[1.947608] (pid) StdoutLine: {'line': b'running install_scripts\n'}
+[1.956342] (py_pubsub) StdoutLine: {'line': b'running install_egg_info\n'}
+[1.961172] (-) TimerEvent: {}
+[1.962184] (py_pubsub) StdoutLine: {'line': b'Copying ../build/py_pubsub/py_pubsub.egg-info to /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub-0.0.0-py3.8.egg-info\n'}
+[1.966920] (gps_sim) CommandEnded: {'returncode': 0}
+[1.970234] (pid) StdoutLine: {'line': b'Installing pid script to /opt/ros/dev_ws/src/install/pid/lib/pid\n'}
+[1.974352] (pid) StdoutLine: {'line': b"writing list of installed files to '/opt/ros/dev_ws/src/build/pid/install.log'\n"}
+[1.977025] (driver_ui) StdoutLine: {'line': b'running install_scripts\n'}
+[1.980489] (driver_ui) StdoutLine: {'line': b'Installing driver_ui script to /opt/ros/dev_ws/src/install/driver_ui/lib/driver_ui\n'}
+[1.983822] (driver_ui) StdoutLine: {'line': b'Installing driver_ui_rtk script to /opt/ros/dev_ws/src/install/driver_ui/lib/driver_ui\n'}
+[1.987095] (driver_ui) StdoutLine: {'line': b"writing list of installed files to '/opt/ros/dev_ws/src/build/driver_ui/install.log'\n"}
+[1.990534] (py_pubsub) StdoutLine: {'line': b'running install_scripts\n'}
+[1.998273] (py_pubsub) StdoutLine: {'line': b'Installing listener script to /opt/ros/dev_ws/src/install/py_pubsub/lib/py_pubsub\n'}
+[2.001101] (py_pubsub) StdoutLine: {'line': b'Installing talker script to /opt/ros/dev_ws/src/install/py_pubsub/lib/py_pubsub\n'}
+[2.008160] (gps_sim) JobEnded: {'identifier': 'gps_sim', 'rc': 0}
+[2.018249] (rtk) JobStarted: {'identifier': 'rtk'}
+[2.019492] (py_pubsub) StdoutLine: {'line': b"writing list of installed files to '/opt/ros/dev_ws/src/build/py_pubsub/install.log'\n"}
+[2.023237] (pid) CommandEnded: {'returncode': 0}
+[2.061259] (-) TimerEvent: {}
+[2.117370] (pid) JobEnded: {'identifier': 'pid', 'rc': 0}
+[2.124895] (driver_ui) CommandEnded: {'returncode': 0}
+[2.161675] (-) TimerEvent: {}
+[2.237284] (driver_ui) JobEnded: {'identifier': 'driver_ui', 'rc': 0}
+[2.245179] (teleop_keyboard) JobStarted: {'identifier': 'teleop_keyboard'}
+[2.261812] (-) TimerEvent: {}
+[2.273053] (py_pubsub) CommandEnded: {'returncode': 0}
+[2.361933] (-) TimerEvent: {}
+[2.383650] (py_pubsub) JobEnded: {'identifier': 'py_pubsub', 'rc': 0}
+[2.462083] (-) TimerEvent: {}
+[2.565289] (-) TimerEvent: {}
+[2.667349] (-) TimerEvent: {}
+[2.768498] (-) TimerEvent: {}
+[2.869838] (-) TimerEvent: {}
+[2.971315] (-) TimerEvent: {}
+[2.977633] (rtk) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../build/rtk', 'build', '--build-base', '/opt/ros/dev_ws/src/build/rtk/build', 'install', '--prefix', '/opt/ros/dev_ws/src/install/rtk', '--record', '/opt/ros/dev_ws/src/build/rtk/install.log', '--single-version-externally-managed'], 'cwd': '/opt/ros/dev_ws/src/rtk', 'env': {'HOSTNAME': 'docker-desktop', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib', 'HOME': '/root', 'OLDPWD': '/opt/ros/dev_ws', 'OVERLAY_WS': '/opt/ros/dev_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/opt/ros/dev_ws/install', 'ROS_DISTRO': 'foxy', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': '', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/opt/ros/dev_ws/install/driver_ui:/opt/ros/dev_ws/install/teleop_keyboard:/opt/ros/dev_ws/install/rtk:/opt/ros/dev_ws/install/py_pubsub:/opt/ros/dev_ws/install/pid:/opt/ros/dev_ws/install/gps_sim:/opt/ros/foxy', 'PWD': '/opt/ros/dev_ws/src/build/rtk', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages:/opt/ros/dev_ws/install/driver_ui/lib/python3.8/site-packages:/opt/ros/dev_ws/install/teleop_keyboard/lib/python3.8/site-packages:/opt/ros/dev_ws/install/rtk/lib/python3.8/site-packages:/opt/ros/dev_ws/install/py_pubsub/lib/python3.8/site-packages:/opt/ros/dev_ws/install/pid/lib/python3.8/site-packages:/opt/ros/dev_ws/install/gps_sim/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages', 'COLCON': '1'}, 'shell': False}
+[3.009543] (teleop_keyboard) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../build/teleop_keyboard', 'build', '--build-base', '/opt/ros/dev_ws/src/build/teleop_keyboard/build', 'install', '--prefix', '/opt/ros/dev_ws/src/install/teleop_keyboard', '--record', '/opt/ros/dev_ws/src/build/teleop_keyboard/install.log', '--single-version-externally-managed'], 'cwd': '/opt/ros/dev_ws/src/teleop_keyboard', 'env': {'HOSTNAME': 'docker-desktop', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib', 'HOME': '/root', 'OLDPWD': '/opt/ros/dev_ws', 'OVERLAY_WS': '/opt/ros/dev_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/opt/ros/dev_ws/install', 'ROS_DISTRO': 'foxy', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': '', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/opt/ros/dev_ws/install/driver_ui:/opt/ros/dev_ws/install/teleop_keyboard:/opt/ros/dev_ws/install/rtk:/opt/ros/dev_ws/install/py_pubsub:/opt/ros/dev_ws/install/pid:/opt/ros/dev_ws/install/gps_sim:/opt/ros/foxy', 'PWD': '/opt/ros/dev_ws/src/build/teleop_keyboard', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages:/opt/ros/dev_ws/install/driver_ui/lib/python3.8/site-packages:/opt/ros/dev_ws/install/teleop_keyboard/lib/python3.8/site-packages:/opt/ros/dev_ws/install/rtk/lib/python3.8/site-packages:/opt/ros/dev_ws/install/py_pubsub/lib/python3.8/site-packages:/opt/ros/dev_ws/install/pid/lib/python3.8/site-packages:/opt/ros/dev_ws/install/gps_sim/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages', 'COLCON': '1'}, 'shell': False}
+[3.071430] (-) TimerEvent: {}
+[3.089156] (rtk) StdoutLine: {'line': b'running egg_info\n'}
+[3.093298] (rtk) StdoutLine: {'line': b'writing ../build/rtk/rtk.egg-info/PKG-INFO\n'}
+[3.098234] (rtk) StdoutLine: {'line': b'writing dependency_links to ../build/rtk/rtk.egg-info/dependency_links.txt\n'}
+[3.104106] (rtk) StdoutLine: {'line': b'writing entry points to ../build/rtk/rtk.egg-info/entry_points.txt\n'}
+[3.109371] (rtk) StdoutLine: {'line': b'writing requirements to ../build/rtk/rtk.egg-info/requires.txt\n'}
+[3.113377] (rtk) StdoutLine: {'line': b'writing top-level names to ../build/rtk/rtk.egg-info/top_level.txt\n'}
+[3.137366] (teleop_keyboard) StdoutLine: {'line': b'running egg_info\n'}
+[3.141154] (teleop_keyboard) StdoutLine: {'line': b'writing ../build/teleop_keyboard/teleop_keyboard.egg-info/PKG-INFO\n'}
+[3.147437] (rtk) StdoutLine: {'line': b"reading manifest file '../build/rtk/rtk.egg-info/SOURCES.txt'\n"}
+[3.150787] (teleop_keyboard) StdoutLine: {'line': b'writing dependency_links to ../build/teleop_keyboard/teleop_keyboard.egg-info/dependency_links.txt\n'}
+[3.154076] (teleop_keyboard) StdoutLine: {'line': b'writing entry points to ../build/teleop_keyboard/teleop_keyboard.egg-info/entry_points.txt\n'}
+[3.159195] (rtk) StdoutLine: {'line': b"writing manifest file '../build/rtk/rtk.egg-info/SOURCES.txt'\n"}
+[3.163012] (teleop_keyboard) StdoutLine: {'line': b'writing requirements to ../build/teleop_keyboard/teleop_keyboard.egg-info/requires.txt\n'}
+[3.166832] (rtk) StdoutLine: {'line': b'running build\n'}
+[3.170298] (rtk) StdoutLine: {'line': b'running build_py\n'}
+[3.173027] (-) TimerEvent: {}
+[3.174108] (rtk) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/rtk/build\n'}
+[3.178230] (teleop_keyboard) StdoutLine: {'line': b'writing top-level names to ../build/teleop_keyboard/teleop_keyboard.egg-info/top_level.txt\n'}
+[3.182621] (rtk) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/rtk/build/lib\n'}
+[3.185681] (rtk) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/rtk/build/lib/rtk\n'}
+[3.188580] (rtk) StdoutLine: {'line': b'copying rtk/__init__.py -> /opt/ros/dev_ws/src/build/rtk/build/lib/rtk\n'}
+[3.191571] (rtk) StdoutLine: {'line': b'copying rtk/publisher.py -> /opt/ros/dev_ws/src/build/rtk/build/lib/rtk\n'}
+[3.197800] (rtk) StdoutLine: {'line': b'running install\n'}
+[3.200182] (rtk) StdoutLine: {'line': b'running install_lib\n'}
+[3.204848] (teleop_keyboard) StdoutLine: {'line': b"reading manifest file '../build/teleop_keyboard/teleop_keyboard.egg-info/SOURCES.txt'\n"}
+[3.210528] (rtk) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk\n'}
+[3.213965] (rtk) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/rtk/build/lib/rtk/__init__.py -> /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk\n'}
+[3.216991] (teleop_keyboard) StdoutLine: {'line': b"writing manifest file '../build/teleop_keyboard/teleop_keyboard.egg-info/SOURCES.txt'\n"}
+[3.222091] (teleop_keyboard) StdoutLine: {'line': b'running build\n'}
+[3.226190] (teleop_keyboard) StdoutLine: {'line': b'running build_py\n'}
+[3.230074] (teleop_keyboard) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/teleop_keyboard/build\n'}
+[3.234041] (rtk) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/rtk/build/lib/rtk/publisher.py -> /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk\n'}
+[3.239910] (teleop_keyboard) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/teleop_keyboard/build/lib\n'}
+[3.243899] (teleop_keyboard) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/build/teleop_keyboard/build/lib/teleop_keyboard\n'}
+[3.248459] (teleop_keyboard) StdoutLine: {'line': b'copying teleop_keyboard/__init__.py -> /opt/ros/dev_ws/src/build/teleop_keyboard/build/lib/teleop_keyboard\n'}
+[3.252775] (rtk) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk/__init__.py to __init__.cpython-38.pyc\n'}
+[3.255984] (teleop_keyboard) StdoutLine: {'line': b'copying teleop_keyboard/teleop_keyboard.py -> /opt/ros/dev_ws/src/build/teleop_keyboard/build/lib/teleop_keyboard\n'}
+[3.260523] (rtk) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk/publisher.py to publisher.cpython-38.pyc\n'}
+[3.264318] (teleop_keyboard) StdoutLine: {'line': b'running install\n'}
+[3.267605] (teleop_keyboard) StdoutLine: {'line': b'running install_lib\n'}
+[3.272208] (teleop_keyboard) StdoutLine: {'line': b'creating /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard\n'}
+[3.276857] (-) TimerEvent: {}
+[3.278583] (rtk) StdoutLine: {'line': b'running install_data\n'}
+[3.282134] (rtk) StdoutLine: {'line': b'running install_egg_info\n'}
+[3.286165] (teleop_keyboard) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/teleop_keyboard/build/lib/teleop_keyboard/__init__.py -> /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard\n'}
+[3.292275] (rtk) StdoutLine: {'line': b'Copying ../build/rtk/rtk.egg-info to /opt/ros/dev_ws/src/install/rtk/lib/python3.8/site-packages/rtk-0.0.0-py3.8.egg-info\n'}
+[3.295312] (teleop_keyboard) StdoutLine: {'line': b'copying /opt/ros/dev_ws/src/build/teleop_keyboard/build/lib/teleop_keyboard/teleop_keyboard.py -> /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard\n'}
+[3.309236] (teleop_keyboard) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard/__init__.py to __init__.cpython-38.pyc\n'}
+[3.327745] (teleop_keyboard) StdoutLine: {'line': b'byte-compiling /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard/teleop_keyboard.py to teleop_keyboard.cpython-38.pyc\n'}
+[3.340909] (teleop_keyboard) StdoutLine: {'line': b'running install_data\n'}
+[3.344997] (teleop_keyboard) StdoutLine: {'line': b'running install_egg_info\n'}
+[3.349064] (teleop_keyboard) StdoutLine: {'line': b'Copying ../build/teleop_keyboard/teleop_keyboard.egg-info to /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard-0.0.0-py3.8.egg-info\n'}
+[3.377019] (-) TimerEvent: {}
+[3.389487] (rtk) StdoutLine: {'line': b'running install_scripts\n'}
+[3.413182] (rtk) StdoutLine: {'line': b'Installing pub script to /opt/ros/dev_ws/src/install/rtk/lib/rtk\n'}
+[3.425279] (rtk) StdoutLine: {'line': b"writing list of installed files to '/opt/ros/dev_ws/src/build/rtk/install.log'\n"}
+[3.449427] (rtk) CommandEnded: {'returncode': 0}
+[3.454583] (teleop_keyboard) StdoutLine: {'line': b'running install_scripts\n'}
+[3.469328] (teleop_keyboard) StdoutLine: {'line': b'Installing teleop_keyboard script to /opt/ros/dev_ws/src/install/teleop_keyboard/lib/teleop_keyboard\n'}
+[3.477443] (-) TimerEvent: {}
+[3.480996] (teleop_keyboard) StdoutLine: {'line': b"writing list of installed files to '/opt/ros/dev_ws/src/build/teleop_keyboard/install.log'\n"}
+[3.568321] (rtk) JobEnded: {'identifier': 'rtk', 'rc': 0}
+[3.575211] (teleop_keyboard) CommandEnded: {'returncode': 0}
+[3.578942] (-) TimerEvent: {}
+[3.677965] (teleop_keyboard) JobEnded: {'identifier': 'teleop_keyboard', 'rc': 0}
+[3.686601] (-) TimerEvent: {}
+[3.688538] (-) EventReactorShutdown: {}

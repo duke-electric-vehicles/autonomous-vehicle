@@ -1,0 +1,30 @@
+[0.783s] Invoking command in '/opt/ros/dev_ws/src/teleop_keyboard': PYTHONPATH=/opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/teleop_keyboard build --build-base /opt/ros/dev_ws/src/build/teleop_keyboard/build install --prefix /opt/ros/dev_ws/src/install/teleop_keyboard --record /opt/ros/dev_ws/src/build/teleop_keyboard/install.log --single-version-externally-managed
+[0.893s] running egg_info
+[0.898s] writing ../build/teleop_keyboard/teleop_keyboard.egg-info/PKG-INFO
+[0.906s] writing dependency_links to ../build/teleop_keyboard/teleop_keyboard.egg-info/dependency_links.txt
+[0.910s] writing entry points to ../build/teleop_keyboard/teleop_keyboard.egg-info/entry_points.txt
+[0.919s] writing requirements to ../build/teleop_keyboard/teleop_keyboard.egg-info/requires.txt
+[0.935s] writing top-level names to ../build/teleop_keyboard/teleop_keyboard.egg-info/top_level.txt
+[0.962s] reading manifest file '../build/teleop_keyboard/teleop_keyboard.egg-info/SOURCES.txt'
+[0.974s] writing manifest file '../build/teleop_keyboard/teleop_keyboard.egg-info/SOURCES.txt'
+[0.979s] running build
+[0.983s] running build_py
+[0.986s] creating /opt/ros/dev_ws/src/build/teleop_keyboard/build
+[0.996s] creating /opt/ros/dev_ws/src/build/teleop_keyboard/build/lib
+[1.001s] creating /opt/ros/dev_ws/src/build/teleop_keyboard/build/lib/teleop_keyboard
+[1.004s] copying teleop_keyboard/__init__.py -> /opt/ros/dev_ws/src/build/teleop_keyboard/build/lib/teleop_keyboard
+[1.012s] copying teleop_keyboard/teleop_keyboard.py -> /opt/ros/dev_ws/src/build/teleop_keyboard/build/lib/teleop_keyboard
+[1.020s] running install
+[1.024s] running install_lib
+[1.030s] creating /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard
+[1.044s] copying /opt/ros/dev_ws/src/build/teleop_keyboard/build/lib/teleop_keyboard/__init__.py -> /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard
+[1.051s] copying /opt/ros/dev_ws/src/build/teleop_keyboard/build/lib/teleop_keyboard/teleop_keyboard.py -> /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard
+[1.066s] byte-compiling /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard/__init__.py to __init__.cpython-38.pyc
+[1.084s] byte-compiling /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard/teleop_keyboard.py to teleop_keyboard.cpython-38.pyc
+[1.098s] running install_data
+[1.101s] running install_egg_info
+[1.105s] Copying ../build/teleop_keyboard/teleop_keyboard.egg-info to /opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages/teleop_keyboard-0.0.0-py3.8.egg-info
+[1.211s] running install_scripts
+[1.227s] Installing teleop_keyboard script to /opt/ros/dev_ws/src/install/teleop_keyboard/lib/teleop_keyboard
+[1.237s] writing list of installed files to '/opt/ros/dev_ws/src/build/teleop_keyboard/install.log'
+[1.331s] Invoked command in '/opt/ros/dev_ws/src/teleop_keyboard' returned '0': PYTHONPATH=/opt/ros/dev_ws/src/install/teleop_keyboard/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/teleop_keyboard build --build-base /opt/ros/dev_ws/src/build/teleop_keyboard/build install --prefix /opt/ros/dev_ws/src/install/teleop_keyboard --record /opt/ros/dev_ws/src/build/teleop_keyboard/install.log --single-version-externally-managed

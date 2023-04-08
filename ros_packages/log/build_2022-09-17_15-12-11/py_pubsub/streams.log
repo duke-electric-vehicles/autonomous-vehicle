@@ -1,0 +1,34 @@
+[1.154s] Invoking command in '/opt/ros/dev_ws/src/py_pubsub': PYTHONPATH=/opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/py_pubsub build --build-base /opt/ros/dev_ws/src/build/py_pubsub/build install --prefix /opt/ros/dev_ws/src/install/py_pubsub --record /opt/ros/dev_ws/src/build/py_pubsub/install.log --single-version-externally-managed
+[1.393s] running egg_info
+[1.404s] writing ../build/py_pubsub/py_pubsub.egg-info/PKG-INFO
+[1.434s] writing dependency_links to ../build/py_pubsub/py_pubsub.egg-info/dependency_links.txt
+[1.455s] writing entry points to ../build/py_pubsub/py_pubsub.egg-info/entry_points.txt
+[1.468s] writing requirements to ../build/py_pubsub/py_pubsub.egg-info/requires.txt
+[1.478s] writing top-level names to ../build/py_pubsub/py_pubsub.egg-info/top_level.txt
+[1.555s] reading manifest file '../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[1.571s] writing manifest file '../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[1.582s] running build
+[1.585s] running build_py
+[1.589s] creating /opt/ros/dev_ws/src/build/py_pubsub/build
+[1.609s] creating /opt/ros/dev_ws/src/build/py_pubsub/build/lib
+[1.620s] creating /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub
+[1.625s] copying py_pubsub/__init__.py -> /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub
+[1.638s] copying py_pubsub/publisher_member_function.py -> /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub
+[1.685s] copying py_pubsub/subscriber_member_function.py -> /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub
+[1.703s] running install
+[1.709s] running install_lib
+[1.713s] creating /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[1.724s] copying /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub/__init__.py -> /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[1.734s] copying /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub/publisher_member_function.py -> /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[1.742s] copying /opt/ros/dev_ws/src/build/py_pubsub/build/lib/py_pubsub/subscriber_member_function.py -> /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[1.751s] byte-compiling /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/__init__.py to __init__.cpython-38.pyc
+[1.774s] byte-compiling /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/publisher_member_function.py to publisher_member_function.cpython-38.pyc
+[1.790s] byte-compiling /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/subscriber_member_function.py to subscriber_member_function.cpython-38.pyc
+[1.803s] running install_data
+[1.817s] running install_egg_info
+[1.822s] Copying ../build/py_pubsub/py_pubsub.egg-info to /opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages/py_pubsub-0.0.0-py3.8.egg-info
+[1.854s] running install_scripts
+[1.857s] Installing listener script to /opt/ros/dev_ws/src/install/py_pubsub/lib/py_pubsub
+[1.864s] Installing talker script to /opt/ros/dev_ws/src/install/py_pubsub/lib/py_pubsub
+[1.879s] writing list of installed files to '/opt/ros/dev_ws/src/build/py_pubsub/install.log'
+[2.132s] Invoked command in '/opt/ros/dev_ws/src/py_pubsub' returned '0': PYTHONPATH=/opt/ros/dev_ws/src/install/py_pubsub/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/py_pubsub build --build-base /opt/ros/dev_ws/src/build/py_pubsub/build install --prefix /opt/ros/dev_ws/src/install/py_pubsub --record /opt/ros/dev_ws/src/build/py_pubsub/install.log --single-version-externally-managed

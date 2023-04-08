@@ -1,0 +1,38 @@
+[1.135s] Invoking command in '/opt/ros/dev_ws/src/pid': PYTHONPATH=/opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/pid build --build-base /opt/ros/dev_ws/src/build/pid/build install --prefix /opt/ros/dev_ws/src/install/pid --record /opt/ros/dev_ws/src/build/pid/install.log --single-version-externally-managed
+[1.252s] running egg_info
+[1.258s] writing ../build/pid/pid.egg-info/PKG-INFO
+[1.263s] writing dependency_links to ../build/pid/pid.egg-info/dependency_links.txt
+[1.277s] writing entry points to ../build/pid/pid.egg-info/entry_points.txt
+[1.292s] writing requirements to ../build/pid/pid.egg-info/requires.txt
+[1.299s] writing top-level names to ../build/pid/pid.egg-info/top_level.txt
+[1.337s] reading manifest file '../build/pid/pid.egg-info/SOURCES.txt'
+[1.363s] writing manifest file '../build/pid/pid.egg-info/SOURCES.txt'
+[1.379s] running build
+[1.387s] running build_py
+[1.397s] creating /opt/ros/dev_ws/src/build/pid/build
+[1.401s] creating /opt/ros/dev_ws/src/build/pid/build/lib
+[1.405s] creating /opt/ros/dev_ws/src/build/pid/build/lib/pid
+[1.429s] copying pid/__init__.py -> /opt/ros/dev_ws/src/build/pid/build/lib/pid
+[1.469s] copying pid/pid.py -> /opt/ros/dev_ws/src/build/pid/build/lib/pid
+[1.507s] copying pid/test.py -> /opt/ros/dev_ws/src/build/pid/build/lib/pid
+[1.533s] running install
+[1.539s] running install_lib
+[1.548s] creating /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid
+[1.556s] copying /opt/ros/dev_ws/src/build/pid/build/lib/pid/__init__.py -> /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid
+[1.583s] copying /opt/ros/dev_ws/src/build/pid/build/lib/pid/pid.py -> /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid
+[1.611s] copying /opt/ros/dev_ws/src/build/pid/build/lib/pid/test.py -> /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid
+[1.647s] byte-compiling /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/__init__.py to __init__.cpython-38.pyc
+[1.678s] byte-compiling /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/pid.py to pid.cpython-38.pyc
+[1.695s] byte-compiling /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/test.py to test.cpython-38.pyc
+[1.698s] running install_data
+[1.702s]   File "/opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid/test.py", line 5
+[1.707s]     const int trigPin = 9;
+[1.714s]           ^
+[1.719s] SyntaxError: invalid syntax
+[1.724s] 
+[1.732s] running install_egg_info
+[1.742s] Copying ../build/pid/pid.egg-info to /opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages/pid-0.0.0-py3.8.egg-info
+[1.853s] running install_scripts
+[1.873s] Installing pid script to /opt/ros/dev_ws/src/install/pid/lib/pid
+[1.876s] writing list of installed files to '/opt/ros/dev_ws/src/build/pid/install.log'
+[1.925s] Invoked command in '/opt/ros/dev_ws/src/pid' returned '0': PYTHONPATH=/opt/ros/dev_ws/src/install/pid/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/pid build --build-base /opt/ros/dev_ws/src/build/pid/build install --prefix /opt/ros/dev_ws/src/install/pid --record /opt/ros/dev_ws/src/build/pid/install.log --single-version-externally-managed
