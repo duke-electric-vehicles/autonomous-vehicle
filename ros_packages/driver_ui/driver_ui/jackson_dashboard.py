@@ -60,8 +60,8 @@ class DriverUI(Node):
         self.SCREEN_WIDTH = 480
         self.SCREEN_HEIGHT = 800
 
-        self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
-        # self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        # self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
+        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
         pygame.display.set_caption("Driver Dashboard")
 
