@@ -30,6 +30,8 @@ RUN apt-get install -y ros-foxy-rqt*
 RUN pip3 install Cython
 RUN pip3 install sbp
 RUN pip3 install numpy --upgrade
+RUN pip3 install opencv-python
+RUN pip3 install opencv-python-headless
 
 # install overlay dependencies
 ARG OVERLAY_WS
