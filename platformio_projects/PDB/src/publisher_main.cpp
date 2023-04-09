@@ -194,7 +194,11 @@ void setup() {
   
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH);  
-  delay(2000);
+
+  while (rmw_uros_ping_agent(100, 5) != RMW_RET_OK) {
+    digitalWrite(LED_PIN, !digitalRead(LED_PIN));
+    delay(300);
+  }
 
   allocator = rcl_get_default_allocator();
 
