@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <micro_ros_platformio.h>
+#include <micro_ros_arduino.h>
 #include <SPI.h>
 #include <SD.h>
 #include <INA190.cpp>
@@ -189,8 +189,8 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 
 void setup() {
   // data_setup(); // Initialize data logging
-  Serial.begin(115200);
-  set_microros_serial_transports(Serial); // Initialize micro-ROS transports
+  // Serial.begin(115200);
+  set_microros_transports(); // Initialize micro-ROS transports
   
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH);  
