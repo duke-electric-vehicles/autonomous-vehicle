@@ -12,6 +12,7 @@ import threading
 import cv2
 import numpy as np
 import sys
+from std_msgs.msg import Float64
 
 class DriverUI(Node):
 
@@ -39,13 +40,27 @@ class DriverUI(Node):
         # )
 
         # rtk
-        self.subscription = self.create_subscription(
+        self.subscription = self.create_subscription
+        (
             GeoPoint, "rtk_pos", self.position_callback, 10
         )
 
-        self.subscription = self.create_subscription(
+        self.subscription = self.create_subscription
+        (
             Vector3, "rtk_vel", self.speed_callback, 10
         )
+
+        self.subscription = self.create_subscription
+        (
+            Float64, "pdb_current", self.current_callback, 10
+        )
+
+        self.subscription = self.create_subscription
+        (
+            Float64, "pdb_voltage", self.voltage_callback, 10
+        )
+
+
 
         self.subscription
         pygame.init()
@@ -95,6 +110,15 @@ class DriverUI(Node):
         self.start_ros_thread()
          # Number of speed values to average
 
+
+    def current_callback(self, msg):
+        self.current = msg.current
+    
+    def current_callback(self, msg):
+        self.current = msg.pdb_current
+    
+    def voltage_callback(self, msg):
+        self.current = msg.pdb_voltage
 
     # def generate_random_data(self):
     #     self.lat += random.uniform(-0.0005, 0.0005)
