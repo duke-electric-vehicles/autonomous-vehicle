@@ -5,7 +5,7 @@
 
 
 const int SAMPLES = 100000;
-INA190 currSense(21);
+INA190 currSense(22);
 
 float calculateMean(const std::vector<float>& samples) {
   int sampleSize = samples.size();

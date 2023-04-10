@@ -4,20 +4,6 @@
 #include <NEO6M.cpp>
 #include <algorithm>
 #include <vector>
-#include "DataCollection.h"
-
-
-
-
-
-
-
-
-
-
-
-
-
 #include <FastLED.h>
 
 // Define the number of LEDs and the data output pin
@@ -38,14 +24,14 @@ void cycleLED(){
   FastLED.show();
   
   // Wait for a short period of time before updating the colors again
-  delayMicroseconds(1000000 / 240); // 240Hz
+  delayMicroseconds(1000000 / 480); // 480 Hz
 }
 
 
 // Sensors and device mapping
-const int CURRENT_SENSE_PIN = 21;//21;
+const int CURRENT_SENSE_PIN = 22;
 const int HALL_INPUT_PIN = 26;
-const int VBAT_INPUT_PIN = 17;
+const int VBAT_INPUT_PIN = 14;
 const int LED_DIN_PIN = 33;
 
 // Comms
@@ -56,33 +42,22 @@ const int TX_PIN = 8;
 
 // Consts
 const float VBAT_GAIN = 10;
-const float VBAT_COMPENSATION = 0.93;
+const float VBAT_COMPENSATION = 1.0;//0.93;
 const int updateRate = 5;   // in Hz
 
+float current = 0;
+float voltage = 0;
+float power = 0;
 // Sensors and devices
-// INA190 currSense(CURRENT_SENSE_PIN);  // pin 21, R = 1mOhm
+INA190 currSense(CURRENT_SENSE_PIN);  // pin 21, R = 1mOhm
 NEO6M gps; 
 
 // Replace these with your sensor reading functions
 double getVoltage() { 
-  int samples = 10;
-
-  float sum = 0;
-  for(int i = 0; i < samples; i++){
-    int voltageIn = analogRead(VBAT_INPUT_PIN);
-    float batteryVoltage = voltageIn * VBAT_GAIN *  (3.3 / 1023);
-    sum += batteryVoltage;
-  }
-  return VBAT_COMPENSATION * (sum / samples); 
-}
-
-double getVoltage_MD() {
   const int samples = 1000; /*calculated sample size based on 1% margin of error and desired confidence level*/;
   std::vector<float> sampleData(samples);
 
-  for (int i = 0; i < samples; i++) {
-    sampleData[i] = getVoltage();
-  }
+  for (int i = 0; i < samples; i++) { sampleData[i] = getVoltage(); }
 
   std::sort(sampleData.begin(), sampleData.end());
   float median;
@@ -96,21 +71,7 @@ double getVoltage_MD() {
   return VBAT_COMPENSATION * static_cast<double>(median);
 }
 
-
-
-
-
-double getCurrent() { 
-  // int samples = 10;
-  // float sum = 0;
-  // for(int i = 0; i < samples; i++){
-  //   sum += currSense.getCurrent();
-  // }
-  // return (sum / samples ); 
-  return -1000.0;
-}
-
-double getCurrent_MD() {
+double getCurrent() {
   const int samples = 1000; /*calculated sample size based on 1% margin of error and desired confidence level*/;
   std::vector<float> sampleData(samples);
 
@@ -126,12 +87,12 @@ double getCurrent_MD() {
   } else {
     median = sampleData[samples / 2];
   }
-
+  
   return static_cast<double>(median);
 }
 
 double getPower() {
-  return currSense.getCurrent() * getVoltage(); 
+  return current*voltage; 
 }
 
 double getVelocity() { return 0; }  // determined by hall sensor
@@ -202,35 +163,24 @@ void logData() {
 }
 
 void setup() {  
-  // Serial.begin(9600);
-  // while (!Serial) {
-  //   ;
-  // }
-
   // Initialize the FastLED library
   FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
   FastLED.setBrightness(64); // Set the brightness of the LEDs (0-255)
 
   // initSD();
   // gps.initialize();
-
-  // collectData();
-
 }
 
 // primary function here is to update and log dataplayo
 void loop() { 
+  voltage = getVoltage();
+  current = getCurrent();
+  power = getPower();
 
+  Serial.print("VOLTAGE = "); Serial.println(voltage, 4);
+  Serial.print("CURRENT = "); Serial.println(current, 4);
+  Serial.print("CURRENT = "); Serial.println(power, 4);
 
-  Serial.print("VOLTAGE = "); Serial.println(getVoltage_MD(), 4);
-  Serial.print("CURRENT = "); Serial.println(getCurrent_MD(), 4);
-  // Serial.print("POWER = "); Serial.println(getPower(), 4);
-
-  // // gps.update();
-  delay(200);
+  // delay(500);
   cycleLED();
 }
-
-// Create a CRGB array to store the color values for each LED
-
-
