@@ -16,17 +16,6 @@ services:
     container_name: 'dev'
     privileged: true
     network_mode: host
-  uros:
-    build:
-      context: .
-      dockerfile: Dockerfile.Uros
-    volumes:
-      - /dev:/dev
-    image: 'uros'
-    tty: true
-    stdin_open: true
-    container_name: 'uros'
-    privileged: true
   lsp:
     build:
       context: .
