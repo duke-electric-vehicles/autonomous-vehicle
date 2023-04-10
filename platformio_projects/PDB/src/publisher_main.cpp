@@ -200,6 +200,8 @@ void setup() {
     delay(300);
   }
 
+  digitalWrite(LED_PIN, LOW);  
+
   allocator = rcl_get_default_allocator();
 
   // Initialize micro-ROS
