@@ -10,7 +10,6 @@ services:
       - /dev:/dev
       - ./.bashrc-docker:/root/.bashrc
       - ./ros_packages/:/opt/ros/dev_ws/src
-      - ./platformio_projects:/opt/ros/dev_ws/pio_projs
     image: 'dev_image:foxy'
     tty: true
     stdin_open: true
