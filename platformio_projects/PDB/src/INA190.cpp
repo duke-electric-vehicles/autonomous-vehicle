@@ -1,24 +1,12 @@
-#include <Arduino.h>
+#include "INA190.hpp"
 
-/**
- * Code for the TI-INA190 current sense amplifier IC.
- **/
-class INA190 {
-    private:
-        static const int GAIN = 100; // in V/V
-        int pin;
-        int Rshunt;
+INA190::INA190(int pin) {
+    this->pin = pin;
+}
 
-    public:
-        INA190(int pin, float shuntResistance){
-            this->pin = pin;
-            this->Rshunt = shuntResistance;
-        }
-
-        float getCurrent(){
-            int analogIn = analogRead(pin);                     // read ADC
-            float analogVoltage = analogIn * (3.3 / 1023.0);      // ADC counts to V
-            float current = (analogVoltage * GAIN) / Rshunt;    // Ohm's law calculation
-            return current;
-        }
-};
+float INA190::getCurrent() {
+    int analogIn = analogRead(pin);
+    float shuntVoltage = analogIn * (3.3 / 1023.0);// * (1/SENSE_GAIN);
+    float current = shuntVoltage * 10;// / R_SHUNT ;
+    return current;
+}
