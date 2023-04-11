@@ -111,13 +111,10 @@ class DriverUI(Node):
         # Number of speed values to average
 
     def current_callback(self, msg):
-        self.current = msg.current
-    
-    def current_callback(self, msg):
-        self.current = msg.pdb_current
+        self.current = msg.data
     
     def voltage_callback(self, msg):
-        self.current = msg.pdb_voltage
+        self.voltage = msg.data
 
     # def generate_random_data(self):
     #     self.lat += random.uniform(-0.0005, 0.0005)
