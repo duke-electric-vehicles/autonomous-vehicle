@@ -14,14 +14,10 @@ import numpy as np
 import sys
 from std_msgs.msg import Float64
 
+#TODO
+#remove threading to see if subscriber works
+
 class DriverUI(Node):
-
-    def start_ros_thread(self):
-        def ros_spin():
-            rclpy.spin(self)
-
-        self.ros_thread = threading.Thread(target=ros_spin)
-        self.ros_thread.start()
 
     def create_button(self, text, x, y, w, h, color, text_color):
         button = pygame.Rect(x, y, w, h)
@@ -35,16 +31,20 @@ class DriverUI(Node):
         super().__init__("driver_ui")
 
         #data sim
-        # self.subscription = self.create_subscription(
-        #     GeoPoint, "gps_data_sim", self.position_callback_speed, 10
-        # )
-
+        self.create_subscription
+        (
+            GeoPoint, "gps_data_sim", self.voltage_callback, 10
+        )
+        self.create_subscription(
+            GeoPoint, "gps_data_sim", self.position_callback_speed, 10
+        )
         # rtk
+        '''
         self.subscription = self.create_subscription
         (
             GeoPoint, "rtk_pos", self.position_callback, 10
         )
-
+        
         self.subscription = self.create_subscription
         (
             Vector3, "rtk_vel", self.speed_callback, 10
@@ -54,15 +54,8 @@ class DriverUI(Node):
         (
             Float64, "pdb_current", self.current_callback, 10
         )
-
-        self.subscription = self.create_subscription
-        (
-            Float64, "pdb_voltage", self.voltage_callback, 10
-        )
-
-
-
-        self.subscription
+        '''
+        
         pygame.init()
 
         self.BLACK = (0, 0, 0)
@@ -103,19 +96,14 @@ class DriverUI(Node):
         self.cumulative_distance = 0.0
         self.speed_values = []
         self.speed_buffer_size = 5
-        self.show_camera = False
-        self.camera_thread = None
+        #self.show_camera = False
+        #self.camera_thread = None
         self.voltage = 0.0
         self.current = 0.0
-        self.start_ros_thread()
+        #self.start_ros_thread()
          # Number of speed values to average
-
-
-    def current_callback(self, msg):
-        self.current = msg.data
-    
-    def voltage_callback(self, msg):
-        self.voltage = msg.data
+        timer_period = 1/60
+        self.timer = self.create_timer(timer_period, self.run)
 
     # def generate_random_data(self):
     #     self.lat += random.uniform(-0.0005, 0.0005)
@@ -126,6 +114,7 @@ class DriverUI(Node):
         if self.prev_lat is not None and self.prev_lon is not None:
             current_lat = msg.latitude
             current_lon = msg.longitude
+            print(current_lon)
             current_timestamp = datetime.now()
 
             self.distance = self.calculate_distance(
@@ -157,6 +146,8 @@ class DriverUI(Node):
         if self.prev_lat is not None and self.prev_lon is not None:
                 current_lat = msg.latitude
                 current_lon = msg.longitude
+                print(current_lat)
+                print(current_lon)
                 current_timestamp = datetime.now()
 
                 self.distance = self.calculate_distance(
@@ -185,7 +176,12 @@ class DriverUI(Node):
 
         self.speed = (sum(self.speed_values) / len(self.speed_values)) * 2.23694
 
-
+    def current_callback(self, msg):
+        self.current = msg.data
+    
+    def voltage_callback(self, msg):
+        self.voltage = msg.longitude
+        print(self.voltage)
 
     def calculate_distance(self, lat1, lon1, lat2, lon2):
         radius_earth = 6371  # km
@@ -201,18 +197,6 @@ class DriverUI(Node):
         c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
         d = radius_earth * c
         return d
-    
-    def initialize_camera(self):
-        self.cap = cv2.VideoCapture(0)
-
-    def display_camera(self):
-        ret, frame = self.cap.read()  # Read a frame from the camera
-        if ret:
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert the frame to RGB
-            frame = cv2.flip(frame, 1)  # Flip the frame horizontally
-            frame = np.rot90(frame)  # Rotate the frame 90 degrees counter-clockwise
-            frame = pygame.surfarray.make_surface(frame)  # Convert the frame to a Pygame surface
-            self.screen.blit(frame, (0, 0))  # Draw the frame on the screen
 
     def draw_text(self, text, font, color, x, y):
         text_surface = font.render(text, True, color)
@@ -267,163 +251,109 @@ class DriverUI(Node):
     def draw_center_circle(self, x, y, radius, color):
         pygame.draw.circle(self.screen, color, (x, y), radius)
 
-    def stop_camera_feed(self):
-        if self.cap:
-            self.cap.release()
-        if self.camera_thread:
-            self.camera_thread.join()
-            self.camera_thread = None
-
-
-
-
     def run(self):
-        self.initialize_camera()
+        #self.initialize_camera()
+        self.screen.fill(self.BLACK)
 
-        # start_button = self.create_button("Start", 0, 700, 160, 100, self.BLUE, self.WHITE)
-        # stop_button = self.create_button("Stop", 160, 700, 160, 100, self.RED, self.WHITE)
-        # reset_button = self.create_button("Reset", 320, 700, 160, 100, self.GREEN, self.WHITE)
+        start_button = self.create_button("Start", 0, 700, 160, 100, self.BLUE, self.WHITE)
+        stop_button = self.create_button("Stop", 160, 700, 160, 100, self.RED, self.WHITE)
+        reset_button = self.create_button("Reset", 320, 700, 160, 100, self.GREEN, self.WHITE)
 
-        done = False
-        while not done:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    done = True
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_s and not self.running:
-                        if self.start_time is None:
-                            self.start_time = time.time()
-                        else:
-                            self.start_time = (
-                                time.time() - (self.stop_time - self.start_time)
-                            )
-                        self.running = True
-                    elif event.key == pygame.K_s and self.running:
-                        self.stop_time = time.time()
-                        self.running = False
-                    elif event.key == pygame.K_r:
-                        self.start_time = None
-                        self.stop_time = None
-                        self.running = False
-                    elif event.key == pygame.K_c:
-                        self.show_camera = not self.show_camera
-                        if self.show_camera:
-                            self.camera_thread = threading.Thread(target=self.show_camera)
-                            self.camera_thread.start()
-                        else:
-                            self.stop_camera_feed()
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    mouse_pos = pygame.mouse.get_pos()
-                    if start_button.collidepoint(mouse_pos) and not self.running:
-                        if self.start_time is None:
-                            self.start_time = time.time()
-                        else:
-                            self.start_time = (
-                                time.time() - (self.stop_time - self.start_time)
-                            )
-                        self.running = True
-                    elif stop_button.collidepoint(mouse_pos) and self.running:
-                        self.stop_time = time.time()
-                        self.running = False
-                    elif reset_button.collidepoint(mouse_pos):
-                        self.start_time = None
-                        self.stop_time = None
-                        self.running = False
+        self.draw_text("Driver Dashboard", self.font_large, self.WHITE, 100, 25)
 
-            if self.show_camera:
-                cover_color = (0, 0, 0)
-                cover_rect = pygame.Rect(0, 0, self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
-                pygame.draw.rect(self.screen, cover_color, cover_rect)
-                self.draw_text("NO CAMERA DETECTED", self.font_large, self.RED, 50, 200)
-                self.display_camera()
-                self.draw_text("Camera Display", self.font_large, self.WHITE, 100, 600)
+        stopwatch_y = 100
+        if self.running:
+            elapsed_time = time.time() - self.start_time
+        else:
+            elapsed_time = (
+                self.stop_time - self.start_time
+                if self.start_time is not None and self.stop_time is not None
+                else 0
+            )
+        minutes = int(elapsed_time // 60)
+        seconds = int(elapsed_time % 60)
+        milliseconds = int((elapsed_time % 1) * 1000)
+        stopwatch_text = "Time: " + f"{minutes:02d}:{seconds:02d}:{milliseconds:03d}"
+        self.draw_text(stopwatch_text, self.font_large, self.WHITE, 120, stopwatch_y)
+        self.draw_text("Lat: " + f"{self.lat:.5f}", self.font_large, self.WHITE, 40, stopwatch_y + 70)
+        self.draw_text("Lon: " + f"{self.lon:.5f}", self.font_large, self.WHITE, 260, stopwatch_y + 70)
 
-            else:
-                # self.screen.fill(self.BLACK)
-
-                # self.generate_random_data()
-                self.screen.fill(self.BLACK)
-
-                
-
-                self.draw_text("Driver Dashboard", self.font_large, self.WHITE, 100, 25)
-
-                stopwatch_y = 100
-                if self.running:
-                    elapsed_time = time.time() - self.start_time
-                else:
-                    elapsed_time = (
-                        self.stop_time - self.start_time
-                        if self.start_time is not None and self.stop_time is not None
-                        else 0
-                    )
-                minutes = int(elapsed_time // 60)
-                seconds = int(elapsed_time % 60)
-                milliseconds = int((elapsed_time % 1) * 1000)
-                stopwatch_text = "Time: " + f"{minutes:02d}:{seconds:02d}:{milliseconds:03d}"
-                self.draw_text(stopwatch_text, self.font_large, self.WHITE, 120, stopwatch_y)
-                self.draw_text("Lat: " + f"{self.lat:.5f}", self.font_large, self.WHITE, 40, stopwatch_y + 70)
-                self.draw_text("Lon: " + f"{self.lon:.5f}", self.font_large, self.WHITE, 260, stopwatch_y + 70)
-
-                self.draw_text("V: " + f"{self.voltage:.2f}", self.font_large, self.WHITE, 10, 385)
-                self.draw_text("I: " + f"{self.current:.2f}", self.font_large, self.WHITE, 370, 385)
+        self.draw_text("V: " + f"{self.voltage:.2f}", self.font_large, self.WHITE, 10, 385)
+        self.draw_text("I: " + f"{self.current:.2f}", self.font_large, self.WHITE, 370, 385)
 
 
 
 
-                # speed_y = 300
-                # self.draw_text(
-                #     f"{self.speed:.2f} MPH", self.font_xlarge, self.WHITE, 50, speed_y
-                # )
+        # speed_y = 300
+        # self.draw_text(
+        #     f"{self.speed:.2f} MPH", self.font_xlarge, self.WHITE, 50, speed_y
+        # )
 
-                            # ...
+                    # ...
 
-                # Speed Gauge
-                gauge_x = self.SCREEN_WIDTH // 2
-                gauge_y = 400
-                gauge_radius = 110
-                max_speed_value = 20  # Set the maximum speed value for the gauge
-                
-                self.draw_needle(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.RED)
+        # Speed Gauge
+        gauge_x = self.SCREEN_WIDTH // 2
+        gauge_y = 400
+        gauge_radius = 110
+        max_speed_value = 20  # Set the maximum speed value for the gauge
+        
+        self.draw_needle(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.RED)
 
-                center_radius = 75
-                self.draw_center_circle(gauge_x, gauge_y, center_radius, self.BLACK)
-                self.draw_gauge(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.WHITE, self.font_large)
+        center_radius = 75
+        self.draw_center_circle(gauge_x, gauge_y, center_radius, self.BLACK)
+        self.draw_gauge(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.WHITE, self.font_large)
 
-                # ...
+        self.draw_cumulative_distance()
+        self.draw_progress_bar(self.cumulative_distance * 0.621371, 10)
 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_s and not self.running:
+                    if self.start_time is None:
+                        self.start_time = time.time()
+                    else:
+                        self.start_time = (
+                            time.time() - (self.stop_time - self.start_time)
+                        )
+                    self.running = True
+                elif event.key == pygame.K_s and self.running:
+                    self.stop_time = time.time()
+                    self.running = False
+                elif event.key == pygame.K_r:
+                    self.start_time = None
+                    self.stop_time = None
+                    self.running = False
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                if start_button.collidepoint(mouse_pos) and not self.running:
+                    if self.start_time is None:
+                        self.start_time = time.time()
+                    else:
+                        self.start_time = (
+                            time.time() - (self.stop_time - self.start_time)
+                        )
+                    self.running = True
+                elif stop_button.collidepoint(mouse_pos) and self.running:
+                    self.stop_time = time.time()
+                    self.running = False
+                elif reset_button.collidepoint(mouse_pos):
+                    self.start_time = None
+                    self.stop_time = None
+                    self.running = False
 
-                # if self.running:
-                #     current_distance = self.calculate_distance(
-                #         self.lat, self.lon, self.lat + 0.001, self.lon + 0.001
-                #     )
-                #     self.distance += current_distance
-
-                self.draw_cumulative_distance()
-                self.draw_progress_bar(self.cumulative_distance * 0.621371, 10)
-
-                # rotated_screen = pygame.transform.rotate(self.screen, -90)
-                # self.screen.blit(rotated_screen, (0, 0))
-
-            start_button = self.create_button("Start", 0, 700, 160, 100, self.GREEN, self.WHITE)
-            stop_button = self.create_button("Stop", 160, 700, 160, 100, self.RED, self.WHITE)
-            reset_button = self.create_button("Reset", 320, 700, 160, 100, self.BLUE, self.WHITE)
-
-            pygame.display.flip()
-
-        self.cap.release()
-        pygame.quit()
+        pygame.display.update()
 
 def main(args=None):
     rclpy.init(args=args)
 
     driver_ui = DriverUI()
-    driver_ui.run()
 
-    # rclpy.spin(driver_ui)
+    rclpy.spin(driver_ui)
 
     driver_ui.destroy_node()
     rclpy.shutdown()
