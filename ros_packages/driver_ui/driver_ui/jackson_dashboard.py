@@ -31,30 +31,16 @@ class DriverUI(Node):
         super().__init__("driver_ui")
 
         #data sim
-        self.create_subscription
-        (
-            GeoPoint, "gps_data_sim", self.voltage_callback, 10
-        )
-        self.create_subscription(
-            GeoPoint, "gps_data_sim", self.position_callback_speed, 10
-        )
+        self.subscriber1 = self.create_subscription(Float64, "pdb_voltage", self.voltage_callback, 10)
+        self.subscriber2 = self.create_subscription(GeoPoint, "gps_data_sim", self.position_callback_speed, 10)
         # rtk
-        '''
-        self.subscription = self.create_subscription
-        (
-            GeoPoint, "rtk_pos", self.position_callback, 10
-        )
         
-        self.subscription = self.create_subscription
-        (
-            Vector3, "rtk_vel", self.speed_callback, 10
-        )
+        self.subscription = self.create_subscription(GeoPoint, "rtk_pos", self.position_callback, 10)
+        
+        self.subscription = self.create_subscription(Vector3, "rtk_vel", self.speed_callback, 10)
 
-        self.subscription = self.create_subscription
-        (
-            Float64, "pdb_current", self.current_callback, 10
-        )
-        '''
+        self.subscription = self.create_subscription(Float64, "pdb_current", self.current_callback, 10)
+        
         
         pygame.init()
 
@@ -180,7 +166,7 @@ class DriverUI(Node):
         self.current = msg.data
     
     def voltage_callback(self, msg):
-        self.voltage = msg.longitude
+        self.voltage = msg.data
         print(self.voltage)
 
     def calculate_distance(self, lat1, lon1, lat2, lon2):
