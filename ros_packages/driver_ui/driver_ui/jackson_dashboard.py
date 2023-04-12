@@ -31,7 +31,6 @@ class DriverUI(Node):
         super().__init__("driver_ui")
 
         #data sim
-        self.create_subscription(Float64, "pdb_voltage", self.voltage_callback, 10)
         self.create_subscription(GeoPoint, "gps_data_sim", self.position_callback_speed, 10)
         # rtk
         
@@ -40,6 +39,7 @@ class DriverUI(Node):
         self.create_subscription(Vector3, "rtk_vel", self.speed_callback, 10)
 
         self.create_subscription(Float64, "pdb_current", self.current_callback, 10)
+        self.create_subscription(Float64, "pdb_voltage", self.voltage_callback, 10)
         
         
         pygame.init()
@@ -130,11 +130,9 @@ class DriverUI(Node):
 
     def position_callback(self, msg):
         if self.prev_lat is not None and self.prev_lon is not None:
-                current_lat = msg.latitude
-                current_lon = msg.longitude
-                print(current_lat)
-                print(current_lon)
-                current_timestamp = datetime.now()
+            current_lat = msg.latitude
+            current_lon = msg.longitude
+            current_timestamp = datetime.now()
 
             self.distance = self.calculate_distance(
                 self.prev_lat, self.prev_lon, current_lat, current_lon
@@ -262,14 +260,12 @@ class DriverUI(Node):
         self.draw_text("V: " + f"{self.voltage:.2f}", self.font_large, self.WHITE, 10, 385)
         self.draw_text("I: " + f"{self.current:.2f}", self.font_large, self.WHITE, 370, 385)
 
-
-
-                self.draw_text(
-                    "V: " + f"{self.voltage:.2f}", self.font_large, self.WHITE, 10, 385
-                )
-                self.draw_text(
-                    "I: " + f"{self.current:.2f}", self.font_large, self.WHITE, 370, 385
-                )
+        self.draw_text(
+            "V: " + f"{self.voltage:.2f}", self.font_large, self.WHITE, 10, 385
+        )
+        self.draw_text(
+            "I: " + f"{self.current:.2f}", self.font_large, self.WHITE, 370, 385
+        )
 
         # speed_y = 300
         # self.draw_text(
