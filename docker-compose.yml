@@ -30,7 +30,7 @@ services:
     image: 'pio_image:foxy'
     tty: true
     stdin_open: true
-    container_name: 'dev'
+    container_name: 'piobuilder'
     privileged: true
     network_mode: host
   lsp:
