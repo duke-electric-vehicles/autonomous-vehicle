@@ -14,11 +14,11 @@ import numpy as np
 import sys
 from std_msgs.msg import Float64
 
-#TODO
-#remove threading to see if subscriber works
+# TODO
+# remove threading to see if subscriber works
+
 
 class DriverUI(Node):
-
     def create_button(self, text, x, y, w, h, color, text_color):
         button = pygame.Rect(x, y, w, h)
         pygame.draw.rect(self.screen, color, button)
@@ -30,18 +30,19 @@ class DriverUI(Node):
     def __init__(self):
         super().__init__("driver_ui")
 
-        #data sim
-        self.create_subscription(GeoPoint, "gps_data_sim", self.position_callback_speed, 10)
+        # data sim
+        self.create_subscription(
+            GeoPoint, "gps_data_sim", self.position_callback_speed, 10
+        )
         # rtk
-        
+
         self.create_subscription(GeoPoint, "rtk_pos", self.position_callback, 10)
-        
+
         self.create_subscription(Vector3, "rtk_vel", self.speed_callback, 10)
 
         self.create_subscription(Float64, "pdb_current", self.current_callback, 10)
         self.create_subscription(Float64, "pdb_voltage", self.voltage_callback, 10)
-        
-        
+
         pygame.init()
 
         self.BLACK = (0, 0, 0)
@@ -82,13 +83,13 @@ class DriverUI(Node):
         self.cumulative_distance = 0.0
         self.speed_values = []
         self.speed_buffer_size = 5
-        #self.show_camera = False
-        #self.camera_thread = None
+        # self.show_camera = False
+        # self.camera_thread = None
         self.voltage = 0.0
         self.current = 0.0
-        #self.start_ros_thread()
-         # Number of speed values to average
-        timer_period = 1/60
+        # self.start_ros_thread()
+        # Number of speed values to average
+        timer_period = 1 / 60
         self.timer = self.create_timer(timer_period, self.run)
 
     # def generate_random_data(self):
@@ -162,10 +163,9 @@ class DriverUI(Node):
 
     def current_callback(self, msg):
         self.current = msg.data
-    
+
     def voltage_callback(self, msg):
         self.voltage = msg.data
-        print(self.voltage)
 
     def calculate_distance(self, lat1, lon1, lat2, lon2):
         radius_earth = 6371  # km
@@ -231,12 +231,18 @@ class DriverUI(Node):
         pygame.draw.circle(self.screen, color, (x, y), radius)
 
     def run(self):
-        #self.initialize_camera()
+        # self.initialize_camera()
         self.screen.fill(self.BLACK)
 
-        start_button = self.create_button("Start", 0, 700, 160, 100, self.BLUE, self.WHITE)
-        stop_button = self.create_button("Stop", 160, 700, 160, 100, self.RED, self.WHITE)
-        reset_button = self.create_button("Reset", 320, 700, 160, 100, self.GREEN, self.WHITE)
+        start_button = self.create_button(
+            "Start", 0, 700, 160, 100, self.BLUE, self.WHITE
+        )
+        stop_button = self.create_button(
+            "Stop", 160, 700, 160, 100, self.RED, self.WHITE
+        )
+        reset_button = self.create_button(
+            "Reset", 320, 700, 160, 100, self.GREEN, self.WHITE
+        )
 
         self.draw_text("Driver Dashboard", self.font_large, self.WHITE, 100, 25)
 
@@ -254,11 +260,27 @@ class DriverUI(Node):
         milliseconds = int((elapsed_time % 1) * 1000)
         stopwatch_text = "Time: " + f"{minutes:02d}:{seconds:02d}:{milliseconds:03d}"
         self.draw_text(stopwatch_text, self.font_large, self.WHITE, 120, stopwatch_y)
-        self.draw_text("Lat: " + f"{self.lat:.5f}", self.font_large, self.WHITE, 40, stopwatch_y + 70)
-        self.draw_text("Lon: " + f"{self.lon:.5f}", self.font_large, self.WHITE, 260, stopwatch_y + 70)
+        self.draw_text(
+            "Lat: " + f"{self.lat:.5f}",
+            self.font_large,
+            self.WHITE,
+            40,
+            stopwatch_y + 70,
+        )
+        self.draw_text(
+            "Lon: " + f"{self.lon:.5f}",
+            self.font_large,
+            self.WHITE,
+            260,
+            stopwatch_y + 70,
+        )
 
-        self.draw_text("V: " + f"{self.voltage:.2f}", self.font_large, self.WHITE, 10, 385)
-        self.draw_text("I: " + f"{self.current:.2f}", self.font_large, self.WHITE, 370, 385)
+        self.draw_text(
+            "V: " + f"{self.voltage:.2f}", self.font_large, self.WHITE, 10, 385
+        )
+        self.draw_text(
+            "I: " + f"{self.current:.2f}", self.font_large, self.WHITE, 370, 385
+        )
 
         self.draw_text(
             "V: " + f"{self.voltage:.2f}", self.font_large, self.WHITE, 10, 385
@@ -272,19 +294,29 @@ class DriverUI(Node):
         #     f"{self.speed:.2f} MPH", self.font_xlarge, self.WHITE, 50, speed_y
         # )
 
-                    # ...
+        # ...
 
         # Speed Gauge
         gauge_x = self.SCREEN_WIDTH // 2
         gauge_y = 400
         gauge_radius = 110
         max_speed_value = 20  # Set the maximum speed value for the gauge
-        
-        self.draw_needle(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.RED)
+
+        self.draw_needle(
+            gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.RED
+        )
 
         center_radius = 75
         self.draw_center_circle(gauge_x, gauge_y, center_radius, self.BLACK)
-        self.draw_gauge(gauge_x, gauge_y, gauge_radius, self.speed, max_speed_value, self.WHITE, self.font_large)
+        self.draw_gauge(
+            gauge_x,
+            gauge_y,
+            gauge_radius,
+            self.speed,
+            max_speed_value,
+            self.WHITE,
+            self.font_large,
+        )
 
         self.draw_cumulative_distance()
         self.draw_progress_bar(self.cumulative_distance * 0.621371, 10)
@@ -297,8 +329,8 @@ class DriverUI(Node):
                     if self.start_time is None:
                         self.start_time = time.time()
                     else:
-                        self.start_time = (
-                            time.time() - (self.stop_time - self.start_time)
+                        self.start_time = time.time() - (
+                            self.stop_time - self.start_time
                         )
                     self.running = True
                 elif event.key == pygame.K_s and self.running:
@@ -317,8 +349,8 @@ class DriverUI(Node):
                     if self.start_time is None:
                         self.start_time = time.time()
                     else:
-                        self.start_time = (
-                            time.time() - (self.stop_time - self.start_time)
+                        self.start_time = time.time() - (
+                            self.stop_time - self.start_time
                         )
                     self.running = True
                 elif stop_button.collidepoint(mouse_pos) and self.running:
