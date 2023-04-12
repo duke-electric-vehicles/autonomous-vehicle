@@ -30,8 +30,6 @@ RUN apt-get install -y ros-foxy-rqt*
 RUN pip3 install Cython
 RUN pip3 install sbp
 RUN pip3 install numpy --upgrade
-RUN pip3 install opencv-python
-RUN pip3 install opencv-python-headless
 
 # install overlay dependencies
 ARG OVERLAY_WS
@@ -54,9 +52,17 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
 RUN apt-get update
 RUN apt-get install -y curl
 
+RUN curl -fsSL https://deb.nodesource.com/setup_19.x | bash - &&\
+apt-get install -y nodejs
+
+RUN npm install -g pyright
+
 # source entrypoint setup
 ENV OVERLAY_WS $OVERLAY_WS
 ENV LANG C.UTF-8
 RUN sed --in-place --expression \
       '$isource "$OVERLAY_WS/install/setup.bash"' \
       /ros_entrypoint.sh
+
+
+CMD ["pyright-langserver", "--stdio"]

@@ -16,14 +16,25 @@ services:
     container_name: 'dev'
     privileged: true
     network_mode: host
-  uros:
+  piobuilder:
     build:
       context: .
-      dockerfile: Dockerfile-Uros
+      dockerfile: Dockerfile.PIO
+    environment:
+      - DISPLAY=${DISPLAY}
     volumes:
       - /dev:/dev
-    image: 'uros'
+      - ./.bashrc-docker:/root/.bashrc
+      - ./ros_packages/:/opt/ros/dev_ws/src
+      - ./platformio_projects/:/opt/ros/dev_ws/pio_projs
+    image: 'pio_image:foxy'
     tty: true
     stdin_open: true
-    container_name: 'uros'
+    container_name: 'piobuilder'
     privileged: true
+    network_mode: host
+  lsp:
+    build:
+      context: .
+      dockerfile: Dockerfile.LSP
+    image: "dev_image_lsp:foxy"

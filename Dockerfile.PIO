@@ -54,6 +54,9 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
 RUN apt-get update
 RUN apt-get install -y curl
 
+RUN curl -fsSL https://raw.githubusercontent.com/platformio/platformio-core-installer/master/get-platformio.py -o get-platformio.py
+RUN python3 get-platformio.py
+
 # source entrypoint setup
 ENV OVERLAY_WS $OVERLAY_WS
 ENV LANG C.UTF-8
