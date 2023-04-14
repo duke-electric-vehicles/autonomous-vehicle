@@ -276,17 +276,10 @@ class DriverUI(Node):
         )
 
         self.draw_text(
-            "V: " + f"{self.voltage:.2f}", self.font_large, self.WHITE, 10, 385
+            "V: " + f"{self.voltage:.1f}", self.font_large, self.WHITE, 10, 385
         )
         self.draw_text(
-            "I: " + f"{self.current:.2f}", self.font_large, self.WHITE, 370, 385
-        )
-
-        self.draw_text(
-            "V: " + f"{self.voltage:.2f}", self.font_large, self.WHITE, 10, 385
-        )
-        self.draw_text(
-            "I: " + f"{self.current:.2f}", self.font_large, self.WHITE, 370, 385
+            "I: " + f"{self.current:.1f}", self.font_large, self.WHITE, 370, 385
         )
 
         # speed_y = 300
