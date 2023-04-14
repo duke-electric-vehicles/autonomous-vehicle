@@ -7,7 +7,7 @@ from geographic_msgs.msg import GeoPoint
 class GpsSimulator(Node):
     def __init__(self):
         super().__init__("GpsSimulator")
-        self.publisher_ = self.create_publisher(GeoPoint, "gps_data_sim", 10)
+        self.publisher_ = self.create_publisher(GeoPoint, "rtk_pos", 10)
         timer_period = 0.05  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.f = open("/opt/ros/dev_ws/src/gps_sim/gps_sim/coordinates.txt", "r")

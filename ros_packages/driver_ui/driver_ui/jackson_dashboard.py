@@ -99,7 +99,7 @@ class DriverUI(Node):
         self.cumulative_distance = 0.0
         self.speed_values = []
         self.speed_buffer_size = 5
-        self.show_camera = False
+        self.show_camera = True
         self.camera_thread = None
         self.voltage = 0.0
         self.current = 0.0
@@ -185,7 +185,6 @@ class DriverUI(Node):
         self.speed = (sum(self.speed_values) / len(self.speed_values)) * 2.23694
 
 
-
     def calculate_distance(self, lat1, lon1, lat2, lon2):
         radius_earth = 6371  # km
         dlat = math.radians(lat2 - lat1)
@@ -210,8 +209,12 @@ class DriverUI(Node):
         if ret:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert the frame to RGB
             frame = cv2.flip(frame, 1)  # Flip the frame horizontally
+            #include all of the camera
+            frame = cv2.resize(frame, (480, 480))
             frame = np.rot90(frame)  # Rotate the frame 90 degrees counter-clockwise
             frame = pygame.surfarray.make_surface(frame)  # Convert the frame to a Pygame surface
+            #make outline on frame surf
+            pygame.draw.rect(frame, (0, 0, 255), frame.get_rect(), 5)
             self.screen.blit(frame, (0, 0))  # Draw the frame on the screen
 
     def draw_text(self, text, font, color, x, y):
@@ -336,10 +339,33 @@ class DriverUI(Node):
             if self.show_camera:
                 cover_color = (0, 0, 0)
                 cover_rect = pygame.Rect(0, 0, self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
+                
+                #stopwatch routine
+                stopwatch_y = 100
+                if self.running:
+                    elapsed_time = time.time() - self.start_time
+                else:
+                    elapsed_time = (
+                        self.stop_time - self.start_time
+                        if self.start_time is not None and self.stop_time is not None
+                        else 0
+                    )
+                minutes = int(elapsed_time // 60)
+                seconds = int(elapsed_time % 60)
+                milliseconds = int((elapsed_time % 1) * 1000)
+                stopwatch_text = f"{minutes:02d}:{seconds:02d}"
+                self.draw_text(stopwatch_text, self.font_large, self.WHITE, 120, stopwatch_y)
+                
+                #testing purposes
+                #self.speed = self.lon
+                #camera routine
                 pygame.draw.rect(self.screen, cover_color, cover_rect)
                 self.draw_text("NO CAMERA DETECTED", self.font_large, self.RED, 50, 200)
                 self.display_camera()
-                self.draw_text("Camera Display", self.font_large, self.WHITE, 100, 600)
+                self.draw_text("Scuffed Time", self.font_large, self.WHITE, 135, 500)
+                self.draw_text(stopwatch_text, self.font_xlarge, self.WHITE, 175, 550)
+                #self.draw_text("Scuffed Velocity", self.font_large, self.WHITE, 100, 600)
+                #self.draw_text(str(self.speed), self.font_large, self.WHITE, 125, 650)
 
             else:
                 # self.screen.fill(self.BLACK)
@@ -408,9 +434,9 @@ class DriverUI(Node):
                 # rotated_screen = pygame.transform.rotate(self.screen, -90)
                 # self.screen.blit(rotated_screen, (0, 0))
 
-            start_button = self.create_button("Start", 0, 700, 160, 100, self.GREEN, self.WHITE)
-            stop_button = self.create_button("Stop", 160, 700, 160, 100, self.RED, self.WHITE)
-            reset_button = self.create_button("Reset", 320, 700, 160, 100, self.BLUE, self.WHITE)
+            start_button = self.create_button("Start", 0, 625, 160, 175, self.GREEN, self.WHITE)
+            stop_button = self.create_button("Stop", 160, 625, 160, 175, self.RED, self.WHITE)
+            reset_button = self.create_button("Reset", 320, 625, 160, 175, self.BLUE, self.WHITE)
 
             pygame.display.flip()
 
