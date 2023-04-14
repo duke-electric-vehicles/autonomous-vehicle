@@ -179,8 +179,7 @@ class DriverUI():
                 pygame.draw.rect(self.screen, cover_color, cover_rect)
                 self.draw_text("NO CAMERA DETECTED", self.font_large, self.RED, 50, 200)
                 self.display_camera()
-                self.draw_text("Scuffed Time", self.font_large, self.WHITE, 135, 500)
-                self.draw_text(stopwatch_text, self.font_xlarge, self.WHITE, 175, 550)
+                self.draw_text(stopwatch_text, self.font_xlarge, self.WHITE, 135, 500)
                 #self.draw_text("Scuffed Velocity", self.font_large, self.WHITE, 100, 600)
                 #self.draw_text(str(self.speed), self.font_large, self.WHITE, 125, 650)
 
