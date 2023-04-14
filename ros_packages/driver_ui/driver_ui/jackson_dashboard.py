@@ -40,23 +40,19 @@ class DriverUI(Node):
         # )
 
         # rtk
-        self.subscription = self.create_subscription
-        (
+        self.subscription = self.create_subscription(
             GeoPoint, "rtk_pos", self.position_callback, 10
         )
 
-        self.subscription = self.create_subscription
-        (
+        self.subscription = self.create_subscription(
             Vector3, "rtk_vel", self.speed_callback, 10
         )
 
-        self.subscription = self.create_subscription
-        (
+        self.subscription = self.create_subscription(
             Float64, "pdb_current", self.current_callback, 10
         )
 
-        self.subscription = self.create_subscription
-        (
+        self.subscription = self.create_subscription(
             Float64, "pdb_voltage", self.voltage_callback, 10
         )
 
@@ -206,7 +202,8 @@ class DriverUI(Node):
         return d
     
     def initialize_camera(self):
-        self.cap = cv2.VideoCapture(0)
+        #raspberry pi index = 1
+        self.cap = cv2.VideoCapture(1)
 
     def display_camera(self):
         ret, frame = self.cap.read()  # Read a frame from the camera
@@ -371,8 +368,8 @@ class DriverUI(Node):
                 self.draw_text("Lat: " + f"{self.lat:.5f}", self.font_large, self.WHITE, 40, stopwatch_y + 70)
                 self.draw_text("Lon: " + f"{self.lon:.5f}", self.font_large, self.WHITE, 260, stopwatch_y + 70)
 
-                self.draw_text("V: " + f"{self.voltage:.2f}", self.font_large, self.WHITE, 10, 385)
-                self.draw_text("I: " + f"{self.current:.2f}", self.font_large, self.WHITE, 370, 385)
+                self.draw_text("V: " + f"{self.voltage:.1f}", self.font_large, self.WHITE, 10, 385)
+                self.draw_text("I: " + f"{self.current:.1f}", self.font_large, self.WHITE, 370, 385)
 
 
 
