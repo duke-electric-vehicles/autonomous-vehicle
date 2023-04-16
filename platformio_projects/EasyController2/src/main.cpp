@@ -1,3 +1,5 @@
+#include "IntervalTimer.h"
+#include "wiring.h"
 #include <Arduino.h>
 
 #define THROTTLE_PIN 15       // Throttle pin
@@ -19,13 +21,17 @@
 #define HALL_OVERSAMPLE 4     // Hall oversampling count. More on this in the getHalls() function
 
 uint8_t hallToMotor[8] = {255, 1, 3, 2, 5, 0, 4, 255};
+int32_t prev_throttle = 0;
+int32_t throttle = 0;
+
+IntervalTimer myTimer;
 
 // Forward declarations
 void identifyHalls();
 void writePWM(uint8_t motorState, uint8_t dutyCycle);
 void writePhases(uint8_t ah, uint8_t bh, uint8_t ch, uint8_t al, uint8_t bl, uint8_t cl);
 uint8_t getHalls();
-uint8_t readThrottle();
+void readThrottle();
 
 void setup() {                // The setup function is called ONCE on boot-up
   Serial.begin(115200);
@@ -48,12 +54,14 @@ void setup() {                // The setup function is called ONCE on boot-up
 
   pinMode(THROTTLE_PIN, INPUT);
   
+  myTimer.begin(readThrottle, 50000);
+
   // identifyHalls();                  // Uncomment this if you want the controller to auto-identify the hall states at startup!
 }
 
 void loop() {                         // The loop function is called repeatedly, once setup() is done
   
-  uint8_t throttle = readThrottle();  // readThrottle() is slow. So do the more important things 200 times more often
+  // uint8_t throttle = readThrottle();  // readThrottle() is slow. So do the more important things 200 times more often
   for(uint8_t i = 0; i < 200; i++)
   {  
     uint8_t hall = getHalls();              // Read from the hall sensors
@@ -171,7 +179,7 @@ uint8_t getHalls()
  * scale the throttle reading to take up the full range of 0-255
  */
 
-uint8_t readThrottle()
+void readThrottle()
 {
   int32_t adc = analogRead(THROTTLE_PIN); // Note, analogRead can be slow!
   adc = (adc - THROTTLE_LOW) << 8;
@@ -179,13 +187,22 @@ uint8_t readThrottle()
 
   adc /= 395.0/255;
 
-  // Serial.println(adc);
+  adc *= 155/255.0;
 
   if (adc > 255) // Bound the output between 0 and 255
-    return 255;
+    adc = 255;
 
   if (adc < 0)
-    return 0;
+    adc = 0;
+
+  noInterrupts();
+  if (adc >= prev_throttle + 1) {
+    adc = prev_throttle + 1;
+  }
+
+  Serial.println(adc);
   
-  return adc;
+  throttle = adc;
+  prev_throttle = throttle;
+  interrupts();
 }
