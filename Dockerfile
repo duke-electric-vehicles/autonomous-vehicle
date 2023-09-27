@@ -32,6 +32,7 @@ RUN pip3 install sbp
 RUN pip3 install numpy --upgrade
 RUN pip3 install opencv-python
 RUN pip3 install opencv-python-headless
+RUN pip3 install tk
 
 # install overlay dependencies
 ARG OVERLAY_WS

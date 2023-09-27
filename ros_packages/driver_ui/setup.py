@@ -24,7 +24,8 @@ setup(
             'driver_ui_rtk = driver_ui.mainRTK:main',
             'fonts_utils = driver_ui.fonts_utils',
             'dashboard = driver_ui.dashboard:main',
-            'jackson_dashboard = driver_ui.jackson_dashboard:main'
+            'jackson_dashboard = driver_ui.jackson_dashboard:main',
+            'rtkdash = driver_ui.rtk_dashboard:main'
         ],
     },
 )
