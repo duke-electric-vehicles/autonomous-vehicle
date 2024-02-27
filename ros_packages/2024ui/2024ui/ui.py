@@ -1,19 +1,25 @@
-import time
-import threading
 import pygame
-import rclpy
-from rclpy.node import Node
-import sys
-from std_msgs.msg import String
 
-pygame.init()
-screen = pygame.display.set_mode((800, 600))
+def main():
+     # This is the entry point of the package, as specified in the setup.py file
+    pygame.init()
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+    pygame.display.set_caption('Quick Start')
+    window_surface = pygame.display.set_mode((800, 600))
 
-    screen.fill((255, 255, 255))
-    pygame.display.flip()
+    background = pygame.Surface((800, 600))
+    background.fill(pygame.Color('#000000'))
+
+    is_running = True
+
+    while is_running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                is_running = False
+
+        window_surface.blit(background, (0, 0))
+        pygame.display.update()
+
+# This is the entry point of the package, as specified in the setup.py file
+if __name__ == '__main__':
+    main()
